@@ -8,10 +8,9 @@
 
 <script lang="ts">
 	import '../app.css';
-	import Header from './components/header/Header.svelte';
+
 	// sync session and refresh data when necessary
 	startSupabaseSessionSync();
 </script>
 
-<Header />
 <slot />
