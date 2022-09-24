@@ -8,6 +8,6 @@
 	}
 
 	input {
-		@apply px-2 py-1.5 border border-pri-light hover:border-pri-base focus:outline-pri-base;
+		@apply px-2 py-1.5 border border-pri-light hover:border-pri-base focus:outline-pri-base text-tert-base;
 	}
 }
