@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+	html {
+		@apply text-pri-base;
+	}
+
+	input {
+		@apply px-2 py-1.5 border border-pri-light hover:border-pri-base focus:outline-pri-base;
+	}
+}
