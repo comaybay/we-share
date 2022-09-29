@@ -1,6 +1,6 @@
 <script context="module" lang="ts">
-	import { setupSupabase, startSupabaseSessionSync } from '$lib/supabase';
-	import { supabaseClient } from '$lib/supabaseClient';
+	import { setupSupabase, startSupabaseSessionSync } from '$lib/supabase-auth';
+	import { supabaseClient } from '$lib/supabase/supabaseClient';
 
 	// set the supabase instance so it can be used in helpers
 	setupSupabase({ supabaseClient });
