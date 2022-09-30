@@ -5,6 +5,8 @@ create table if not exists public.profiles (
   quote varchar(255),
   primary key (id)
 );
+alter table public.profiles add constraint valid_username check ( username ~ '^[a-zA-Z0-9_\-]+$' );
+alter table public.profiles add constraint unique_username unique;
 
 alter table public.profiles enable row level security;
 
