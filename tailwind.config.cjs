@@ -11,6 +11,8 @@ module.exports = {
       'pri-light': '#6493A7',
       'pri-lighter': '#EEF5F8',
       'sec-base': '#AB2B2B',
+      'sec-hover': '#942222',
+      'sec-loading': '#b56662',
       'tert-base': '#1512AD',
       'tert-light': '#D7D6FC',
       'qua-base': '#1AA75B',
