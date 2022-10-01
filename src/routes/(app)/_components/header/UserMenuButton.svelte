@@ -46,7 +46,7 @@
 				</a>
 			</UserMenuItem>
 			<UserMenuItem>
-				<form class="hover:bg-pri-lighter" method="post" action="api?/logout">
+				<form class="hover:bg-pri-lighter" method="post" action="api/logout">
 					<button>Đăng xuất</button>
 				</form>
 			</UserMenuItem>
