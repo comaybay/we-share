@@ -1,8 +1,8 @@
 <script lang="ts">
 	import type UserProfile from '$lib/types/UserProfile';
-	import WeShareIcon from '../WeShareIcon.svelte';
-	import NavLink from './NavLink.svelte';
-	import UserMenuButton from './UserMenuButton.svelte';
+	import WeShareIcon from './WeShareIcon.svelte';
+	import NavLink from './header/NavLink.svelte';
+	import UserMenuButton from './header/UserMenuButton.svelte';
 
 	export let userProfile: UserProfile | null;
 </script>

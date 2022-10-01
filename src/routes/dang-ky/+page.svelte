@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { applyAction, enhance, type SubmitFunction } from '$app/forms';
-	import Button from '../components/Button.svelte';
-	import InputTextWithLabel from '../components/InputTextWithLabel.svelte';
-	import WeShareLogoBig from '../components/WeShareLogoBig.svelte';
+	import Button from '../_components/Button.svelte';
+	import InputTextWithLabel from '../_components/InputTextWithLabel.svelte';
+	import WeShareLogoBig from '../_components/WeShareLogoBig.svelte';
 	import type { ActionData } from './$types';
 
 	let loading = false;
