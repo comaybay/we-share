@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type UserProfile from '$lib/types/UserProfile';
-	import WeShareIcon from './WeShareIcon.svelte';
+	import WeShareIcon from '../../_components/WeShareIcon.svelte';
 	import NavLink from './header/NavLink.svelte';
 	import UserMenuButton from './header/UserMenuButton.svelte';
 
