@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import redirectHome from '$lib/server/redirectHome';
+import { validEmail, validPassword, validUsername } from '$lib/server/validations';
 import { saveSession } from '$lib/supabase-auth/server';
 import { convertToUserFriendlyMessage } from '$lib/supabase/convertToUserFriendlyMessage';
 import { supabaseClient } from '$lib/supabase/supabaseClient';
@@ -25,24 +26,21 @@ export const actions: Actions = {
 		const result: SignInError = {};
 
 		//common mistakes
-		const usernameValidation = /^[a-zA-Z0-9_]{4,15}$/;
 		if (!username) {
 			result.usernameMissing = true;
-		} else if (!usernameValidation.test(username)) {
+		} else if (!validUsername(username)) {
 			result.usernameInvalid = true;
 		}
 
-		const passwordValidation = /^[a-zA-Z0-9_]{6,50}$/;
 		if (!password) {
 			result.passwordMissing = true;
-		} else if (!passwordValidation.test(password)) {
+		} else if (!validPassword(password)) {
 			result.passwordInvalid = true;
 		}
 
-		const emailValidation = /(?=^.{5,254}$)^\S+@\S+\.\S+$/;
 		if (!email) {
 			result.emailMissing = true;
-		} else if (!emailValidation.test(email)) {
+		} else if (!validEmail(email)) {
 			result.emailInvalid = true;
 		}
 
