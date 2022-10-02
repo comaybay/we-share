@@ -22,6 +22,7 @@ module.exports = {
       'tert-base': '#1512AD',
       'tert-light': '#D7D6FC',
       'qua-base': '#1AA75B',
+      'qua-hover': '#0e8244',
       'quin-base': '#C6CA00',
     },
   },
