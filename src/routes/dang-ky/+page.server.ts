@@ -60,11 +60,8 @@ export const actions: Actions = {
 			.select('username', { count: 'exact', head: true })
 			.match({ username });
 
-		console.log('GET USER');
-		console.log(sameUsernameCount);
-
 		if (errorGetSameName) {
-			result.userFriendlyMessage = convertToUserFriendlyMessage({ status: 400, message: '' });
+			result.userFriendlyMessage = convertToUserFriendlyMessage({ status: 500, message: '' });
 			return invalid(500, result);
 		}
 

@@ -14,6 +14,7 @@ export function convertToUserFriendlyMessage(error: ApiError) {
 }
 
 const errorPatterns: Array<ErrorPattern> = [
+	{ keywords: ['login credentials'], message: 'Tên tài khoản hoặc mật khẩu không chính xác' },
 	{ keywords: ['password'], message: 'Mật khẩu không đúng (phải lớn hơn 6 ký tự)' },
 	{ keywords: ['already registered'], message: 'Email này đã được sử dụng bởi một tài khoản khác' }
 ];

@@ -130,9 +130,11 @@
 			</div>
 			<div class="mt-8 flex justify-end space-x-2">
 				{#if form?.userFriendlyMessage}
-					<p class="font-semibold text-sec-base">*{form.userFriendlyMessage}</p>
+					<p class="mr-auto font-semibold text-sec-base">*{form.userFriendlyMessage}</p>
 				{/if}
-				<Button {loading}><span class="px-4">Đăng ký</span></Button>
+				<div class="shrink-0">
+					<Button {loading}><span class="px-4">Đăng ký</span></Button>
+				</div>
 			</div>
 		</form>
 	</div>
