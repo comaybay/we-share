@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Header from './_components/Header.svelte';
 	import type { LayoutServerData } from './$types';
+	import Header from './_components/Header.svelte';
 
 	export let data: LayoutServerData;
 </script>

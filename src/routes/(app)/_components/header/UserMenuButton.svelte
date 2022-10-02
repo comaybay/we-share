@@ -38,15 +38,13 @@
 	{#if showMenu}
 		<nav
 			transition:fly={{ y: -250, duration: 250, easing: quadInOut, opacity: 1 }}
-			class="absolute border rounded-b-xl border-pri-base py-2 w-full min-w-fit right-0 whitespace-nowrap"
+			class="-z-10 absolute border rounded-b-xl border-pri-base py-2 w-full min-w-fit right-0 whitespace-nowrap"
 		>
 			<UserMenuItem>
-				<a class="block hover:bg-pri-lighter" href="/nguoi-dung/{userProfile.username}"
-					>Trang cá nhân
-				</a>
+				<a href="/nguoi-dung/{userProfile.username}">Trang cá nhân </a>
 			</UserMenuItem>
 			<UserMenuItem>
-				<form class="hover:bg-pri-lighter" method="post" action="api/logout">
+				<form method="post" action="api/logout">
 					<button>Đăng xuất</button>
 				</form>
 			</UserMenuItem>
