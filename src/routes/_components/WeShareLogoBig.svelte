@@ -7,5 +7,5 @@
 		<WeShareIcon size={64} strokeWidth={1} />
 		<span class="text-5xl tracking-[0.07em] text-pri-base">WeShare</span>
 	</div>
-	<p class="text-3xl"><span class="text-sec-base">Cộng đồng</span> chia sẻ kiến thức</p>
+	<p class="text-3xl text-center"><span class="text-sec-base">Cộng đồng</span> chia sẻ kiến thức</p>
 </a>
