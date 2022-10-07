@@ -11,7 +11,12 @@
 	const handleSubmit: SubmitFunction = () => {
 		pressedOnce = true;
 		loading = true;
-		return async ({ action, result }) => {
+
+		if (form) {
+			form.userFriendlyMessage = '';
+		}
+
+		return async ({ result }) => {
 			loading = false;
 			await applyAction(result);
 		};

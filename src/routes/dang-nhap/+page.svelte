@@ -1,15 +1,29 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
+	import { applyAction, enhance, type SubmitFunction } from '$app/forms';
 	import Button from '../_components/Button.svelte';
 	import InputTextWithLabel from '../_components/InputTextWithLabel.svelte';
 	import Link from '../_components/Link.svelte';
 	import WeShareLogoBig from '../_components/WeShareLogoBig.svelte';
 	import type { ActionData } from './$types';
 
+	export let form: ActionData | null;
+
 	let usernameOrEmail = '';
 	let password = '';
+	let loading = false;
 
-	export let form: ActionData | null;
+	const handleSubmit: SubmitFunction = () => {
+		loading = true;
+
+		if (form) {
+			form.userFriendlyMessage = '';
+		}
+
+		return async ({ result }) => {
+			loading = false;
+			await applyAction(result);
+		};
+	};
 </script>
 
 <div class="absolute -z-10 h-full ml-20 border-r-2 border-sec-base" />
@@ -24,7 +38,7 @@
 	</div>
 	<div class="w-full flex space-x-20 justify-center mt-10">
 		<form
-			use:enhance
+			use:enhance={handleSubmit}
 			method="POST"
 			class="w-[29rem] px-8 pb-6 border border-pri-light rounded-sm bg-paper"
 		>
@@ -70,7 +84,7 @@
 					<p class="mr-auto font-semibold text-sec-base">*{form.userFriendlyMessage}</p>
 				{/if}
 				<div class="shrink-0 w-fit ml-auto">
-					<Button><span class="mx-4">Đăng nhập</span></Button>
+					<Button {loading}><span class="mx-4">Đăng nhập</span></Button>
 				</div>
 			</div>
 
