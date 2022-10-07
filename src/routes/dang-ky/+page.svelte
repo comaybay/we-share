@@ -2,6 +2,7 @@
 	import { applyAction, enhance, type SubmitFunction } from '$app/forms';
 	import Button from '../_components/Button.svelte';
 	import InputTextWithLabel from '../_components/InputTextWithLabel.svelte';
+	import Link from '../_components/Link.svelte';
 	import WeShareLogoBig from '../_components/WeShareLogoBig.svelte';
 	import type { ActionData } from './$types';
 
@@ -34,21 +35,23 @@
 
 <div class="relative">
 	<div
-		class="absolute top-0 -z-10 h-[940px] md:h-[720px] w-full flex flex-col space-y-12 justify-center"
+		class="absolute -z-10 h-full w-full flex flex-col pt-20 lg:pt-0 space-y-16 lg:space-y-12 justify-center"
 	>
 		{#each new Array(7) as _}
 			<div class="border-b-2 border-pri-light" />
 		{/each}
 	</div>
 	<div class="absolute -z-10 h-full ml-20 border-r-2 border-sec-base" />
-	<div class="w-full min-h-screen flex flex-wrap lg:space-x-20 justify-center items-center">
-		<div class="self-start mt-10 md:mt-20 mx-4 lg:mx-0">
+	<div
+		class="p-4 min-h-screen min-w-fit flex flex-col lg:flex-row lg:space-x-20 justify-center items-center"
+	>
+		<div class="m-4 lg:-translate-y-52">
 			<WeShareLogoBig />
 		</div>
 		<form
 			use:enhance={handleSubmit}
 			method="POST"
-			class="shrink w-[29rem] h-fit my-6 px-8 pb-6 border border-pri-light rounded-sm bg-paper mx-2"
+			class="shrink w-[29rem] min-w-[22rem] h-fit px-8 pb-6 border border-pri-light rounded-sm bg-paper"
 		>
 			<h3 class="text-center text-3xl my-6">Đăng ký</h3>
 			<div class="flex flex-col space-y-4">
@@ -140,6 +143,9 @@
 				<div class="shrink-0">
 					<Button {loading}><span class="px-4">Đăng ký</span></Button>
 				</div>
+			</div>
+			<div class="mt-8 w-fit mx-auto">
+				<Link href="/dang-nhap">Đã có tài khoản? đăng nhập!</Link>
 			</div>
 		</form>
 	</div>

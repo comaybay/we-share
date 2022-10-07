@@ -26,21 +26,20 @@
 	};
 </script>
 
-<div class="absolute -z-10 h-full ml-20 border-r-2 border-sec-base" />
-<div class="relative flex flex-col items-center">
-	<div class="absolute top-0 -z-10 mt-24 h-full w-full flex flex-col space-y-12 justify-center">
+<div class="relative">
+	<div class="absolute -z-10 pt-32 h-full w-full flex flex-col space-y-12 justify-center">
 		{#each new Array(6) as _}
 			<div class="border-b-2 border-pri-light" />
 		{/each}
 	</div>
-	<div class="mt-20">
+	<div class="absolute -z-10 h-full ml-20 border-r-2 border-sec-base" />
+
+	<div class="p-4 min-h-screen min-w-fit flex flex-col items-center justify-center">
 		<WeShareLogoBig />
-	</div>
-	<div class="w-full flex space-x-20 justify-center mt-10">
 		<form
 			use:enhance={handleSubmit}
 			method="POST"
-			class="w-[29rem] px-8 pb-6 border border-pri-light rounded-sm bg-paper"
+			class="mt-10 w-[29rem] min-w-[22rem] px-8 pb-6 border border-pri-light rounded-sm bg-paper"
 		>
 			<h3 class="text-center text-3xl my-6">Đăng nhập</h3>
 			<div class="flex flex-col space-y-4">

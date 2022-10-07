@@ -4,7 +4,7 @@
 
 @layer base {
 	html {
-		@apply text-pri-base;
+		@apply text-pri-base min-w-fit;
 	}
 
 	input {
