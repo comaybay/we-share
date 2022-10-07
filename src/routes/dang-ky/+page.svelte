@@ -2,6 +2,7 @@
 	import { applyAction, enhance, type SubmitFunction } from '$app/forms';
 	import Button from '../_components/Button.svelte';
 	import InputTextWithLabel from '../_components/InputTextWithLabel.svelte';
+	import Link from '../_components/Link.svelte';
 	import WeShareLogoBig from '../_components/WeShareLogoBig.svelte';
 	import type { ActionData } from './$types';
 
@@ -142,6 +143,9 @@
 				<div class="shrink-0">
 					<Button {loading}><span class="px-4">Đăng ký</span></Button>
 				</div>
+			</div>
+			<div class="mt-8 w-fit mx-auto">
+				<Link href="/dang-nhap">Đã có tài khoản? đăng nhập!</Link>
 			</div>
 		</form>
 	</div>
