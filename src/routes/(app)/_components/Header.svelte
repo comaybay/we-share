@@ -9,10 +9,12 @@
 
 <div class="fixed w-full">
 	<header class="relative z-auto flex px-4 items-center border-b border-pri-base h-16 bg-paper">
-		<a href="/" class="ml-4 flex items-center flex-1">
-			<WeShareIcon />
-			<span class="text-3xl tracking-[0.07em] text-pri-base">WeShare</span>
-		</a>
+		<div class="flex-1">
+			<a href="/" class="px-4 inline-flex items-center">
+				<WeShareIcon />
+				<span class="text-3xl tracking-[0.07em] text-pri-base">WeShare</span>
+			</a>
+		</div>
 
 		<nav class="self-stretch hidden md:flex justify-center flex-1">
 			<NavLink href="/hoi-dap">Hỏi đáp</NavLink>
