@@ -2,10 +2,9 @@
 	import { userProfile } from 'src/lib/stores/userProfile';
 	import ButtonOutline from 'src/routes/_components/ButtonOutline.svelte';
 	import WeShareIcon from '../../_components/WeShareIcon.svelte';
+	import MobileNavigation from './header/MobileNavigation.svelte';
 	import NavLink from './header/NavLink.svelte';
 	import UserMenuButton from './header/UserMenuButton.svelte';
-
-	export let userProfile: UserProfile | null;
 </script>
 
 <div class="fixed w-full">
@@ -15,13 +14,13 @@
 			<span class="text-3xl tracking-[0.07em] text-pri-base">WeShare</span>
 		</a>
 
-		<nav class="self-stretch flex justify-center flex-1">
+		<nav class="self-stretch hidden md:flex justify-center flex-1">
 			<NavLink href="/hoi-dap">Hỏi đáp</NavLink>
 			<NavLink href="/chia-se">Chia sẻ</NavLink>
 			<NavLink href="/tim-nhom">Tìm nhóm</NavLink>
 		</nav>
 
-		<div class="flex-1">
+		<div class="hidden md:block flex-1">
 			{#if $userProfile}
 				<UserMenuButton userProfile={$userProfile} />
 			{:else}
@@ -50,6 +49,8 @@
 				</div>
 			{/if}
 		</div>
+
+		<MobileNavigation />
 	</header>
 </div>
 <!-- Header's height -->
