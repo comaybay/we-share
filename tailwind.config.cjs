@@ -12,6 +12,7 @@ module.exports = {
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
+      black: "#000000",
       'paper': '#FEFFFF',
       'pri-base': '#32667C',
       'pri-light': '#6493A7',

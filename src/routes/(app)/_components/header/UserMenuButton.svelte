@@ -3,7 +3,7 @@
 	import type UserProfile from '$lib/types/UserProfile';
 	import { quadInOut } from 'svelte/easing';
 	import { fly } from 'svelte/transition';
-	import UserMenuItem from './UserMenuItem.svelte';
+	import UserMenuNavLink from './UserMenuNavLink.svelte';
 
 	export let userProfile: UserProfile;
 	let showMenu = false;
@@ -11,8 +11,7 @@
 
 <div class="relative w-fit ml-auto">
 	<button
-		use:clickoutside
-		on:clickoutside={() => (showMenu = false)}
+		use:clickoutside={() => (showMenu = false)}
 		on:click={() => (showMenu = !showMenu)}
 		class="relative z-10 max-w-[265px] flex items-center py-1 px-4 bg-paper hover:bg-pri-lighter text-left"
 	>
@@ -40,14 +39,12 @@
 			transition:fly={{ y: -250, duration: 250, easing: quadInOut, opacity: 1 }}
 			class="-z-10 absolute border rounded-b-xl border-pri-base py-2 w-full min-w-fit right-0 whitespace-nowrap"
 		>
-			<UserMenuItem>
-				<a href="/nguoi-dung/{userProfile.username}">Trang cá nhân </a>
-			</UserMenuItem>
-			<UserMenuItem>
+			<UserMenuNavLink href="/nguoi-dung/{userProfile.username}">Trang cá nhân</UserMenuNavLink>
+			<div class="hover:bg-pri-lighter">
 				<form method="post" action="api/logout">
-					<button>Đăng xuất</button>
+					<button class="text-left block w-full px-4 py-2">Đăng xuất</button>
 				</form>
-			</UserMenuItem>
+			</div>
 		</nav>
 	{/if}
 </div>
