@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type UserProfile from '$lib/types/UserProfile';
+	import { userProfile } from 'src/lib/stores/userProfile';
 	import ButtonOutline from 'src/routes/_components/ButtonOutline.svelte';
 	import WeShareIcon from '../../_components/WeShareIcon.svelte';
 	import NavLink from './header/NavLink.svelte';
@@ -22,8 +22,8 @@
 		</nav>
 
 		<div class="flex-1">
-			{#if userProfile}
-				<UserMenuButton {userProfile} />
+			{#if $userProfile}
+				<UserMenuButton userProfile={$userProfile} />
 			{:else}
 				<div class="w-fit ml-auto">
 					<a href="/dang-nhap">
