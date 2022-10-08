@@ -3,10 +3,8 @@
 	import { userProfile } from 'src/lib/stores/userProfile';
 	import { onMount } from 'svelte';
 	import MobileNavLink from './MobileNavLink.svelte';
-	let active = true;
+	let active = false;
 	let mounted = false;
-
-	let mobileNavBtn: HTMLButtonElement;
 
 	$: if (mounted) {
 		if (active) {
@@ -30,7 +28,6 @@
 <div class="h-full">
 	<div class="relative h-full flex items-center">
 		<button
-			bind:this={mobileNavBtn}
 			class="md:hidden p-2 rounded-full hover:bg-pri-lighter {active ? 'bg-pri-lighter' : ''}"
 			on:click={() => (active = !active)}
 			use:clickoutside={onClickOutside}
