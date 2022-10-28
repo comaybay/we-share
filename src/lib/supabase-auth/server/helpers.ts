@@ -19,7 +19,7 @@ export function saveSession(cookies: Cookies, session: Session) {
 export function deleteSession(cookies: Cookies) {
 	const { cookieName, cookieOptions } = getServerConfig();
 
-	['access', 'refresh', 'provider'].forEach((name) => {
+	['access', 'refresh', 'provider'].forEach(name => {
 		cookies.set(`${cookieName}-${name}-token`, '', {
 			...cookieOptions,
 			maxAge: -1
