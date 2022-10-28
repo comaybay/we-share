@@ -34,7 +34,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@supabase/supabase-js": "^2.0.4",
+		"@supabase/supabase-js": "^1.35.7",
 		"@tinymce/tinymce-svelte": "^1.0.0",
 		"jose": "^4.9.3"
 	}

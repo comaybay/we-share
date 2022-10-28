@@ -8,7 +8,7 @@
 		return prefix + '_' + Math.floor(Math.random() * 1000000000) + String(Date.now());
 	};
 
-	export let value = '';
+	export let value: string;
 	export let placeholder = '';
 
 	export let id = uuid('tinymce-svelte');
@@ -18,9 +18,6 @@
 
 	const customUIId = `${id}-submit`;
 	const conf = {
-		skin_url: '/weshare-editor',
-		skin: 'weshare-editor',
-		content_css: 'weshare-editor',
 		statusbar: false,
 		menubar: false,
 		paste_as_text: true,
@@ -47,25 +44,7 @@
 	};
 </script>
 
-<div
-	class="outline outline-1 outline-transparent hover:outline-pri-base transition-all duration-100"
->
-	<Editor apiKey={PUBLIC_TINY_API_KEY} {id} {disabled} {conf} bind:value />
-</div>
-<div id={customUIId} class="flex justify-between mt-3">
-	<div>
-		<div class="rounded-full border border-pri-light hover:border-pri-base">
-			<input
-				required
-				name=""
-				minlength={3}
-				maxlength={255}
-				type="text"
-				class="rounded-full border-none focus:outline-none w-32 resize-x"
-				placeholder="Chủ đề"
-			/>
-			<button class="w-10 h-10 rounded-full hover:bg-pri-lighter">+</button>
-		</div>
-	</div>
+<Editor apiKey={PUBLIC_TINY_API_KEY} {id} {disabled} {conf} bind:value />
+<div id={customUIId} class="flex justify-end">
 	<Button><span class="px-4">Đăng</span></Button>
 </div>

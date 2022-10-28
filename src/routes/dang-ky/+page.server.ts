@@ -2,10 +2,9 @@
 import redirectHome from '$lib/server/redirectHome';
 import { validEmail, validPassword, validUsername } from '$lib/server/validations';
 import { saveSession } from '$lib/supabase-auth/server';
+import { convertToUserFriendlyMessage } from '$lib/supabase/convertToUserFriendlyMessage';
 import { supabaseClient } from '$lib/supabase/supabaseClient';
 import { invalid, redirect } from '@sveltejs/kit';
-import { redirectHome } from 'src/lib/redirectHome';
-import { ErrorType, extractError, getUserFriendlyMessage } from 'src/lib/server/errorExtraction';
 import type { Actions, PageServerLoad } from './$types';
 
 export const load: PageServerLoad = ({ locals }) => {
@@ -55,14 +54,14 @@ export const actions: Actions = {
 			return invalid(400, result);
 		}
 
-		// validations that require database access
+		//validations that require database access
 		const { error: errorGetSameName, count: sameUsernameCount } = await supabaseClient
 			.from('profiles')
 			.select('username', { count: 'exact', head: true })
 			.match({ username });
 
 		if (errorGetSameName) {
-			result.userFriendlyMessage = getUserFriendlyMessage(ErrorType.ServerError);
+			result.userFriendlyMessage = convertToUserFriendlyMessage({ status: 500, message: '' });
 			return invalid(500, result);
 		}
 
@@ -71,16 +70,12 @@ export const actions: Actions = {
 			return invalid(400, result);
 		}
 
-		const {
-			error,
-			data: { user, session }
-		} = await supabaseClient.auth.signUp({ email, password });
-
+		const { user, error, session } = await supabaseClient.auth.signUp({ email, password });
 		if (error) {
-			const { errorType, userFriendlyMessage } = extractError(error);
-			result.userFriendlyMessage = userFriendlyMessage;
+			console.log(error);
+			result.userFriendlyMessage = convertToUserFriendlyMessage(error);
 
-			if (errorType === ErrorType.InValidLoginCredentials) {
+			if (error?.status === 400) {
 				result.invalidCredentials = true;
 				return invalid(400, result);
 			}
