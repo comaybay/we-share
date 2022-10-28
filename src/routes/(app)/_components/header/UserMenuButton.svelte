@@ -1,6 +1,6 @@
 <script lang="ts">
 	import clickoutside from '$lib/actions/clickoutside';
-	import type UserProfile from '$lib/types/UserProfile';
+	import type { UserProfile } from '$lib/types/UserProfile';
 	import { quadInOut } from 'svelte/easing';
 	import { fly } from 'svelte/transition';
 	import UserMenuNavLink from './UserMenuNavLink.svelte';

@@ -2,6 +2,7 @@
 	export let type: 'text' | 'password' | 'email' = 'text';
 	export let labelText: string;
 	export let name: string;
+	export let autocomplete: string;
 
 	export let required = false;
 	export let value: string;
@@ -22,6 +23,7 @@
 			{name}
 			{minlength}
 			{maxlength}
+			{autocomplete}
 			bind:value
 			type="text"
 			class="rounded-sm w-full"
@@ -32,6 +34,7 @@
 			{name}
 			{minlength}
 			{maxlength}
+			{autocomplete}
 			bind:value
 			type="password"
 			class="rounded-sm w-full"
@@ -42,6 +45,7 @@
 			{name}
 			{minlength}
 			{maxlength}
+			{autocomplete}
 			bind:value
 			type="email"
 			class="rounded-sm w-full"
