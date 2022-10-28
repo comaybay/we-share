@@ -1,27 +1,26 @@
-import { supabaseClient } from '$lib/supabase/supabaseClient';
 import type UserProfile from '$lib/types/UserProfile';
+import { getSupabase } from '@supabase/auth-helpers-sveltekit';
 import type { LayoutServerLoad } from './$types';
 
-export const load: LayoutServerLoad<{ userProfile: UserProfile | null }> = async ({ locals }) => {
-	const user = locals.user;
+export const load: LayoutServerLoad<{ userProfile: UserProfile | null }> = async event => {
+	const { session, supabaseClient } = await getSupabase(event);
 
-	if (!user) {
+	if (!session) {
 		return { userProfile: null };
 	}
 
 	const { data: profile } = await supabaseClient
 		.from('profiles')
 		.select('username, name, quote')
-		.match({ id: user.id })
+		.match({ id: session.user.id })
 		.single();
 
 	return {
 		userProfile: {
-			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-			email: user.email!,
-			profilename: profile.name,
-			username: profile.username,
-			quote: profile.quote
+			email: session.user.email as string,
+			profilename: profile?.name as string,
+			username: profile?.username as string,
+			quote: profile?.quote as string
 		}
 	};
 };

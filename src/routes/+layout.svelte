@@ -1,16 +1,23 @@
 <script context="module" lang="ts">
-	import { setupSupabase, startSupabaseSessionSync } from '$lib/supabase-auth';
-	import { supabaseClient } from '$lib/supabase/supabaseClient';
-
-	// set the supabase instance so it can be used in helpers
-	setupSupabase({ supabaseClient });
+	import { invalidate } from '$app/navigation';
+	import { supabaseClient } from '$lib/db';
+	import { onMount } from 'svelte';
 </script>
 
 <script lang="ts">
 	import '../app.css';
 
-	// sync session and refresh data when necessary
-	startSupabaseSessionSync();
+	onMount(() => {
+		const {
+			data: { subscription }
+		} = supabaseClient.auth.onAuthStateChange(() => {
+			invalidate('supabase:auth');
+		});
+
+		return () => {
+			subscription.unsubscribe();
+		};
+	});
 </script>
 
 <slot />

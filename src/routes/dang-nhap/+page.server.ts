@@ -1,21 +1,23 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { saveSession } from '$lib/supabase-auth/server';
-import { supabaseClient } from '$lib/supabase/supabaseClient';
+import { getSupabase } from '@supabase/auth-helpers-sveltekit';
+import type { SupabaseClient } from '@supabase/supabase-js';
 import { invalid } from '@sveltejs/kit';
 import { ErrorType, extractError, getUserFriendlyMessage } from 'src/lib/server/errorExtraction';
 import redirectHome from 'src/lib/server/redirectHome';
 import { validEmail, validPassword, validUsername } from 'src/lib/server/validations';
 import type { Actions, PageServerLoad } from './$types';
 
-export const load: PageServerLoad = ({ locals }) => {
-	if (locals.user) {
+export const load: PageServerLoad = async event => {
+	const { session } = await getSupabase(event);
+	if (session) {
 		throw redirectHome();
 	}
 };
 
 export const actions: Actions = {
-	async default({ request, cookies }) {
-		const formData = await request.formData();
+	async default(event) {
+		const { supabaseClient } = await getSupabase(event);
+		const formData = await event.request.formData();
 
 		const usernameOrEmail = (formData.get('username-or-email') as string).trim();
 		const password = (formData.get('password') as string).trim();
@@ -52,7 +54,7 @@ export const actions: Actions = {
 			email = usernameOrEmail;
 		} else {
 			const username = usernameOrEmail;
-			const result = await getEmailFromUsernanme(username);
+			const result = await getEmailFromUsernanme(supabaseClient, username);
 
 			if (result.error) {
 				signInError.userFriendlyMessage = getUserFriendlyMessage(ErrorType.ServerError);
@@ -67,10 +69,7 @@ export const actions: Actions = {
 			}
 		}
 
-		const {
-			error,
-			data: { session }
-		} = await supabaseClient.auth.signInWithPassword({ email, password });
+		const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
 
 		if (error) {
 			const { errorType, userFriendlyMessage } = extractError(error);
@@ -85,13 +84,11 @@ export const actions: Actions = {
 			return invalid(500, signInError);
 		}
 
-		saveSession(cookies, session!);
-
 		throw redirectHome();
 	}
 };
 
-async function getEmailFromUsernanme(username: string) {
+async function getEmailFromUsernanme(supabaseClient: SupabaseClient, username: string) {
 	const { data, error } = await supabaseClient
 		.from('profiles')
 		.select('username, email')
