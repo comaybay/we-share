@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
+import redirectHome from '$lib/server/redirectHome';
 import { saveSession } from '$lib/supabase-auth/server';
+import { convertToUserFriendlyMessage } from '$lib/supabase/convertToUserFriendlyMessage';
 import { supabaseClient } from '$lib/supabase/supabaseClient';
 import { invalid } from '@sveltejs/kit';
-import { ErrorType, extractError, getUserFriendlyMessage } from 'src/lib/server/errorExtraction';
-import redirectHome from 'src/lib/server/redirectHome';
 import { validEmail, validPassword, validUsername } from 'src/lib/server/validations';
 import type { Actions, PageServerLoad } from './$types';
 
@@ -55,7 +55,10 @@ export const actions: Actions = {
 			const result = await getEmailFromUsernanme(username);
 
 			if (result.error) {
-				signInError.userFriendlyMessage = getUserFriendlyMessage(ErrorType.ServerError);
+				signInError.userFriendlyMessage = convertToUserFriendlyMessage({
+					status: 500,
+					message: ''
+				});
 				return invalid(500, signInError);
 			}
 
@@ -67,16 +70,12 @@ export const actions: Actions = {
 			}
 		}
 
-		const {
-			error,
-			data: { session }
-		} = await supabaseClient.auth.signInWithPassword({ email, password });
+		const { error, session } = await supabaseClient.auth.signIn({ email, password });
 
 		if (error) {
-			const { errorType, userFriendlyMessage } = extractError(error);
-			signInError.userFriendlyMessage = userFriendlyMessage;
+			signInError.userFriendlyMessage = convertToUserFriendlyMessage(error);
 
-			if (errorType === ErrorType.InValidLoginCredentials) {
+			if (error?.status === 400) {
 				signInError.invalidCredentials = true;
 				return invalid(400, signInError);
 			}

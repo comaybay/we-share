@@ -60,7 +60,6 @@
 						<InputTextWithLabel
 							labelText="Tên tài khoản"
 							name="username"
-							autocomplete="username"
 							bind:value={username}
 							required
 							minlength={4}
@@ -83,7 +82,6 @@
 							labelText="Mật khẩu"
 							name="password"
 							type="password"
-							autocomplete="new-password"
 							bind:value={password}
 							required
 							minlength={6}
@@ -104,7 +102,6 @@
 							labelText="Nhập lại mật khẩu"
 							name="reenter-password"
 							type="password"
-							autocomplete="new-password"
 							bind:value={reenterPassword}
 							required
 							minlength={6}
@@ -120,7 +117,6 @@
 							labelText="Email"
 							name="email"
 							type="email"
-							autocomplete="email"
 							bind:value={email}
 							required
 							minlength={5}
@@ -136,16 +132,10 @@
 					<InputTextWithLabel
 						labelText="Tên hiển thị của bạn"
 						name="profilename"
-						autocomplete="name"
 						bind:value={profilename}
 					/>
 
-					<InputTextWithLabel
-						labelText="Danh ngôn của bạn"
-						name="quote"
-						autocomplete="on"
-						bind:value={quote}
-					/>
+					<InputTextWithLabel labelText="Danh ngôn của bạn" name="quote" bind:value={quote} />
 				</div>
 				<div class="mt-8 flex justify-end space-x-2">
 					{#if form?.userFriendlyMessage}
