@@ -2,8 +2,8 @@
 import { getSupabase } from '@supabase/auth-helpers-sveltekit';
 import type { SupabaseClient } from '@supabase/supabase-js';
 import { invalid } from '@sveltejs/kit';
+import { redirectHome } from 'src/lib/redirectHome';
 import { ErrorType, extractError, getUserFriendlyMessage } from 'src/lib/server/errorExtraction';
-import redirectHome from 'src/lib/server/redirectHome';
 import { validEmail, validPassword, validUsername } from 'src/lib/server/validations';
 import type { Actions, PageServerLoad } from './$types';
 

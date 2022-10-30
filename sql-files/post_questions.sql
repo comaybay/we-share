@@ -4,10 +4,11 @@ create table if not exists post_questions (
   date_last_updated timestamp with time zone, 
   title varchar(255) not null,
   slug varchar(255) not null,
-  content varchar(30000) not null,
+  text_content varchar(30000) not null,
+  content varchar(300000) not null,
   topics varchar(255)[] not null,
-  favorite_answer_id bigint references post_question_comments(id),
 
+  favorite_answer_id bigint references post_question_comments(id),
   author_id uuid references profiles(id) not null
 );
 alter table post_questions enable row level security;

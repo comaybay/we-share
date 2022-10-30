@@ -1,6 +1,6 @@
-export default interface UserProfile {
+export interface UserProfile {
 	email: string;
 	username: string;
-	profilename: string;
+	name: string;
 	quote: string | null;
 }

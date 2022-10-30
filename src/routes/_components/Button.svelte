@@ -1,5 +1,6 @@
 <script lang="ts">
 	export let loading = false;
+	export let disabled = false;
 </script>
 
 <div class="inline-block">
@@ -20,8 +21,9 @@
 	{/if}
 	<button
 		on:click
-		class="rounded-sm px-4 py-2 text-pri-lighter font-medium
-	{loading ? 'bg-sec-loading' : 'bg-sec-base hover:bg-sec-hover'}"
+		{disabled}
+		class="rounded-sm px-4 py-2 text-pri-lighter font-medium 
+		{loading || disabled ? 'bg-sec-loading' : 'bg-sec-base hover:bg-sec-hover'}"
 	>
 		<slot />
 	</button>

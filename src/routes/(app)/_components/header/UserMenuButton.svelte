@@ -30,7 +30,7 @@
 			/>
 		</svg>
 		<div class="overflow-hidden">
-			<p class="text-lg truncate">{userProfile.profilename}</p>
+			<p class="text-lg truncate">{userProfile.name}</p>
 			<p class="text-sm truncate">@{userProfile.username}</p>
 		</div>
 	</button>
@@ -41,7 +41,7 @@
 		>
 			<UserMenuNavLink href="/nguoi-dung/{userProfile.username}">Trang cá nhân</UserMenuNavLink>
 			<div class="hover:bg-pri-lighter">
-				<form method="post" action="api/logout">
+				<form method="post" action="/api/logout">
 					<button class="text-left block w-full px-4 py-2">Đăng xuất</button>
 				</form>
 			</div>

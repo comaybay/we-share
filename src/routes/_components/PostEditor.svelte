@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { PUBLIC_TINY_API_KEY } from '$env/static/public';
 	import Editor from '@tinymce/tinymce-svelte';
-	import Button from './Button.svelte';
 
 	//copied from TinyMCE Editor internal uuid function
 	const uuid = (prefix: string): string => {
@@ -9,6 +8,7 @@
 	};
 
 	export let value = '';
+	export let text = '';
 	export let placeholder = '';
 
 	export let id = uuid('tinymce-svelte');
@@ -16,15 +16,14 @@
 	export let minHeight = 300;
 	export let maxHeight = 500;
 
-	const customUIId = `${id}-submit`;
 	const conf = {
 		skin_url: '/weshare-editor',
 		skin: 'weshare-editor',
 		content_css: 'weshare-editor',
 		statusbar: false,
 		menubar: false,
+		contextmenu: false,
 		paste_as_text: true,
-		custom_ui_selector: `#${customUIId}`,
 		content_style: 'body { font-family: sans-serif; }', //set editor font to be the same as app's font
 		resize: false,
 		toolbar_mode: 'sliding',
@@ -48,24 +47,16 @@
 </script>
 
 <div
-	class="outline outline-1 outline-transparent hover:outline-pri-base transition-all duration-100"
+	class="outline outline-1 outline-transparent transition-all duration-100 
+	{disabled ? '' : 'hover:outline-pri-base'}"
 >
-	<Editor apiKey={PUBLIC_TINY_API_KEY} {id} {disabled} {conf} bind:value />
-</div>
-<div id={customUIId} class="flex justify-between mt-3">
-	<div>
-		<div class="rounded-full border border-pri-light hover:border-pri-base">
-			<input
-				required
-				name=""
-				minlength={3}
-				maxlength={255}
-				type="text"
-				class="rounded-full border-none focus:outline-none w-32 resize-x"
-				placeholder="Chủ đề"
-			/>
-			<button class="w-10 h-10 rounded-full hover:bg-pri-lighter">+</button>
-		</div>
-	</div>
-	<Button><span class="px-4">Đăng</span></Button>
+	<Editor
+		apiKey={PUBLIC_TINY_API_KEY}
+		{id}
+		{disabled}
+		{conf}
+		bind:value
+		bind:text
+		modelEvents="input change keyup undo redo"
+	/>
 </div>

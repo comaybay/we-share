@@ -8,6 +8,10 @@
 	}
 
 	input {
-		@apply px-2 py-1.5 border border-pri-light hover:border-pri-base focus:outline-pri-base text-tert-base;
+		@apply px-2 py-1.5 border border-pri-light hover:enabled:border-pri-base focus:outline-pri-base text-tert-base disabled:text-pri-light disabled:bg-transparent;
+	}
+
+	.topic-box:focus-within button {
+		@apply text-tert-base;
 	}
 }
