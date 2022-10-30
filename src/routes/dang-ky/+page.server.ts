@@ -2,14 +2,15 @@
 import { redirectHome } from '$lib/redirectHome';
 import { validEmail, validPassword, validUsername } from '$lib/server/validations';
 import { getSupabase } from '@supabase/auth-helpers-sveltekit';
-import { invalid } from '@sveltejs/kit';
+import { invalid, redirect } from '@sveltejs/kit';
 import { ErrorType, extractError, getUserFriendlyMessage } from 'src/lib/server/errorExtraction';
 import type { Actions, PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async event => {
 	const { session } = await getSupabase(event);
 	if (session) {
-		throw redirectHome();
+		const redirectPath = event.url.searchParams.get('returnto');
+		throw redirectPath ? redirect(303, redirectPath) : redirectHome();
 	}
 };
 

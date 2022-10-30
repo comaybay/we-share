@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { getSupabase } from '@supabase/auth-helpers-sveltekit';
 import type { SupabaseClient } from '@supabase/supabase-js';
-import { invalid } from '@sveltejs/kit';
+import { invalid, redirect } from '@sveltejs/kit';
 import { redirectHome } from 'src/lib/redirectHome';
 import { ErrorType, extractError, getUserFriendlyMessage } from 'src/lib/server/errorExtraction';
 import { validEmail, validPassword, validUsername } from 'src/lib/server/validations';
@@ -10,7 +10,8 @@ import type { Actions, PageServerLoad } from './$types';
 export const load: PageServerLoad = async event => {
 	const { session } = await getSupabase(event);
 	if (session) {
-		throw redirectHome();
+		const redirectPath = event.url.searchParams.get('returnto');
+		throw redirectPath ? redirect(303, redirectPath) : redirectHome();
 	}
 };
 

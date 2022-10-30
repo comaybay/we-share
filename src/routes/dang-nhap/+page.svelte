@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { applyAction, enhance, type SubmitFunction } from '$app/forms';
-	import { invalidateAll } from '$app/navigation';
+	import { goto, invalidateAll } from '$app/navigation';
+	import { page } from '$app/stores';
 	import Button from '../_components/Button.svelte';
 	import InputTextWithLabel from '../_components/InputTextWithLabel.svelte';
 	import Link from '../_components/Link.svelte';
@@ -8,6 +9,11 @@
 	import type { ActionData } from './$types';
 
 	export let form: ActionData | null;
+
+	const redirectPath = $page.url.searchParams.get('returnto');
+	const signUpPath = redirectPath
+		? `/dang-ky?returnto=${encodeURIComponent(redirectPath)}`
+		: '/dang-ky';
 
 	let usernameOrEmail = '';
 	let password = '';
@@ -21,13 +27,20 @@
 		}
 
 		return async ({ result }) => {
-			await applyAction(result);
-
 			if (result.type !== 'redirect') {
 				loading = false;
-			} else {
-				await invalidateAll();
+				await applyAction(result);
+				return;
 			}
+
+			const redirectLink = $page.url.searchParams.get('returnto');
+			if (redirectLink) {
+				await goto(redirectLink);
+			} else {
+				await applyAction(result);
+			}
+
+			await invalidateAll();
 		};
 	};
 </script>
@@ -97,7 +110,7 @@
 				</div>
 
 				<div class="mt-8 block w-fit mx-auto">
-					<Link href="/dang-ky">Chưa có tài khoản? đăng ký!</Link>
+					<Link href={signUpPath}>Chưa có tài khoản? đăng ký!</Link>
 				</div>
 			</form>
 		</div>
