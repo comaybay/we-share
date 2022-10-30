@@ -4,7 +4,8 @@ create table if not exists post_sharings (
   date_last_updated timestamp with time zone, 
   title varchar(255) not null,
   slug varchar(255) not null,
-  content varchar(30000) not null,
+  text_content varchar(30000) not null,
+  content varchar(300000) not null,
   topics varchar(255)[] not null,
 
   author_id uuid references profiles(id) not null
