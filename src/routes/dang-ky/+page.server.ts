@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { redirectHome } from '$lib/redirectHome';
 import { validEmail, validPassword, validUsername } from '$lib/server/validations';
 import { getSupabase } from '@supabase/auth-helpers-sveltekit';
-import { invalid, redirect } from '@sveltejs/kit';
+import { invalid } from '@sveltejs/kit';
 import { ErrorType, extractError, getUserFriendlyMessage } from 'src/lib/server/errorExtraction';
-import redirectHome from 'src/lib/server/redirectHome';
 import type { Actions, PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async event => {
@@ -98,7 +98,7 @@ export const actions: Actions = {
 			})
 			.match({ id: user!.id });
 
-		throw redirect(303, '/');
+		throw redirectHome();
 	}
 };
 
