@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { applyAction, enhance, type SubmitFunction } from '$app/forms';
+	import { invalidateAll } from '$app/navigation';
 	import Button from '../_components/Button.svelte';
 	import InputTextWithLabel from '../_components/InputTextWithLabel.svelte';
 	import Link from '../_components/Link.svelte';
@@ -24,6 +25,8 @@
 
 			if (result.type !== 'redirect') {
 				loading = false;
+			} else {
+				await invalidateAll();
 			}
 		};
 	};
