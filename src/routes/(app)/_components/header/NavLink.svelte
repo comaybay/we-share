@@ -3,7 +3,7 @@
 
 	export let href: string;
 
-	$: active = $page.url.pathname === href;
+	$: active = $page.url.pathname.includes(href);
 </script>
 
 <a
