@@ -9,4 +9,12 @@
 </script>
 
 <Header />
-<slot />
+<div class="flex">
+	<div
+		class="hidden sm:block w-14 border-r-2 border-sec-base bg-stripes self-stretch min-h-screen"
+	/>
+	<!-- pt-16: Header Height -->
+	<div class="mt-16 grow">
+		<slot />
+	</div>
+</div>

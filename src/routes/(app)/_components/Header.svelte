@@ -43,5 +43,3 @@
 		<MobileNavigation />
 	</header>
 </div>
-<!-- Header's height -->
-<div class="h-16" />
