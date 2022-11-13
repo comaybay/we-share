@@ -11,7 +11,7 @@
 	stroke="currentColor"
 	width={size}
 	height={size}
-	class="rotate-180 stroke-sec-base"
+	class="rotate-180"
 >
 	<path
 		stroke-linecap="round"

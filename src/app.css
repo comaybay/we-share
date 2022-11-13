@@ -14,4 +14,16 @@
 	.topic-box:focus-within button {
 		@apply text-tert-base;
 	}
+
+	.bg-stripes {
+		background: linear-gradient(
+			to bottom,
+			transparent 0px,
+			transparent 38.5px,
+			#6493a7 38.5px,
+			#6493a7 40px
+		);
+
+		background-size: 100% 40px;
+	}
 }
