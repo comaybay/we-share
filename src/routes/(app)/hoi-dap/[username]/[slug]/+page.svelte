@@ -15,7 +15,7 @@
 
 <div class="flex justify-center mt-8">
 	{#if post}
-		<div class="grow px-8 py-4 border border-pri-light max-w-3xl min-w-0">
+		<div class="grow px-8 md:py-4 md:border md:border-pri-light max-w-3xl min-w-0">
 			<a href="/nguoi-dung/{post.author.username}">
 				<div class="inline-block w-12 h-12 mb-1">
 					<UserProfilePicture />
