@@ -8,4 +8,4 @@ export const POST_SHARING_COMMENT_MAX_LENGTH = 10000;
 export const TITLE_MAX_LENGTH = 255;
 
 export const TOPIC_MAX_LENGTH = 50;
-export const MAX_TOPIC_NUMBER = 20;
+export const MAX_NUMBER_OF_TOPICS = 20;

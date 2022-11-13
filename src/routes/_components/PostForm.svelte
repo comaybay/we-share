@@ -1,7 +1,10 @@
 <script lang="ts">
 	import { applyAction, enhance } from '$app/forms';
-
-	import { MAX_TOPIC_NUMBER, POST_QUESTION_MAX_LENGTH, TOPIC_MAX_LENGTH } from 'src/lib/constants';
+	import {
+		MAX_NUMBER_OF_TOPICS,
+		POST_QUESTION_MAX_LENGTH,
+		TOPIC_MAX_LENGTH
+	} from 'src/lib/constants';
 	import type { PostSubmitionError } from 'src/lib/types/PostSubmitionError';
 	import { userFriendlyMessage } from 'src/lib/userFriendlyMessage';
 	import PostEditor from 'src/routes/_components/PostEditor.svelte';
@@ -19,7 +22,7 @@
 
 	let submitting = false;
 
-	$: tagLimitReached = topics.length >= MAX_TOPIC_NUMBER;
+	$: tagLimitReached = topics.length >= MAX_NUMBER_OF_TOPICS;
 	$: contentTooLong = textContent.length > POST_QUESTION_MAX_LENGTH;
 
 	function addTopic() {

@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { getSupabase } from '@supabase/auth-helpers-sveltekit';
 import { invalid, redirect, type Actions } from '@sveltejs/kit';
+import { MAX_NUMBER_OF_TOPICS } from 'src/lib/constants';
 import { redirectLogin } from 'src/lib/redirectLogin';
 import { ErrorType, getUserFriendlyMessage } from 'src/lib/server/errorExtraction';
 import slugify from 'src/lib/server/slugify';
@@ -21,6 +22,12 @@ export const actions: Actions = {
 		let topics: string[];
 		try {
 			topics = JSON.parse(formData.get('topics') as string);
+
+			if (topics.length > MAX_NUMBER_OF_TOPICS) {
+				return invalid(400, {
+					message: `number of topic must not be larger than ${MAX_NUMBER_OF_TOPICS}`
+				});
+			}
 		} catch (e) {
 			return invalid(400, { message: 'invalid topics' });
 		}
