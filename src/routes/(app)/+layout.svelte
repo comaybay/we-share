@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { userProfile } from 'src/lib/stores/userProfile';
 	import type { LayoutData } from './$types';
+	import Footer from './_components/Footer.svelte';
 	import Header from './_components/Header.svelte';
 
 	export let data: LayoutData;
@@ -9,12 +10,13 @@
 </script>
 
 <Header />
-<div class="flex">
-	<div
-		class="hidden sm:block w-14 border-r-2 border-sec-base bg-stripes self-stretch min-h-screen"
-	/>
+<div class="flex items-stretch">
+	<div class="hidden sm:block w-14 border-r-2 border-sec-base bg-stripes" />
 	<!-- pt-16: Header Height -->
-	<div class="mt-16 grow">
-		<slot />
+	<div class="pt-16 grow flex flex-col min-h-screen">
+		<div class="grow my-8">
+			<slot />
+		</div>
+		<Footer />
 	</div>
 </div>

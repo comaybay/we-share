@@ -12,7 +12,9 @@
 	<header class="relative z-auto flex px-4 items-center border-b border-pri-base h-16 bg-paper">
 		<div class="flex-1">
 			<a href="/" class="px-4 inline-flex items-center">
-				<WeShareIcon />
+				<div class="text-sec-base">
+					<WeShareIcon />
+				</div>
 				<span class="text-3xl tracking-[0.07em] text-pri-base">WeShare</span>
 			</a>
 		</div>
