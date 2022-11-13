@@ -24,10 +24,14 @@ export const load: PageLoad = async event => {
 
 	return {
 		post: {
+			author: {
+				username: event.params.username,
+				id: authorId
+			},
 			id: data.id,
 			title: data.title,
-			dateCreated: data.date_created,
-			dateLastUpdated: data.date_last_updated,
+			dateCreated: new Date(data.date_created),
+			dateLastUpdated: new Date(data.date_last_updated),
 			content: data.content,
 			topics: data.topics,
 			favoriteAnswerId: data.favorite_answer_id

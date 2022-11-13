@@ -141,7 +141,7 @@
 
 		{#each topics as topic, i (topic)}
 			<div
-				class="flex items-center  rounded-full border border-pri-light bg-paper min-w-0"
+				class="flex items-center rounded-full border border-pri-light bg-paper min-w-0"
 				animate:flip={{ duration: 600 }}
 			>
 				<span class="pl-4 pr-2 truncate">{topic}</span>
