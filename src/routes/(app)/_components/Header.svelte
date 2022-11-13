@@ -1,13 +1,14 @@
 <script lang="ts">
 	import { userProfile } from 'src/lib/stores/userProfile';
 	import ButtonOutline from 'src/routes/_components/ButtonOutline.svelte';
+	import UserProfilePicture from '../../_components/UserProfilePicture.svelte';
 	import WeShareIcon from '../../_components/WeShareIcon.svelte';
 	import MobileNavigation from './header/MobileNavigation.svelte';
 	import NavLink from './header/NavLink.svelte';
 	import UserMenuButton from './header/UserMenuButton.svelte';
 </script>
 
-<div class="fixed w-full">
+<div class="fixed w-full z-10">
 	<header class="relative z-auto flex px-4 items-center border-b border-pri-base h-16 bg-paper">
 		<div class="flex-1">
 			<a href="/" class="px-4 inline-flex items-center">
@@ -29,23 +30,10 @@
 				<div class="w-fit ml-auto">
 					<a href="/dang-nhap">
 						<ButtonOutline>
-							<div class="">
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									fill="none"
-									viewBox="0 0 24 24"
-									stroke-width="1"
-									stroke="currentColor"
-									class="w-8 h-8 inline-block"
-								>
-									<path
-										stroke-linecap="round"
-										stroke-linejoin="round"
-										d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
-									/>
-								</svg>
-								<span class="align-middle text-lg uppercase">Đăng nhập</span>
+							<div class="inline-block w-8 h-8">
+								<UserProfilePicture />
 							</div>
+							<span class="align-middle text-lg uppercase">Đăng nhập</span>
 						</ButtonOutline>
 					</a>
 				</div>

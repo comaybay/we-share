@@ -7,6 +7,10 @@ module.exports = {
     extend: {
       fontFamily: {
         'sans': ['sans-serif', ...defaultTheme.fontFamily.sans],
+      },
+      transitionDuration: {
+        '25': '25ms',
+        '50': '50ms'
       }
     },
     colors: {
@@ -26,6 +30,7 @@ module.exports = {
       'qua-hover': '#0e8244',
       'quin-base': '#C6CA00',
     },
+
   },
   plugins: [],
 }
