@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { userProfile } from 'src/lib/stores/userProfile';
 	import ButtonOutline from 'src/routes/_components/ButtonOutline.svelte';
+	import UserProfilePicture from '../../_components/UserProfilePicture.svelte';
 	import WeShareIcon from '../../_components/WeShareIcon.svelte';
 	import MobileNavigation from './header/MobileNavigation.svelte';
 	import NavLink from './header/NavLink.svelte';
 	import UserMenuButton from './header/UserMenuButton.svelte';
-	import UserProfilePicture from './UserProfilePicture.svelte';
 </script>
 
-<div class="fixed w-full">
+<div class="fixed w-full z-10">
 	<header class="relative z-auto flex px-4 items-center border-b border-pri-base h-16 bg-paper">
 		<div class="flex-1">
 			<a href="/" class="px-4 inline-flex items-center">
@@ -30,10 +30,10 @@
 				<div class="w-fit ml-auto">
 					<a href="/dang-nhap">
 						<ButtonOutline>
-							<div class="">
+							<div class="inline-block w-8 h-8">
 								<UserProfilePicture />
-								<span class="align-middle text-lg uppercase">Đăng nhập</span>
 							</div>
+							<span class="align-middle text-lg uppercase">Đăng nhập</span>
 						</ButtonOutline>
 					</a>
 				</div>

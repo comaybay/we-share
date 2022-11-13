@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { applyAction, enhance } from '$app/forms';
 
-	import { MAX_TOPIC_NUMBER, POST_QUESTION_MAX_LENGTH } from 'src/lib/constants';
+	import { MAX_TOPIC_NUMBER, POST_QUESTION_MAX_LENGTH, TOPIC_MAX_LENGTH } from 'src/lib/constants';
 	import type { PostSubmitionError } from 'src/lib/types/PostSubmitionError';
 	import { userFriendlyMessage } from 'src/lib/userFriendlyMessage';
 	import PostEditor from 'src/routes/_components/PostEditor.svelte';
@@ -107,7 +107,7 @@
 			>
 				<input
 					minlength={3}
-					maxlength={255}
+					maxlength={TOPIC_MAX_LENGTH}
 					type="text"
 					class="pl-4 pr-2 rounded-full w-32 border-none focus:outline-none resize-x"
 					placeholder="Chủ đề"
@@ -119,7 +119,7 @@
 					disabled={submitting}
 					type="button"
 					on:click={addTopic}
-					class="w-10 h-10 rounded-full text-pri-base hover:enabled:bg-pri-lighter disabled:text-pri-light"
+					class="shrink-0 w-10 h-10 rounded-full text-pri-base hover:enabled:bg-pri-lighter disabled:text-pri-light"
 				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -141,10 +141,10 @@
 
 		{#each topics as topic, i (topic)}
 			<div
-				class="flex items-center w-fit rounded-full border border-pri-light bg-paper"
+				class="flex items-center  rounded-full border border-pri-light bg-paper min-w-0"
 				animate:flip={{ duration: 600 }}
 			>
-				<span class="pl-4 pr-2">{topic}</span>
+				<span class="pl-4 pr-2 truncate">{topic}</span>
 				<button on:click={() => removeTopic(i)} class="w-10 h-10 rounded-full hover:bg-pri-lighter">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
