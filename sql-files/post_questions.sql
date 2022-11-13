@@ -6,7 +6,7 @@ create table if not exists post_questions (
   slug varchar(255) not null,
   text_content varchar(30000) not null,
   content varchar(300000) not null,
-  topics varchar(255)[] not null,
+  topics varchar(50)[] not null,
 
   favorite_answer_id bigint references post_question_comments(id),
   author_id uuid references profiles(id) not null
