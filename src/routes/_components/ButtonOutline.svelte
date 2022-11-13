@@ -20,7 +20,7 @@
 	{/if}
 	<button
 		on:click
-		class="rounded-sm px-4 py-1 font-medium border-2 transition-colors duration-[50ms]
+		class="rounded-sm px-4 py-1 font-medium border-2 transition-colors duration-50
 	{loading
 			? 'bg-sec-loading hover:text-sec-loading'
 			: 'text-sec-base hover:text-paper border-sec-base hover:bg-sec-base '}"
