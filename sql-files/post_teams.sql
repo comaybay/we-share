@@ -7,6 +7,7 @@ create table if not exists post_teams (
   content varchar(10000) not null,
   course_code varchar(255),
   needed_skills varchar(50)[] not null,
+  view_count bigint not null default 0,
 
   author_id uuid references profiles(id) not null
 );

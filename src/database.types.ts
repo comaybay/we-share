@@ -84,6 +84,7 @@ export interface Database {
           favorite_answer_id: number | null
           author_id: string
           text_content: string
+          view_count: number
         }
         Insert: {
           id?: number
@@ -96,6 +97,7 @@ export interface Database {
           favorite_answer_id?: number | null
           author_id: string
           text_content: string
+          view_count?: number
         }
         Update: {
           id?: number
@@ -108,6 +110,7 @@ export interface Database {
           favorite_answer_id?: number | null
           author_id?: string
           text_content?: string
+          view_count?: number
         }
       }
       post_sharing_bookmarks: {
@@ -200,6 +203,7 @@ export interface Database {
           content: string
           topics: string[]
           author_id: string
+          view_count: number
         }
         Insert: {
           id?: number
@@ -210,6 +214,7 @@ export interface Database {
           content: string
           topics: string[]
           author_id: string
+          view_count: number
         }
         Update: {
           id?: number
@@ -220,6 +225,7 @@ export interface Database {
           content?: string
           topics?: string[]
           author_id?: string
+          view_count?: number
         }
       }
       post_team_comments: {
@@ -262,6 +268,7 @@ export interface Database {
           course_code: string | null
           needed_skills: string[]
           author_id: string
+          view_count: number
         }
         Insert: {
           id?: number
@@ -273,6 +280,7 @@ export interface Database {
           course_code?: string | null
           needed_skills: string[]
           author_id: string
+          view_count?: number
         }
         Update: {
           id?: number
@@ -284,6 +292,7 @@ export interface Database {
           course_code?: string | null
           needed_skills?: string[]
           author_id?: string
+          view_count?: number
         }
       }
       profiles: {
