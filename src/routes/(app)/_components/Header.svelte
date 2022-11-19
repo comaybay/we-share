@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { userProfile } from 'src/lib/stores/userProfile';
-	import ButtonOutline from 'src/routes/_components/ButtonOutline.svelte';
+	import ButtonOutline from 'src/routes/_components/buttons/ButtonOutline.svelte';
 	import UserProfilePicture from '../../_components/UserProfilePicture.svelte';
 	import WeShareIcon from '../../_components/WeShareIcon.svelte';
 	import MobileNavigation from './header/MobileNavigation.svelte';

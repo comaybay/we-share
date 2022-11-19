@@ -22,7 +22,7 @@
 	<button
 		on:click
 		{disabled}
-		class="rounded-sm px-4 py-2 text-pri-lighter font-medium 
+		class="w-full rounded-sm px-4 py-2 text-pri-lighter font-medium 
 		{loading || disabled ? 'bg-sec-loading' : 'bg-sec-base hover:bg-sec-hover'}"
 	>
 		<slot />

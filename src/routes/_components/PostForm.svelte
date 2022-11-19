@@ -9,7 +9,7 @@
 	import { userFriendlyMessage } from 'src/lib/userFriendlyMessage';
 	import PostEditor from 'src/routes/_components/PostEditor.svelte';
 	import { flip } from 'svelte/animate';
-	import Button from './Button.svelte';
+	import Button from './buttons/Button.svelte';
 
 	export let postError: PostSubmitionError | null;
 

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { toRelativeTime } from 'src/lib/i18n/toRelativeTime';
-	import PostTitle from 'src/routes/_components/posts/PostTitle.svelte';
-	import Topic from 'src/routes/_components/posts/Topic.svelte';
+	import PostTitle from 'src/routes/(app)/_components/posts/PostTitle.svelte';
+	import TopicContainer from 'src/routes/(app)/_components/posts/TopicContainer.svelte';
 	import UserProfilePicture from 'src/routes/_components/UserProfilePicture.svelte';
 	import type { PageData } from './$types';
 
@@ -26,15 +26,11 @@
 			</a>
 			<span>hỏi {toRelativeTime(post.dateCreated)}</span>
 			<PostTitle>{post.title}</PostTitle>
-			<div class="mt-4">
+			<div class="mt-4 mb-6">
 				{@html post.content}
 			</div>
 
-			<div class="mt-6 flex flex-wrap gap-2">
-				{#each post.topics as topic}
-					<Topic href="/hoi-dap?topic={encodeURIComponent(topic)}">{topic}</Topic>
-				{/each}
-			</div>
+			<TopicContainer topics={post.topics} baseHref="/hoi-dap" />
 		</div>
 	{/if}
 </div>

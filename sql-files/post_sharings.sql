@@ -7,6 +7,7 @@ create table if not exists post_sharings (
   text_content varchar(30000) not null,
   content varchar(300000) not null,
   topics varchar(50)[] not null,
+  view_count bigint not null default 0,
 
   author_id uuid references profiles(id) not null
 );

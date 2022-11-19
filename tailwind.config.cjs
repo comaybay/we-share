@@ -21,6 +21,7 @@ module.exports = {
       'pri-base': '#32667C',
       'pri-light': '#6493A7',
       'pri-lighter': '#EEF5F8',
+      'pri-hover': '#4693cf',
       'sec-base': '#AB2B2B',
       'sec-hover': '#942222',
       'sec-loading': '#b56662',
@@ -32,5 +33,5 @@ module.exports = {
     },
 
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/line-clamp')],
 }

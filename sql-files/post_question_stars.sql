@@ -1,8 +1,8 @@
 create table if not exists post_question_stars (
   date_created timestamp with time zone not null,
 
-  user_id uuid references profiles(id),
-  post_id bigint references post_questions(id),
+  user_id uuid references profiles(id) not null,
+  post_id bigint references post_questions(id) not null,
   primary key (user_id, post_id)
 );
 alter table post_question_stars enable row level security;
