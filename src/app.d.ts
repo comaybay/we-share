@@ -5,7 +5,7 @@ declare namespace App {
 	// interface PageError {}
 	// interface Platform {}
 	interface Supabase {
-		Database: import('./DatabaseDefinitions').Database;
+		Database: import('./database.types').Database;
 		SchemaName: 'public';
 	}
 	// interface Locals {}
