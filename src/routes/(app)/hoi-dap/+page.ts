@@ -5,6 +5,7 @@ import type { ForeignTableCount } from 'src/lib/types/supabase/ForeignTableCount
 import type { PageLoad } from './$types';
 
 export const load: PageLoad = async event => {
+	event.depends('questions:get');
 	const { supabaseClient } = await getSupabase(event);
 
 	const query = supabaseClient.from('post_questions').select(

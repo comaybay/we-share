@@ -1,9 +1,10 @@
 <script lang="ts">
 	export let loading = false;
 	export let disabled = false;
+	export let displayBlock = false;
 </script>
 
-<div class="inline-block">
+<div class={displayBlock ? 'block' : 'inline-block'}>
 	{#if loading}
 		<svg
 			aria-hidden="true"
