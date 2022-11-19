@@ -2,7 +2,7 @@
 	import { applyAction, enhance, type SubmitFunction } from '$app/forms';
 	import { goto, invalidateAll } from '$app/navigation';
 	import { page } from '$app/stores';
-	import Button from '../_components/Button.svelte';
+	import Button from '../_components/buttons/Button.svelte';
 	import InputTextWithLabel from '../_components/InputTextWithLabel.svelte';
 	import Link from '../_components/Link.svelte';
 	import WeShareLogoBig from '../_components/WeShareLogoBig.svelte';
