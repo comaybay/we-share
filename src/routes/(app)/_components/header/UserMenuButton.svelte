@@ -37,7 +37,7 @@
 	{#if showMenu}
 		<nav
 			transition:fly={{ y: -250, duration: 250, easing: quadInOut, opacity: 1 }}
-			class="-z-10 absolute border rounded-b-xl border-pri-base py-2 w-full min-w-fit right-0 whitespace-nowrap"
+			class="-z-10 absolute border rounded-b-xl bg-paper border-pri-base py-2 w-full min-w-fit right-0 whitespace-nowrap"
 		>
 			<UserMenuNavLink href="/nguoi-dung/{userProfile.username}">Trang cá nhân</UserMenuNavLink>
 			<div class="hover:bg-pri-lighter">
