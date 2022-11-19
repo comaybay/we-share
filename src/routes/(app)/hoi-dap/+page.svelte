@@ -66,7 +66,7 @@
 <div class="flex flex-col lg:flex-row-reverse gap-x-16 px-4 md:px-12 justify-between">
 	<div class="flex flex-col shrink-0 min-w-[330px] mb-4 lg:mb-0">
 		<a href="/hoi-dap/dat-cau-hoi">
-			<Button displayBlock>
+			<Button block>
 				<div class="w-full flex gap-x-2 justify-center items-center px-14">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"

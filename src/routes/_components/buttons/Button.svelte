@@ -1,10 +1,10 @@
 <script lang="ts">
 	export let loading = false;
 	export let disabled = false;
-	export let displayBlock = false;
+	export let block = false;
 </script>
 
-<div class={displayBlock ? 'block' : 'inline-block'}>
+<div class={block ? 'block' : 'inline-block'}>
 	{#if loading}
 		<svg
 			aria-hidden="true"
@@ -23,7 +23,7 @@
 	<button
 		on:click
 		{disabled}
-		class="w-full rounded-sm px-4 py-2 text-pri-lighter font-medium 
+		class="{block ? 'w-full' : ''} rounded-sm px-4 py-2 text-pri-lighter font-medium 
 		{loading || disabled ? 'bg-sec-loading' : 'bg-sec-base hover:bg-sec-hover'}"
 	>
 		<slot />
