@@ -1,24 +1,19 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { getSupabase } from '@supabase/auth-helpers-sveltekit';
 import { invalid, redirect, type Actions } from '@sveltejs/kit';
 import { MAX_NUMBER_OF_TOPICS } from 'src/lib/constants';
-import { redirectLogin } from 'src/lib/redirectLogin';
 import { ErrorType, getUserFriendlyMessage } from 'src/lib/server/errorExtraction';
 import slugify from 'src/lib/server/slugify';
 import type { PostSubmitionError } from 'src/lib/types/PostSubmitionError';
+import { useProtectedRoute } from 'src/lib/useProtectedRoute';
 
 export const actions: Actions = {
 	async default(event) {
-		const { session, supabaseClient } = await getSupabase(event);
-
-		if (!session) {
-			throw redirectLogin();
-		}
+		const { session, supabaseClient } = await useProtectedRoute(event);
 
 		const formData = await event.request.formData();
-		const title = formData.get('title')?.toString()?.trim();
-		const content = formData.get('content')?.toString()?.trim();
-		const contentText = formData.get('text-content')?.toString()?.trim();
+		const title = formData.get('title')?.toString()?.trim() as string;
+		const content = formData.get('content')?.toString()?.trim() as string;
+		const contentText = formData.get('text-content')?.toString()?.trim() as string;
 		let topics: string[];
 		try {
 			topics = JSON.parse(formData.get('topics') as string);
@@ -47,7 +42,7 @@ export const actions: Actions = {
 		}
 
 		const date = new Date().toISOString();
-		let slug = slugify(title!);
+		let slug = slugify(title);
 
 		if (slug.length === 0) {
 			slug = Date.now().toString();
@@ -89,7 +84,7 @@ export const actions: Actions = {
 
 		const { error: getUsernameError, data: userProfile } = await supabaseClient
 			.from('profiles')
-			.select('username, name, quote')
+			.select('username')
 			.match({ id: session.user.id })
 			.single();
 
