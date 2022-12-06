@@ -6,7 +6,7 @@
 	import { onMount } from 'svelte';
 	import SparkleIcon from '../_components/icons/SparkleIcon.svelte';
 	import TopIcon from '../_components/icons/TopIcon.svelte';
-	import TopicContainer from '../_components/posts/TopicContainer.svelte';
+	import TopicContainer from '../_components/postDetail/TopicContainer.svelte';
 	import type { PageData } from './$types';
 	import Question from './_components/Question.svelte';
 
@@ -44,15 +44,19 @@
 	}
 
 	async function onClickNewestQuestions() {
-		url.searchParams.set('order', 'newest');
-		url = url;
-		updateData();
+		if (!newestQuestionsActive) {
+			url.searchParams.set('order', 'newest');
+			url = url;
+			updateData();
+		}
 	}
 
 	async function onClickTopQuestions() {
-		url.searchParams.set('order', 'top');
-		url = url;
-		updateData();
+		if (!topQuestionsActive) {
+			url.searchParams.set('order', 'top');
+			url = url;
+			updateData();
+		}
 	}
 
 	async function updateData() {
@@ -63,7 +67,7 @@
 	}
 </script>
 
-<div class="flex flex-col lg:flex-row-reverse gap-x-16 px-4 md:px-12 justify-between">
+<div class="flex flex-col lg:flex-row-reverse gap-x-16 px-4 md:px-28 justify-between">
 	<div class="flex flex-col shrink-0 min-w-[330px] mb-4 lg:mb-0">
 		<a href="/hoi-dap/dat-cau-hoi">
 			<Button block>

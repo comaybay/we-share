@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { toRelativeTime } from 'src/lib/i18n/toRelativeTime';
-	import PostTitle from 'src/routes/(app)/_components/posts/PostTitle.svelte';
-	import TopicContainer from 'src/routes/(app)/_components/posts/TopicContainer.svelte';
+	import PostTitle from 'src/routes/(app)/_components/postDetail/PostTitle.svelte';
+	import TopicContainer from 'src/routes/(app)/_components/postDetail/TopicContainer.svelte';
 	import UserProfilePicture from 'src/routes/_components/UserProfilePicture.svelte';
 	import type { PageData } from './$types';
 
