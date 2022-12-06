@@ -1,5 +1,5 @@
 <script lang="ts">
-	import PostForm from 'src/routes/_components/PostForm.svelte';
+	import PostForm from 'src/routes/(app)/_components/newPost/PostForm.svelte';
 	import type { ActionData } from './$types';
 
 	export let form: ActionData;
