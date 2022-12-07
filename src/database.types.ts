@@ -277,6 +277,7 @@ export interface Database {
           needed_skills: string[]
           author_id: string
           view_count: number
+          text_content: string
         }
         Insert: {
           id?: number
@@ -289,6 +290,7 @@ export interface Database {
           needed_skills: string[]
           author_id: string
           view_count?: number
+          text_content: string
         }
         Update: {
           id?: number
@@ -301,6 +303,7 @@ export interface Database {
           needed_skills?: string[]
           author_id?: string
           view_count?: number
+          text_content?: string
         }
       }
       profiles: {
