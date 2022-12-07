@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { toRelativeTime } from 'src/lib/i18n/toRelativeTime';
 	import CommentIcon from 'src/routes/(app)/_components/icons/CommentIcon.svelte';
-	import type { PageData } from '../$types';
-	import HeartIcon from '../../_components/icons/HeartIcon.svelte';
-	import StarIcon from '../../_components/icons/StarIcon.svelte';
-	import ViewIcon from '../../_components/icons/ViewIcon.svelte';
+	import type { PageData } from '../../hoi-dap/$types';
+	import HeartIcon from '../icons/HeartIcon.svelte';
+	import StarIcon from '../icons/StarIcon.svelte';
+	import ViewIcon from '../icons/ViewIcon.svelte';
 
 	export let question: PageData['questions'][number];
 </script>

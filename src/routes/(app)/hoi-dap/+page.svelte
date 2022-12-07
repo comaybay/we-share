@@ -6,9 +6,9 @@
 	import LoadingIndicator from '../_components/LoadingIndicator.svelte';
 	import TopicContainer from '../_components/postDetail/TopicContainer.svelte';
 	import NewestPostsButton from '../_components/posts/NewestPostsButton.svelte';
+	import Question from '../_components/posts/Question.svelte';
 	import TopPostsButton from '../_components/posts/TopPostsButton.svelte';
 	import type { PageData } from './$types';
-	import Question from './_components/Question.svelte';
 
 	export let data: PageData;
 
@@ -97,7 +97,7 @@
 			</div>
 		</div>
 	</div>
-	<div>
+	<div class="grow">
 		<NewestPostsButton active={newestQuestionsActive} on:click={onClickNewestQuestions} />
 		<TopPostsButton active={topQuestionsActive} on:click={onClickTopQuestions} />
 		{#if !loading}
