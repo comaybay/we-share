@@ -54,7 +54,6 @@ export const actions: Actions = {
 				.single();
 
 			if (countError || duplicatedTitleCount === null) {
-				console.log(countError);
 				result.serverError = true;
 				result.userFriendlyMessage = getUserFriendlyMessage(ErrorType.ServerError);
 				return invalid(500, result);
