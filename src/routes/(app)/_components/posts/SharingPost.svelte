@@ -5,6 +5,7 @@
 	import type { PageData } from '../../chia-se/$types';
 	import ViewIcon from '../icons/ViewIcon.svelte';
 	import YellowStarcon from '../icons/YellowStarcon.svelte';
+	import PostHeaderTopicContainer from './PostHeaderTopicContainer.svelte';
 
 	export let post: PageData['posts'][number];
 </script>
@@ -27,7 +28,7 @@
 			<a class="hover:text-pri-hover" href={`nguoi-dung/${post.authorUsername}`}>
 				{post.authorUsername}
 			</a>
-			<span>hỏi {toRelativeTime(post.dateCreated)}</span>
+			<span>{toRelativeTime(post.dateCreated)}</span>
 			{#if post.dateLastUpdated}
 				<span class="italic">(cập nhật {toRelativeTime(post.dateLastUpdated)})</span>
 			{/if}
@@ -40,16 +41,7 @@
 				</div>
 			</div>
 
-			<div class="mt-3 w-full flex flex-wrap gap-2">
-				{#each post.topics as topic}
-					<a
-						href="hoi-dap?topic={encodeURIComponent(topic)}"
-						class="min-w-0 truncate px-2.5 rounded-full border border-pri-light bg-paper hover:bg-pri-light hover:text-paper transition-colors duration-25"
-					>
-						{topic}
-					</a>
-				{/each}
-			</div>
+			<PostHeaderTopicContainer baseHref="chia-se" topics={post.topics} />
 		</div>
 	</div>
 </div>
