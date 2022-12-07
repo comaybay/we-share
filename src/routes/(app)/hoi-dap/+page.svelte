@@ -2,13 +2,13 @@
 	import { goto, invalidate } from '$app/navigation';
 	import { page } from '$app/stores';
 	import Button from 'src/routes/_components/buttons/Button.svelte';
-	import ButtonText from 'src/routes/_components/buttons/ButtonText.svelte';
 	import { onMount } from 'svelte';
-	import SparkleIcon from '../_components/icons/SparkleIcon.svelte';
-	import TopIcon from '../_components/icons/TopIcon.svelte';
-	import TopicContainer from '../_components/posts/TopicContainer.svelte';
+	import LoadingIndicator from '../_components/LoadingIndicator.svelte';
+	import TopicContainer from '../_components/postDetail/TopicContainer.svelte';
+	import NewestPostsButton from '../_components/posts/NewestPostsButton.svelte';
+	import Question from '../_components/posts/Question.svelte';
+	import TopPostsButton from '../_components/posts/TopPostsButton.svelte';
 	import type { PageData } from './$types';
-	import Question from './_components/Question.svelte';
 
 	export let data: PageData;
 
@@ -44,15 +44,19 @@
 	}
 
 	async function onClickNewestQuestions() {
-		url.searchParams.set('order', 'newest');
-		url = url;
-		updateData();
+		if (!newestQuestionsActive) {
+			url.searchParams.set('order', 'newest');
+			url = url;
+			updateData();
+		}
 	}
 
 	async function onClickTopQuestions() {
-		url.searchParams.set('order', 'top');
-		url = url;
-		updateData();
+		if (!topQuestionsActive) {
+			url.searchParams.set('order', 'top');
+			url = url;
+			updateData();
+		}
 	}
 
 	async function updateData() {
@@ -63,7 +67,7 @@
 	}
 </script>
 
-<div class="flex flex-col lg:flex-row-reverse gap-x-16 px-4 md:px-12 justify-between">
+<div class="flex flex-col lg:flex-row-reverse gap-x-16 px-4 md:px-28 justify-between">
 	<div class="flex flex-col shrink-0 min-w-[330px] mb-4 lg:mb-0">
 		<a href="/hoi-dap/dat-cau-hoi">
 			<Button block>
@@ -93,40 +97,15 @@
 			</div>
 		</div>
 	</div>
-	<div>
-		<ButtonText active={newestQuestionsActive} on:click={onClickNewestQuestions}>
-			<div class="flex gap-x-1">
-				<SparkleIcon />
-				<span>Mới nhất</span>
-			</div>
-		</ButtonText>
-		<ButtonText active={topQuestionsActive} on:click={onClickTopQuestions}>
-			<div class="flex gap-x-1">
-				<TopIcon />
-				<span>Top</span>
-			</div>
-		</ButtonText>
+	<div class="grow">
+		<NewestPostsButton active={newestQuestionsActive} on:click={onClickNewestQuestions} />
+		<TopPostsButton active={topQuestionsActive} on:click={onClickTopQuestions} />
 		{#if !loading}
 			{#each questions as question}
 				<Question {question} />
 			{/each}
 		{:else}
-			<div class="mt-8 flex items-center gap-x-2">
-				<svg
-					aria-hidden="true"
-					class="inline-block mr-2 w-8 h-8 animate-spin"
-					viewBox="0 0 24 24"
-					fill="none"
-					xmlns="http://www.w3.org/2000/svg"
-				>
-					<circle class="opacity-25 stroke-pri-base" cx="12" cy="12" r="10" stroke-width="2" />
-					<path
-						class="opacity-75 fill-sec-base"
-						d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-					/>
-				</svg>
-				<span class="text-lg"> Đang tải... </span>
-			</div>
+			<LoadingIndicator />
 		{/if}
 	</div>
 </div>

@@ -24,13 +24,13 @@
 					{post.author.username}
 				</span>
 			</a>
-			<span>hỏi {toRelativeTime(post.dateCreated)}</span>
+			<span>{toRelativeTime(post.dateCreated)}</span>
 			<PostTitle>{post.title}</PostTitle>
 			<div class="mt-4 mb-6">
 				{@html post.content}
 			</div>
 
-			<TopicContainer topics={post.topics} baseHref="/hoi-dap" />
+			<TopicContainer topics={post.topics} baseHref="/chia-se" />
 		</div>
 	{/if}
 </div>

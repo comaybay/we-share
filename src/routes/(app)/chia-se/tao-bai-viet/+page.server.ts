@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { invalid, redirect, type Actions } from '@sveltejs/kit';
 import { MAX_NUMBER_OF_TOPICS } from 'src/lib/constants';
 import { ErrorType, getUserFriendlyMessage } from 'src/lib/server/errorExtraction';
@@ -48,7 +47,7 @@ export const actions: Actions = {
 			slug = Date.now().toString();
 		} else {
 			const { error: countError, data: duplicatedTitleCount } = await supabaseClient
-				.rpc('post_questions_count_duplicated_slug', {
+				.rpc('post_sharings_count_duplicated_slug', {
 					_author_id: session.user.id,
 					_slug: slug
 				})
@@ -66,7 +65,7 @@ export const actions: Actions = {
 			}
 		}
 
-		const { error: insertError } = await supabaseClient.from('post_questions').insert({
+		const { error: insertError } = await supabaseClient.from('post_sharings').insert({
 			date_created: date,
 			slug,
 			text_content: contentText,
@@ -94,6 +93,6 @@ export const actions: Actions = {
 			return invalid(500, result);
 		}
 
-		throw redirect(303, `/hoi-dap/${userProfile.username}/${slug}`);
+		throw redirect(303, `/chia-se/${userProfile.username}/${slug}`);
 	}
 };

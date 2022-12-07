@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { toRelativeTime } from 'src/lib/i18n/toRelativeTime';
 	import CommentIcon from 'src/routes/(app)/_components/icons/CommentIcon.svelte';
-	import type { PageData } from '../$types';
-	import HeartIcon from '../../_components/icons/HeartIcon.svelte';
-	import StarIcon from '../../_components/icons/StarIcon.svelte';
-	import ViewIcon from '../../_components/icons/ViewIcon.svelte';
+	import type { PageData } from '../../hoi-dap/$types';
+	import HeartIcon from '../icons/HeartIcon.svelte';
+	import StarIcon from '../icons/StarIcon.svelte';
+	import ViewIcon from '../icons/ViewIcon.svelte';
+	import PostHeaderTopicContainer from './PostHeaderTopicContainer.svelte';
 
 	export let question: PageData['questions'][number];
 </script>
@@ -40,16 +41,7 @@
 				</div>
 			</div>
 
-			<div class="mt-3 w-full flex flex-wrap gap-2">
-				{#each question.topics as topic}
-					<a
-						href="hoi-dap?topic={encodeURIComponent(topic)}"
-						class="min-w-0 truncate px-2.5 rounded-full border border-pri-light bg-paper hover:bg-pri-light hover:text-paper transition-colors duration-25"
-					>
-						{topic}
-					</a>
-				{/each}
-			</div>
+			<PostHeaderTopicContainer baseHref="hoi-dap" topics={question.topics} />
 		</div>
 	</div>
 </div>

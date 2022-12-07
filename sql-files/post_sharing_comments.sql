@@ -7,7 +7,7 @@ create table if not exists post_sharing_comments (
   
   author_id uuid references profiles(id) not null,
   parent_comment_id bigint references post_sharing_comments(id),
-  post_id bigint references post_questions(id) not null
+  post_id bigint references post_sharings(id) not null
 );
 alter table public.post_sharing_comments enable row level security;
 

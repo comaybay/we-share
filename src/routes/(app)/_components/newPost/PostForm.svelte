@@ -7,9 +7,9 @@
 	} from 'src/lib/constants';
 	import type { PostSubmitionError } from 'src/lib/types/PostSubmitionError';
 	import { userFriendlyMessage } from 'src/lib/userFriendlyMessage';
-	import PostEditor from 'src/routes/_components/PostEditor.svelte';
+	import PostEditor from 'src/routes/(app)/_components/newPost/PostEditor.svelte';
 	import { flip } from 'svelte/animate';
-	import Button from './buttons/Button.svelte';
+	import Button from '../../../_components/buttons/Button.svelte';
 
 	export let postError: PostSubmitionError | null;
 
