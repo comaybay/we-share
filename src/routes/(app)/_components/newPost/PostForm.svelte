@@ -1,17 +1,15 @@
 <script lang="ts">
 	import { applyAction, enhance } from '$app/forms';
-	import {
-		MAX_NUMBER_OF_TOPICS,
-		POST_QUESTION_MAX_LENGTH,
-		TOPIC_MAX_LENGTH
-	} from 'src/lib/constants';
+	import { MAX_NUMBER_OF_TOPICS, TOPIC_MAX_LENGTH } from 'src/lib/constants';
 	import type { PostSubmitionError } from 'src/lib/types/PostSubmitionError';
 	import { userFriendlyMessage } from 'src/lib/userFriendlyMessage';
 	import PostEditor from 'src/routes/(app)/_components/newPost/PostEditor.svelte';
 	import { flip } from 'svelte/animate';
 	import Button from '../../../_components/buttons/Button.svelte';
+	import InputTitle from './InputTitle.svelte';
 
 	export let postError: PostSubmitionError | null;
+	export let postContentMaxLength: number;
 
 	let title = '';
 	let content = '';
@@ -23,7 +21,7 @@
 	let submitting = false;
 
 	$: tagLimitReached = topics.length >= MAX_NUMBER_OF_TOPICS;
-	$: contentTooLong = textContent.length > POST_QUESTION_MAX_LENGTH;
+	$: contentTooLong = textContent.length > postContentMaxLength;
 
 	function addTopic() {
 		const newTopic = inputTopic.trim();
@@ -60,17 +58,7 @@
 		};
 	}}
 >
-	<input
-		disabled={submitting}
-		required
-		name="title"
-		minlength={1}
-		maxlength={255}
-		bind:value={title}
-		type="text"
-		class="rounded-sm w-full"
-		placeholder="Tiêu đề"
-	/>
+	<InputTitle {title} disabled={submitting} />
 	{#if postError?.titleEmpty}
 		<p class="text-sec-base">
 			*{userFriendlyMessage.titleEmpty}
@@ -88,7 +76,7 @@
 
 	<div class="mt-2">
 		<span class:text-sec-base={contentTooLong}>
-			{textContent.length} / {POST_QUESTION_MAX_LENGTH}
+			{textContent.length} / {postContentMaxLength}
 		</span>
 		{#if contentTooLong}
 			<span class={contentTooLong ? 'ml-2 text-sec-base font-bold' : ''}>

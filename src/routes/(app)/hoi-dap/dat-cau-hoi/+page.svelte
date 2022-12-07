@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { POST_QUESTION_MAX_LENGTH } from 'src/lib/constants';
 	import PostForm from 'src/routes/(app)/_components/newPost/PostForm.svelte';
 	import type { ActionData } from './$types';
 
@@ -11,5 +12,5 @@
 </h1>
 
 <div class="mx-auto px-8 max-w-6xl">
-	<PostForm postError={form} />
+	<PostForm postError={form} postContentMaxLength={POST_QUESTION_MAX_LENGTH} />
 </div>
