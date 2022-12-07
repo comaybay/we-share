@@ -59,7 +59,7 @@
 	async function updateData() {
 		loading = true;
 		await goto(url.href, { keepfocus: true, noscroll: true });
-		await invalidate('questions:get');
+		await invalidate('sharingposts:get');
 		loading = false;
 	}
 </script>
