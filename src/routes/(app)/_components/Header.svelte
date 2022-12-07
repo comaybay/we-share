@@ -9,8 +9,10 @@
 </script>
 
 <div class="fixed w-full z-10">
-	<header class="relative z-auto flex px-4 items-center border-b border-pri-base h-16 bg-paper">
-		<div class="flex-1">
+	<header
+		class="relative z-auto flex px-4 justify-between items-center border-b border-pri-base h-16 bg-paper"
+	>
+		<div>
 			<a href="/" class="px-4 inline-flex items-center">
 				<div class="text-sec-base">
 					<WeShareIcon />
@@ -19,13 +21,13 @@
 			</a>
 		</div>
 
-		<nav class="self-stretch hidden md:flex justify-center flex-1">
+		<nav class="self-stretch hidden md:flex justify-center">
 			<NavLink href="/hoi-dap">Hỏi đáp</NavLink>
 			<NavLink href="/chia-se">Chia sẻ</NavLink>
 			<NavLink href="/tim-nhom">Tìm nhóm</NavLink>
 		</nav>
 
-		<div class="hidden md:block flex-1">
+		<div class="hidden md:block">
 			{#if $userProfile}
 				<UserMenuButton userProfile={$userProfile} />
 			{:else}

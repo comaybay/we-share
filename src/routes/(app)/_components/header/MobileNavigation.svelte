@@ -25,10 +25,10 @@
 	}
 </script>
 
-<div class="h-full">
+<div class="h-full md:hidden">
 	<div class="relative h-full flex items-center">
 		<button
-			class="md:hidden p-2 rounded-full hover:bg-pri-lighter {active ? 'bg-pri-lighter' : ''}"
+			class="p-2 rounded-full hover:bg-pri-lighter {active ? 'bg-pri-lighter' : ''}"
 			on:click={() => (active = !active)}
 			use:clickoutside={onClickOutside}
 		>
