@@ -350,6 +350,10 @@ export interface Database {
         Args: { _author_id: string; _slug: string }
         Returns: number
       }
+      post_teams_count_duplicated_slug: {
+        Args: { _author_id: string; _slug: string }
+        Returns: number
+      }
       test: {
         Args: { slug: string }
         Returns: string
