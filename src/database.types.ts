@@ -153,6 +153,7 @@ export interface Database {
           id: number
           date_created: string
           date_last_updated: string | null
+          text_content: string
           content: string
           author_id: string
           parent_comment_id: number | null
@@ -162,6 +163,7 @@ export interface Database {
           id?: number
           date_created: string
           date_last_updated?: string | null
+          text_content: string
           content: string
           author_id: string
           parent_comment_id?: number | null
@@ -171,6 +173,7 @@ export interface Database {
           id?: number
           date_created?: string
           date_last_updated?: string | null
+          text_content?: string
           content?: string
           author_id?: string
           parent_comment_id?: number | null
@@ -206,6 +209,7 @@ export interface Database {
           author_id: string
           view_count: number
           text_content: string
+          post_sharing_stars_count: number
         }
         Insert: {
           id?: number
@@ -333,6 +337,10 @@ export interface Database {
       }
       post_questions_count_duplicated_slug: {
         Args: { _author_id: string; _slug: string }
+        Returns: number
+      }
+      post_sharing_stars_count: {
+        Args: { "": unknown }
         Returns: number
       }
       post_sharings_count_duplicated_slug: {
