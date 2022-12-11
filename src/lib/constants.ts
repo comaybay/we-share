@@ -9,3 +9,6 @@ export const TITLE_MAX_LENGTH = 255;
 
 export const TOPIC_MAX_LENGTH = 50;
 export const MAX_NUMBER_OF_TOPICS = 20;
+
+export const MIN_TEAM_SIZE = 2;
+export const MAX_TEAM_SIZE = 100;
