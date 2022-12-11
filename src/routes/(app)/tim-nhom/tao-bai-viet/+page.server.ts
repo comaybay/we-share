@@ -14,6 +14,12 @@ export const actions: Actions = {
 		const content = formData.get('content')?.toString()?.trim() as string;
 		const contentText = formData.get('text-content')?.toString()?.trim() as string;
 		const courseCode = formData.get('course-code')?.toString()?.trim() as string;
+		const teamSize = parseInt(formData.get('team-size')?.toString()?.trim() as string);
+
+		if (isNaN(teamSize)) {
+			return invalid(400, { message: 'invalid team size' });
+		}
+
 		let neededSkills: string[];
 		try {
 			neededSkills = JSON.parse(formData.get('needed-skills') as string);
@@ -77,7 +83,8 @@ export const actions: Actions = {
 			title,
 			content,
 			needed_skills: neededSkills,
-			course_code: courseCode
+			course_code: courseCode,
+			team_size: teamSize
 		});
 
 		if (insertError) {
