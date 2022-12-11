@@ -6,7 +6,8 @@ create table if not exists post_teams (
   slug varchar(255) not null,
   text_content varchar(10000) not null,
   content varchar(100000) not null,
-  course_code varchar(255),
+  team_size smallint not null check (team_size >= 2 and team_size <= 100),
+  course_code varchar(255) not null,
   needed_skills varchar(50)[] not null,
   view_count bigint not null default 0,
 

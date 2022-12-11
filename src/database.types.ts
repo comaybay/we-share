@@ -265,6 +265,26 @@ export interface Database {
           post_id?: number
         }
       }
+      post_team_members: {
+        Row: {
+          id: number
+          date_created: string
+          post_team_id: number
+          member_id: string
+        }
+        Insert: {
+          id?: number
+          date_created: string
+          post_team_id: number
+          member_id: string
+        }
+        Update: {
+          id?: number
+          date_created?: string
+          post_team_id?: number
+          member_id?: string
+        }
+      }
       post_teams: {
         Row: {
           id: number
@@ -273,11 +293,12 @@ export interface Database {
           title: string
           slug: string
           content: string
-          course_code: string | null
+          course_code: string
           needed_skills: string[]
           author_id: string
           view_count: number
           text_content: string
+          team_size: number
         }
         Insert: {
           id?: number
@@ -286,11 +307,12 @@ export interface Database {
           title: string
           slug: string
           content: string
-          course_code?: string | null
+          course_code: string
           needed_skills: string[]
           author_id: string
           view_count?: number
           text_content: string
+          team_size: number
         }
         Update: {
           id?: number
@@ -299,11 +321,12 @@ export interface Database {
           title?: string
           slug?: string
           content?: string
-          course_code?: string | null
+          course_code?: string
           needed_skills?: string[]
           author_id?: string
           view_count?: number
           text_content?: string
+          team_size?: number
         }
       }
       profiles: {
