@@ -4,8 +4,10 @@ create table if not exists post_teams (
   date_last_updated timestamp with time zone, 
   title varchar(255) not null,
   slug varchar(255) not null,
-  content varchar(10000) not null,
-  course_code varchar(255),
+  text_content varchar(10000) not null,
+  content varchar(100000) not null,
+  team_size smallint not null check (team_size >= 2 and team_size <= 100),
+  course_code varchar(255) not null,
   needed_skills varchar(50)[] not null,
   view_count bigint not null default 0,
 

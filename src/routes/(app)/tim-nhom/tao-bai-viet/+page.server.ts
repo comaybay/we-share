@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { invalid, redirect, type Actions } from '@sveltejs/kit';
 import { MAX_NUMBER_OF_TOPICS } from 'src/lib/constants';
 import { ErrorType, getUserFriendlyMessage } from 'src/lib/server/errorExtraction';
@@ -14,23 +13,34 @@ export const actions: Actions = {
 		const title = formData.get('title')?.toString()?.trim() as string;
 		const content = formData.get('content')?.toString()?.trim() as string;
 		const contentText = formData.get('text-content')?.toString()?.trim() as string;
-		let topics: string[];
-		try {
-			topics = JSON.parse(formData.get('topics') as string);
+		const courseCode = formData.get('course-code')?.toString()?.trim() as string;
+		const teamSize = parseInt(formData.get('team-size')?.toString()?.trim() as string);
 
-			if (topics.length > MAX_NUMBER_OF_TOPICS) {
+		if (isNaN(teamSize)) {
+			return invalid(400, { message: 'invalid team size' });
+		}
+
+		let neededSkills: string[];
+		try {
+			neededSkills = JSON.parse(formData.get('needed-skills') as string);
+
+			if (neededSkills.length > MAX_NUMBER_OF_TOPICS) {
 				return invalid(400, {
-					message: `number of topic must not be larger than ${MAX_NUMBER_OF_TOPICS}`
+					message: `number of skills must not be larger than ${MAX_NUMBER_OF_TOPICS}`
 				});
 			}
 		} catch (e) {
-			return invalid(400, { message: 'invalid topics' });
+			return invalid(400, { message: 'invalid skills' });
 		}
 
-		const result: PostSubmitionError = {};
+		const result: FindTeamPostSubmitionError = {};
 
 		if (!title) {
 			result.titleEmpty = true;
+		}
+
+		if (!courseCode) {
+			result.courseCodeEmpty = true;
 		}
 
 		if (!contentText || !content) {
@@ -48,7 +58,7 @@ export const actions: Actions = {
 			slug = Date.now().toString();
 		} else {
 			const { error: countError, data: duplicatedTitleCount } = await supabaseClient
-				.rpc('post_questions_count_duplicated_slug', {
+				.rpc('post_teams_count_duplicated_slug', {
 					_author_id: session.user.id,
 					_slug: slug
 				})
@@ -65,21 +75,36 @@ export const actions: Actions = {
 			}
 		}
 
-		const { error: insertError } = await supabaseClient.from('post_questions').insert({
-			date_created: date,
-			slug,
-			text_content: contentText,
-			author_id: session.user.id,
-			title,
-			content,
-			topics
-		});
+		const { error: insertError, data: postData } = await supabaseClient
+			.from('post_teams')
+			.insert({
+				date_created: date,
+				slug,
+				text_content: contentText,
+				author_id: session.user.id,
+				title,
+				content,
+				needed_skills: neededSkills,
+				course_code: courseCode,
+				team_size: teamSize
+			})
+			.select();
 
 		if (insertError) {
 			result.serverError = true;
 			result.userFriendlyMessage = getUserFriendlyMessage(ErrorType.ServerError);
 			return invalid(500, result);
 		}
+
+		await supabaseClient
+			.from('post_team_members')
+			.insert({
+				date_created: date,
+				member_id: session.user.id,
+				post_team_id: postData[0].id
+			})
+			.match({ id: session.user.id })
+			.single();
 
 		const { error: getUsernameError, data: userProfile } = await supabaseClient
 			.from('profiles')
@@ -93,6 +118,10 @@ export const actions: Actions = {
 			return invalid(500, result);
 		}
 
-		throw redirect(303, `/hoi-dap/${userProfile.username}/${slug}`);
+		throw redirect(303, `/tim-nhom/${userProfile.username}/${slug}`);
 	}
+};
+
+type FindTeamPostSubmitionError = PostSubmitionError & {
+	courseCodeEmpty?: boolean;
 };

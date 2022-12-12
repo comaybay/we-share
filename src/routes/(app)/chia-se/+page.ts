@@ -34,7 +34,6 @@ export const load: PageLoad = async event => {
 	const { data, error: getPostsError } = await query;
 
 	if (getPostsError) {
-		console.log(getPostsError);
 		throw error(404);
 	}
 
