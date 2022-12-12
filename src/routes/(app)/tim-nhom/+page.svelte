@@ -7,8 +7,6 @@
 	import LoadingIndicator from '../_components/LoadingIndicator.svelte';
 	import TopicContainer from '../_components/postDetail/TopicContainer.svelte';
 	import FindTeamPost from '../_components/posts/FindTeamPost.svelte';
-	import NewestPostsButton from '../_components/posts/NewestPostsButton.svelte';
-	import TopPostsButton from '../_components/posts/TopPostsButton.svelte';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
@@ -33,28 +31,19 @@
 		}
 	}
 
-	let newestPostsActive = false;
-	let topPostsActive = false;
+	let notFullTeamPostsActive = false;
 	$: {
-		const sortSrder = url.searchParams.get('order');
-		newestPostsActive = sortSrder !== null && sortSrder === 'newest';
-		topPostsActive = sortSrder !== null && sortSrder === 'top';
+		const filter = url.searchParams.get('filter');
+		notFullTeamPostsActive = filter !== null && filter === 'not-full';
 	}
 
-	async function onClickNewestQuestions() {
-		if (!newestPostsActive) {
-			url.searchParams.set('order', 'newest');
-			url = url;
-			updateData();
+	async function onToggleFindNotFullTeams() {
+		if (!notFullTeamPostsActive) {
+			url.searchParams.set('filter', 'not-full');
+		} else {
+			url.searchParams.delete('filter');
 		}
-	}
-
-	async function onClickTopQuestions() {
-		if (!topPostsActive) {
-			url.searchParams.set('order', 'top');
-			url = url;
-			updateData();
-		}
+		updateData();
 	}
 
 	async function updateData() {
@@ -83,8 +72,16 @@
 		</div>
 	</div>
 	<div class="grow">
-		<NewestPostsButton active={newestPostsActive} on:click={onClickNewestQuestions} />
-		<TopPostsButton active={topPostsActive} on:click={onClickTopQuestions} />
+		<label class="flex gap-1.5 items-center hover:cursor-pointer">
+			<input
+				on:change={onToggleFindNotFullTeams}
+				type="checkbox"
+				class="scale-125 accent-pri-base"
+				checked={notFullTeamPostsActive}
+			/>
+			Chỉ hiện nhóm thiếu thành viên
+		</label>
+
 		{#if !loading}
 			{#each data.posts as post}
 				<FindTeamPost {post} />

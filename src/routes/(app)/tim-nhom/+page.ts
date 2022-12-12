@@ -10,8 +10,7 @@ export const load: PageLoad = async event => {
 
 	const query = supabaseClient.from('post_teams').select(
 		`title, date_created, date_last_updated, team_size, course_code, needed_skills, view_count, slug,
-			author:profiles!post_teams_author_id_fkey(username), members:profiles!post_team_members(count), 
-			post_team_comments(count), post_team_members(count)`
+			author:profiles!post_teams_author_id_fkey(username), post_team_comments(count), post_team_members!inner(count)`
 	);
 	console.log('A');
 
@@ -30,11 +29,15 @@ export const load: PageLoad = async event => {
 
 		if (filter === 'not-full') {
 			query
-				.neq('team_size', 'post_teams_members.count')
+				.eq('is_team_full', false)
 				.order('date_last_updated', { ascending: false })
 				.order('date_created', { ascending: false });
 		}
 	}
+
+	// query
+	// 	.order('date_last_updated', { ascending: false })
+	// 	.order('date_created', { ascending: false });
 
 	const { data, error: getPostsError } = await query;
 
@@ -49,7 +52,6 @@ export const load: PageLoad = async event => {
 		dateLastUpdated: q.date_last_updated ? new Date(q.date_last_updated) : null,
 		authorUsername: (q.author as ForeignProfileName).username,
 		teamSize: q.team_size,
-		memberCount: (q.members as ForeignTableCount)[0].count,
 		teamMemberCount: (q.post_team_members as ForeignTableCount)[0].count,
 		courseCode: q.course_code,
 		neededSkills: q.needed_skills,

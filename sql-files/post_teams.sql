@@ -7,6 +7,7 @@ create table if not exists post_teams (
   text_content varchar(10000) not null,
   content varchar(100000) not null,
   team_size smallint not null check (team_size >= 2 and team_size <= 100),
+  is_team_full boolean not null default FALSE,
   course_code varchar(255) not null,
   needed_skills varchar(50)[] not null,
   view_count bigint not null default 0,
@@ -31,3 +32,33 @@ create policy "Users can update their own post_teams."
 create policy "Users can delete their own post_teams."
   on post_teams for delete
   using ( auth.uid() = author_id );
+
+-- inserts a row into public.users
+create function public.update_post_teams_is_team_full()
+returns trigger
+language plpgsql
+security definer set search_path = public
+as $$
+begin
+  update post_teams 
+  set is_team_full = team_size <= (
+    select COUNT(*) from post_team_members
+    where post_team_members.post_team_id = id
+  );
+  return new;
+end;
+$$;
+
+-- trigger the function every time team_size is updated
+create trigger on_post_teams_team_size_updated
+  after update of team_size on post_teams
+  for each row execute procedure public.update_post_teams_is_team_full();
+
+-- trigger the function every time a new member is added or removed out of the team
+create trigger on_post_team_members_created
+  after insert on post_team_members
+  for each row execute procedure public.update_post_teams_is_team_full();
+
+create trigger on_post_team_members_deleted
+  after delete on post_team_members
+  for each row execute procedure public.update_post_teams_is_team_full();

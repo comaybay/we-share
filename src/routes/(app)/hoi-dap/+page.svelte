@@ -46,7 +46,6 @@
 	async function onClickNewestQuestions() {
 		if (!newestQuestionsActive) {
 			url.searchParams.set('order', 'newest');
-			url = url;
 			updateData();
 		}
 	}
@@ -54,7 +53,6 @@
 	async function onClickTopQuestions() {
 		if (!topQuestionsActive) {
 			url.searchParams.set('order', 'top');
-			url = url;
 			updateData();
 		}
 	}
