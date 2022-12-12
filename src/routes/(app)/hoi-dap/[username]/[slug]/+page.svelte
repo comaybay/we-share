@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { toRelativeTime } from 'src/lib/i18n/toRelativeTime';
+	import PostContent from 'src/routes/(app)/_components/postDetail/PostContent.svelte';
 	import PostTitle from 'src/routes/(app)/_components/postDetail/PostTitle.svelte';
 	import TopicContainer from 'src/routes/(app)/_components/postDetail/TopicContainer.svelte';
 	import UserProfilePicture from 'src/routes/_components/UserProfilePicture.svelte';
@@ -27,7 +28,7 @@
 			<span>hỏi {toRelativeTime(post.dateCreated)}</span>
 			<PostTitle>{post.title}</PostTitle>
 			<div class="mt-4 mb-6">
-				{@html post.content}
+				<PostContent content={post.content} />
 			</div>
 
 			<TopicContainer topics={post.topics} baseHref="/hoi-dap" />

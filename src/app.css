@@ -26,4 +26,9 @@
 
 		background-size: 100% 40px;
 	}
+
+	.no-tailwind-base,
+	.no-tailwind-base * {
+		all: revert;
+	}
 }
