@@ -2,6 +2,7 @@
 	import { toRelativeTime } from 'src/lib/i18n/toRelativeTime';
 	import CommentIcon from 'src/routes/(app)/_components/icons/CommentIcon.svelte';
 	import type { PageData } from '../../tim-nhom/$types';
+	import MemberIcon from '../icons/MemberIcon.svelte';
 	import ViewIcon from '../icons/ViewIcon.svelte';
 	import PostHeaderTopicContainer from './PostHeaderTopicContainer.svelte';
 
@@ -30,21 +31,28 @@
 				<div class="flex items-center gap-x-0.5">
 					<span>{post.viewCount}</span><ViewIcon />
 				</div>
+				<div class="flex items-center">
+					<span>
+						{post.teamMemberCount}/{post.teamSize}
+					</span>
+					<MemberIcon />
+				</div>
 			</div>
 
 			<PostHeaderTopicContainer baseHref="tim-nhom" topics={post.neededSkills} />
 		</div>
 		<div class="flex flex-col items-end gap-2">
-			<div
-				class="w-fit min-w-0 truncate px-2.5 rounded-full border border-sec-base text-sec-base
-         bg-paper transition-colors duration-25"
+			<a
+				href="tim-nhom?course-code={post.courseCode}"
+				class="w-fit min-w-0 truncate px-2.5 rounded-full border border-tert-base text-tert-base 
+				hover:bg-tert-light bg-paper transition-colors duration-25"
 			>
 				{post.courseCode}
-			</div>
+			</a>
 			<div
 				class="min-w-0 truncate px-2.5 rounded-full border {isTeamFull
 					? 'border-qua-base text-qua-base'
-					: 'border-sec-base text-sec-base'} bg-paper transition-colors duration-25"
+					: 'border-sec-base text-sec-base'}"
 			>
 				{isTeamFull ? 'Đủ thành viên' : 'Thiếu thành viên'}
 			</div>

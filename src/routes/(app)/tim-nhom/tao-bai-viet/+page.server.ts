@@ -75,23 +75,36 @@ export const actions: Actions = {
 			}
 		}
 
-		const { error: insertError } = await supabaseClient.from('post_teams').insert({
-			date_created: date,
-			slug,
-			text_content: contentText,
-			author_id: session.user.id,
-			title,
-			content,
-			needed_skills: neededSkills,
-			course_code: courseCode,
-			team_size: teamSize
-		});
+		const { error: insertError, data: postData } = await supabaseClient
+			.from('post_teams')
+			.insert({
+				date_created: date,
+				slug,
+				text_content: contentText,
+				author_id: session.user.id,
+				title,
+				content,
+				needed_skills: neededSkills,
+				course_code: courseCode,
+				team_size: teamSize
+			})
+			.select();
 
 		if (insertError) {
 			result.serverError = true;
 			result.userFriendlyMessage = getUserFriendlyMessage(ErrorType.ServerError);
 			return invalid(500, result);
 		}
+
+		await supabaseClient
+			.from('post_team_members')
+			.insert({
+				date_created: date,
+				member_id: session.user.id,
+				post_team_id: postData[0].id
+			})
+			.match({ id: session.user.id })
+			.single();
 
 		const { error: getUsernameError, data: userProfile } = await supabaseClient
 			.from('profiles')

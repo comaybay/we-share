@@ -10,13 +10,19 @@ export const load: PageLoad = async event => {
 
 	const query = supabaseClient.from('post_teams').select(
 		`title, date_created, date_last_updated, team_size, course_code, needed_skills, view_count, slug,
-			profiles!post_teams_author_id_fkey(username), post_team_comments(count), post_team_members(count)`
+			author:profiles!post_teams_author_id_fkey(username), members:profiles!post_team_members(count), 
+			post_team_comments(count), post_team_members(count)`
 	);
+	console.log('A');
 
 	const { url } = event;
 	const searchParams = url.searchParams;
 	if (searchParams.has('topic')) {
 		query.contains('needed_skills', [searchParams.get('topic')]);
+	}
+
+	if (searchParams.has('course-code')) {
+		query.eq('course_code', searchParams.get('course-code'));
 	}
 
 	if (searchParams.has('filter')) {
@@ -33,7 +39,6 @@ export const load: PageLoad = async event => {
 	const { data, error: getPostsError } = await query;
 
 	if (getPostsError) {
-		console.log(getPostsError);
 		throw error(404);
 	}
 
@@ -42,8 +47,9 @@ export const load: PageLoad = async event => {
 		slug: q.slug,
 		dateCreated: new Date(q.date_created),
 		dateLastUpdated: q.date_last_updated ? new Date(q.date_last_updated) : null,
-		authorUsername: (q.profiles as ForeignProfileName).username,
+		authorUsername: (q.author as ForeignProfileName).username,
 		teamSize: q.team_size,
+		memberCount: (q.members as ForeignTableCount)[0].count,
 		teamMemberCount: (q.post_team_members as ForeignTableCount)[0].count,
 		courseCode: q.course_code,
 		neededSkills: q.needed_skills,
