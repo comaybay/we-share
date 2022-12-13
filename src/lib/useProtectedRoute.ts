@@ -1,5 +1,6 @@
 import { getSupabase } from '@supabase/auth-helpers-sveltekit';
 import { redirect, type LoadEvent, type RequestEvent } from '@sveltejs/kit';
+import generateLoginPath from './login/generateLoginPath';
 
 /**
  * redirects to login page if not logged in
@@ -8,7 +9,7 @@ import { redirect, type LoadEvent, type RequestEvent } from '@sveltejs/kit';
 export async function useProtectedRoute(event: LoadEvent | RequestEvent) {
 	const { session, supabaseClient } = await getSupabase(event);
 	if (!session) {
-		throw redirect(303, `/dang-nhap?returnto=${encodeURIComponent(event.url.pathname)}`);
+		throw redirect(303, generateLoginPath(event.url.pathname));
 	}
 
 	return { session, supabaseClient };

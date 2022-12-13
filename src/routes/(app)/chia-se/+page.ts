@@ -23,7 +23,7 @@ export const load: PageLoad = async event => {
 		const order = searchParams.get('order');
 		// https://github.com/supabase/supabase/discussions/7875
 		if (order === 'top') {
-			query.order('post_sharing_stars_count');
+			query.order('post_sharing_stars_count', { ascending: false });
 		} else if (order === 'newest') {
 			query
 				.order('date_last_updated', { ascending: false })
