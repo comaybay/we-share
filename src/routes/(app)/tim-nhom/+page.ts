@@ -28,35 +28,32 @@ export const load: PageLoad = async event => {
 		const filter = searchParams.get('filter');
 
 		if (filter === 'not-full') {
-			query
-				.eq('is_team_full', false)
-				.order('date_last_updated', { ascending: false })
-				.order('date_created', { ascending: false });
+			query.eq('is_team_full', false);
 		}
 	}
 
-	// query
-	// 	.order('date_last_updated', { ascending: false })
-	// 	.order('date_created', { ascending: false });
+	query
+		.order('date_last_updated', { ascending: false })
+		.order('date_created', { ascending: false });
 
-	const { data, error: getPostsError } = await query;
+	const { data: postsData, error: getPostsError } = await query;
 
 	if (getPostsError) {
 		throw error(404);
 	}
 
-	const posts = data.map(q => ({
-		title: q.title,
-		slug: q.slug,
-		dateCreated: new Date(q.date_created),
-		dateLastUpdated: q.date_last_updated ? new Date(q.date_last_updated) : null,
-		authorUsername: (q.author as ForeignProfileName).username,
-		teamSize: q.team_size,
-		teamMemberCount: (q.post_team_members as ForeignTableCount)[0].count,
-		courseCode: q.course_code,
-		neededSkills: q.needed_skills,
-		viewCount: q.view_count,
-		commentCount: (q.post_team_comments as ForeignTableCount)[0].count
+	const posts = postsData.map(p => ({
+		title: p.title,
+		slug: p.slug,
+		dateCreated: new Date(p.date_created),
+		dateLastUpdated: p.date_last_updated ? new Date(p.date_last_updated) : null,
+		authorUsername: (p.author as ForeignProfileName).username,
+		teamSize: p.team_size,
+		teamMemberCount: (p.post_team_members as ForeignTableCount)[0].count,
+		courseCode: p.course_code,
+		neededSkills: p.needed_skills,
+		viewCount: p.view_count,
+		commentCount: (p.post_team_comments as ForeignTableCount)[0].count
 	}));
 
 	return {

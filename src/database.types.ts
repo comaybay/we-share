@@ -16,7 +16,7 @@ export interface Database {
           comment_id: number
         }
         Insert: {
-          date_created: string
+          date_created?: string
           user_id: string
           comment_id: number
         }
@@ -38,7 +38,7 @@ export interface Database {
         }
         Insert: {
           id?: number
-          date_created: string
+          date_created?: string
           date_last_updated?: string | null
           content: string
           author_id: string
@@ -62,7 +62,7 @@ export interface Database {
           post_id: number
         }
         Insert: {
-          date_created: string
+          date_created?: string
           user_id: string
           post_id: number
         }
@@ -89,7 +89,7 @@ export interface Database {
         }
         Insert: {
           id?: number
-          date_created: string
+          date_created?: string
           date_last_updated?: string | null
           title: string
           slug: string
@@ -138,7 +138,7 @@ export interface Database {
           comment_id: number
         }
         Insert: {
-          date_created: string
+          date_created?: string
           user_id: string
           comment_id: number
         }
@@ -161,7 +161,7 @@ export interface Database {
         }
         Insert: {
           id?: number
-          date_created: string
+          date_created?: string
           date_last_updated?: string | null
           text_content: string
           content: string
@@ -187,7 +187,7 @@ export interface Database {
           post_id: number
         }
         Insert: {
-          date_created: string
+          date_created?: string
           user_id: string
           post_id: number
         }
@@ -213,7 +213,7 @@ export interface Database {
         }
         Insert: {
           id?: number
-          date_created: string
+          date_created?: string
           date_last_updated?: string | null
           title: string
           slug: string
@@ -248,7 +248,7 @@ export interface Database {
         }
         Insert: {
           id?: number
-          date_created: string
+          date_created?: string
           date_last_updated?: string | null
           content: string
           author_id: string
@@ -267,19 +267,16 @@ export interface Database {
       }
       post_team_members: {
         Row: {
-          id: number
           date_created: string
           post_team_id: number
           member_id: string
         }
         Insert: {
-          id?: number
-          date_created: string
+          date_created?: string
           post_team_id: number
           member_id: string
         }
         Update: {
-          id?: number
           date_created?: string
           post_team_id?: number
           member_id?: string
@@ -299,10 +296,11 @@ export interface Database {
           view_count: number
           text_content: string
           team_size: number
+          is_team_full: boolean
         }
         Insert: {
           id?: number
-          date_created: string
+          date_created?: string
           date_last_updated?: string | null
           title: string
           slug: string
@@ -313,6 +311,7 @@ export interface Database {
           view_count?: number
           text_content: string
           team_size: number
+          is_team_full?: boolean
         }
         Update: {
           id?: number
@@ -327,6 +326,7 @@ export interface Database {
           view_count?: number
           text_content?: string
           team_size?: number
+          is_team_full?: boolean
         }
       }
       profiles: {

@@ -1,11 +1,12 @@
 <script lang="ts">
-	import { userProfile } from 'src/lib/stores/userProfile';
+	import { page } from '$app/stores';
 	import ButtonOutline from 'src/routes/_components/buttons/ButtonOutline.svelte';
 	import UserProfilePicture from '../../_components/UserProfilePicture.svelte';
 	import WeShareIcon from '../../_components/WeShareIcon.svelte';
 	import MobileNavigation from './header/MobileNavigation.svelte';
 	import NavLink from './header/NavLink.svelte';
 	import UserMenuButton from './header/UserMenuButton.svelte';
+	$: userProfile = $page.data.userProfile;
 </script>
 
 <div class="fixed w-full z-10">
@@ -28,8 +29,8 @@
 		</nav>
 
 		<div class="hidden md:block">
-			{#if $userProfile}
-				<UserMenuButton userProfile={$userProfile} />
+			{#if userProfile}
+				<UserMenuButton {userProfile} />
 			{:else}
 				<div class="w-fit ml-auto">
 					<a href="/dang-nhap">

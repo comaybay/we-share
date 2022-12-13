@@ -1,5 +1,5 @@
 create table if not exists post_team_members (
-  date_created timestamp with time zone not null, 
+  date_created timestamp with time zone not null default current_timestamp, 
 
   post_team_id bigint references post_teams(id) not null,
   member_id uuid references profiles(id) not null

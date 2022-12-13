@@ -1,12 +1,6 @@
 <script lang="ts">
-	import { userProfile } from 'src/lib/stores/userProfile';
-	import type { LayoutData } from './$types';
 	import Footer from './_components/Footer.svelte';
 	import Header from './_components/Header.svelte';
-
-	export let data: LayoutData;
-
-	$: $userProfile = data.userProfile;
 </script>
 
 <Header />

@@ -1,5 +1,5 @@
 create table if not exists post_sharing_bookmarks (
-  date_created timestamp with time zone not null,
+  date_created timestamp with time zone not null default current_timestamp,
 
   user_id uuid references profiles(id),
   post_id bigint references post_sharings(id),

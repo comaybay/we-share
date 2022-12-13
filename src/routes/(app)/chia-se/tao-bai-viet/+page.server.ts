@@ -40,7 +40,6 @@ export const actions: Actions = {
 			return invalid(400, result);
 		}
 
-		const date = new Date().toISOString();
 		let slug = slugify(title);
 
 		if (slug.length === 0) {
@@ -65,7 +64,6 @@ export const actions: Actions = {
 		}
 
 		const { error: insertError } = await supabaseClient.from('post_sharings').insert({
-			date_created: date,
 			slug,
 			text_content: contentText,
 			author_id: session.user.id,

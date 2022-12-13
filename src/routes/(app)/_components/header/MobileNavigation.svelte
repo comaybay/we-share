@@ -1,8 +1,11 @@
 <script lang="ts">
+	import { page } from '$app/stores';
 	import clickoutside from 'src/lib/actions/clickoutside';
-	import { userProfile } from 'src/lib/stores/userProfile';
 	import { onMount } from 'svelte';
 	import MobileNavLink from './MobileNavLink.svelte';
+
+	$: userProfile = $page.data.userProfile;
+
 	let active = false;
 	let mounted = false;
 
@@ -52,13 +55,13 @@
 	{#if active}
 		<div class="absolute -z-10 left-0 w-full h-screen bg-black opacity-30" />
 		<div class="absolute -z-10 left-0 w-full bg-paper whitespace-nowrap shadow-xl">
-			{#if $userProfile}
-				<MobileNavLink href="/nguoi-dung/{$userProfile.username}">Trang cá nhân</MobileNavLink>
+			{#if userProfile}
+				<MobileNavLink href="/nguoi-dung/{userProfile.username}">Trang cá nhân</MobileNavLink>
 			{/if}
 			<MobileNavLink href="/hoi-dap">Hỏi đáp</MobileNavLink>
 			<MobileNavLink href="/chia-se">Chia sẻ</MobileNavLink>
 			<MobileNavLink href="/tim-nhom">Tìm nhóm</MobileNavLink>
-			{#if $userProfile}
+			{#if userProfile}
 				<div class="hover:bg-pri-lighter ">
 					<div class="mx-8 border-b border-pri-base" />
 					<form method="post" action="api/logout">
