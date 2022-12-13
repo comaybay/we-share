@@ -51,7 +51,6 @@ export const actions: Actions = {
 			return invalid(400, result);
 		}
 
-		const date = new Date().toISOString();
 		let slug = slugify(title);
 
 		if (slug.length === 0) {
@@ -78,7 +77,6 @@ export const actions: Actions = {
 		const { error: insertError, data: postData } = await supabaseClient
 			.from('post_teams')
 			.insert({
-				date_created: date,
 				slug,
 				text_content: contentText,
 				author_id: session.user.id,
@@ -99,7 +97,6 @@ export const actions: Actions = {
 		await supabaseClient
 			.from('post_team_members')
 			.insert({
-				date_created: date,
 				member_id: session.user.id,
 				post_team_id: postData[0].id
 			})
