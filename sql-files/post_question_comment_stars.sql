@@ -1,5 +1,5 @@
 create table if not exists post_question_comment_stars (
-  date_created timestamp with time zone not null,
+  date_created timestamp with time zone not null default current_timestamp,
 
   user_id uuid references profiles(id),
   comment_id bigint references post_question_comments(id),
