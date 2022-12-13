@@ -57,7 +57,7 @@
 			>
 				<StarIcon solid={question.starred} />
 			</button>
-			<div class="mt-1 {question.hasFavoritedAnswer ? 'text-qua-base' : 'text-qua-light'}">
+			<div class="mt-1 {question.hasFavoritedAnswer ? 'text-qua-base' : 'text-qua-loading'}">
 				<HeartIcon solid={question.hasFavoritedAnswer} />
 			</div>
 		</div>
