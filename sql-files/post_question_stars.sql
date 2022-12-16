@@ -2,7 +2,7 @@ create table if not exists post_question_stars (
   date_created timestamp with time zone default current_timestamp,
 
   user_id uuid references profiles(id) not null,
-  post_id bigint references post_questions(id) not null,
+  post_id bigint not null references post_questions(id) on delete cascade,
   primary key (user_id, post_id)
 );
 alter table post_question_stars enable row level security;

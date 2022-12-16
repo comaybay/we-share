@@ -43,8 +43,6 @@
 		}
 		loading = false;
 	}
-
-	$: console.log(post);
 </script>
 
 <div class="pt-4 pb-2 px-4 border-b border-pri-base h-26">

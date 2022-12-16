@@ -1,7 +1,7 @@
 create table if not exists post_team_members (
   date_created timestamp with time zone not null default current_timestamp, 
 
-  post_team_id bigint references post_teams(id) not null,
+  post_team_id not null bigint references post_teams(id) on delete cascade,
   member_id uuid references profiles(id) not null
   primary key (post_team_id, member_id)
 );

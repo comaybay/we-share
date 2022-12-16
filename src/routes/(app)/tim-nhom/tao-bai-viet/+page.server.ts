@@ -86,7 +86,8 @@ export const actions: Actions = {
 				course_code: courseCode,
 				team_size: teamSize
 			})
-			.select();
+			.select()
+			.single();
 
 		if (insertError) {
 			result.serverError = true;
@@ -94,14 +95,10 @@ export const actions: Actions = {
 			return invalid(500, result);
 		}
 
-		await supabaseClient
-			.from('post_team_members')
-			.insert({
-				member_id: session.user.id,
-				post_team_id: postData[0].id
-			})
-			.match({ id: session.user.id })
-			.single();
+		await supabaseClient.from('post_team_members').insert({
+			member_id: session.user.id,
+			post_team_id: postData.id
+		});
 
 		const { error: getUsernameError, data: userProfile } = await supabaseClient
 			.from('profiles')

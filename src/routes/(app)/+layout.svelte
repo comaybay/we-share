@@ -1,4 +1,5 @@
 <script lang="ts">
+	import DialogControl from './_components/dialogControl/DialogControl.svelte';
 	import Footer from './_components/Footer.svelte';
 	import Header from './_components/Header.svelte';
 </script>
@@ -14,3 +15,5 @@
 		<Footer />
 	</div>
 </div>
+
+<DialogControl />

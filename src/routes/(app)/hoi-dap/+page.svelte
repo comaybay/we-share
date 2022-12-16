@@ -70,7 +70,7 @@
 	<div class="flex flex-col shrink-0 min-w-[330px] mb-4 lg:mb-0">
 		<a href="/hoi-dap/dat-cau-hoi">
 			<Button block>
-				<div class="w-full flex gap-x-2 justify-center items-center px-14">
+				<div class="w-full flex gap-x-2 justify-center items-center px-14 py-1">
 					<AskQuestionIcon />
 					<b>ĐẶT CÂU HỎI</b>
 				</div>

@@ -12,7 +12,6 @@ export const load: PageLoad = async event => {
 		`title, date_created, date_last_updated, team_size, course_code, needed_skills, view_count, slug,
 			profiles!post_teams_author_id_fkey(username), post_team_comments(count), post_team_members!inner(count)`
 	);
-	console.log('A');
 
 	const { url } = event;
 	const searchParams = url.searchParams;

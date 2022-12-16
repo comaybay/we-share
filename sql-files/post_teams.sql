@@ -34,7 +34,7 @@ create policy "Users can delete their own post_teams."
   using ( auth.uid() = author_id );
 
 -- inserts a row into public.users
-create function public.update_post_teams_is_team_full()
+create or replace function public.update_post_teams_is_team_full()
 returns trigger
 language plpgsql
 security definer set search_path = public
@@ -43,8 +43,25 @@ begin
   update post_teams 
   set is_team_full = team_size <= (
     select COUNT(*) from post_team_members
-    where post_team_members.post_team_id = id
-  );
+    where post_team_members.post_team_id = new.id
+  )
+  where id = new.id;
+  return new;
+end;
+$$;
+
+create or replace function public.update_post_teams_is_team_full_members_changed()
+returns trigger
+language plpgsql
+security definer set search_path = public
+as $$
+begin
+  update post_teams 
+  set is_team_full = team_size <= (
+    select COUNT(*) from post_team_members
+    where post_team_members.post_team_id = old.post_team_id
+  )
+  where id = new.post_team_id;
   return new;
 end;
 $$;
@@ -55,10 +72,6 @@ create trigger on_post_teams_team_size_updated
   for each row execute procedure public.update_post_teams_is_team_full();
 
 -- trigger the function every time a new member is added or removed out of the team
-create trigger on_post_team_members_created
-  after insert on post_team_members
-  for each row execute procedure public.update_post_teams_is_team_full();
-
-create trigger on_post_team_members_deleted
-  after delete on post_team_members
-  for each row execute procedure public.update_post_teams_is_team_full();
+create trigger on_post_team_members_insert_or_delete
+  after insert or delete on post_team_members
+  for each row execute procedure public.update_post_teams_is_team_full_members_changed();
