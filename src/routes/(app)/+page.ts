@@ -15,7 +15,7 @@ export const load: PageLoad = async event => {
 		)
 		.order('date_last_updated', { ascending: false })
 		.order('date_created', { ascending: false })
-		.limit(4);
+		.limit(3);
 
 	const sharingPostsQuery = supabaseClient
 		.from('post_sharings')
@@ -25,7 +25,7 @@ export const load: PageLoad = async event => {
 		)
 		.order('date_last_updated', { ascending: false })
 		.order('date_created', { ascending: false })
-		.limit(4);
+		.limit(3);
 
 	const findTeamPostsQuery = supabaseClient
 		.from('post_teams')
@@ -35,7 +35,7 @@ export const load: PageLoad = async event => {
 		)
 		.order('date_last_updated', { ascending: false })
 		.order('date_created', { ascending: false })
-		.limit(4);
+		.limit(3);
 
 	await Promise.all([questionsQuery, sharingPostsQuery, findTeamPostsQuery]);
 
