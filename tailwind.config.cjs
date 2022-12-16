@@ -21,6 +21,7 @@ module.exports = {
       current: 'currentColor',
       black: "#000000",
       'paper': '#FEFFFF',
+      'dialog': '#313d3d7a',
       'pri-base': '#32667C',
       'pri-light': '#6493A7',
       'pri-lighter': '#EEF5F8',
