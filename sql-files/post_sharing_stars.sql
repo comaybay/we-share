@@ -2,7 +2,7 @@ create table if not exists post_sharing_stars (
   date_created timestamp with time zone default current_timestamp,
 
   user_id uuid references profiles(id),
-  post_id bigint references post_sharings(id),
+  post_id bigint not null references post_sharings(id) on delete cascade,
   primary key (user_id, post_id)
 );
 alter table post_sharing_stars enable row level security;
