@@ -58,7 +58,7 @@
 	<div class="flex flex-col shrink-0 min-w-[330px] mb-4 lg:mb-0">
 		<a href="/tim-nhom/tao-bai-viet">
 			<Button block>
-				<div class="w-full flex gap-x-2 justify-center items-center px-14">
+				<div class="w-full flex gap-x-2 justify-center items-center px-14 py-1">
 					<TeamIcon />
 					<b>ĐĂNG BÀI TÌM NHÓM</b>
 				</div>
