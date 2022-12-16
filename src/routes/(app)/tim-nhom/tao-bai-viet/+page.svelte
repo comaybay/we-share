@@ -9,11 +9,11 @@
 		TOPIC_MAX_LENGTH
 	} from 'src/lib/constants';
 	import { userFriendlyMessage } from 'src/lib/userFriendlyMessage';
-	import PostEditor from 'src/routes/(app)/_components/newPost/PostEditor.svelte';
+	import PostEditor from 'src/routes/(app)/_components/posts/new/PostEditor.svelte';
 	import { flip } from 'svelte/animate';
 	import Button from '../../../_components/buttons/Button.svelte';
-	import InputTitle from '../../_components/newPost/InputTitle.svelte';
-	import NewPostHeader from '../../_components/newPost/NewPostHeader.svelte';
+	import InputTitle from '../../_components/posts/new/InputTitle.svelte';
+	import NewPostHeader from '../../_components/posts/new/NewPostHeader.svelte';
 	import type { ActionData } from './$types';
 
 	export let form: ActionData;

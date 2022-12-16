@@ -5,16 +5,15 @@
 	import { toRelativeTime } from 'src/lib/i18n/toRelativeTime';
 	import generateLoginPath from 'src/lib/login/generateLoginPath';
 	import CommentIcon from 'src/routes/(app)/_components/icons/CommentIcon.svelte';
-	import UserProfilePicture from 'src/routes/_components/UserProfilePicture.svelte';
-	import type { PageData } from '../../chia-se/$types';
-	import ViewIcon from '../icons/ViewIcon.svelte';
-	import YellowStarcon from '../icons/YellowStarcon.svelte';
-	import PostHeaderTopicContainer from './PostHeaderTopicContainer.svelte';
+	import type { PageData } from '../../../$types';
+	import ViewIcon from '../../icons/ViewIcon.svelte';
+	import YellowStarcon from '../../icons/YellowStarcon.svelte';
+	import AuthorNavLink from '../AuthorNavLink.svelte';
+	import Title from './Title.svelte';
 
-	export let post: PageData['posts'][number];
+	export let post: PageData['sharingPosts'][number];
 
 	let loading = false;
-
 	async function onClickedStar() {
 		loading = true;
 		const user = $page.data.session?.user;
@@ -44,14 +43,13 @@
 		}
 		loading = false;
 	}
+
+	$: console.log(post);
 </script>
 
-<div class="py-4 px-6 border-b border-pri-base">
+<div class="pt-4 pb-2 px-4 border-b border-pri-base h-26">
 	<div class="flex gap-x-4">
 		<div class="flex flex-col items-center text-quin-base">
-			<div class="w-16 h-16 text-pri-base">
-				<UserProfilePicture />
-			</div>
 			<span class="text-4xl">{post.starCount}</span>
 			<button
 				on:click={onClickedStar}
@@ -63,17 +61,15 @@
 			</button>
 		</div>
 		<div>
-			<h3 class="text-2xl text-tert-base line-clamp-2">
-				<a href={`chia-se/${post.authorUsername}/${post.slug}`}>{post.title}</a>
-			</h3>
-			<a class="hover:text-pri-hover" href={`nguoi-dung/${post.authorUsername}`}>
-				{post.authorUsername}
-			</a>
-			<span>{toRelativeTime(post.dateCreated)}</span>
-			{#if post.dateLastUpdated}
-				<span class="italic">(cập nhật {toRelativeTime(post.dateLastUpdated)})</span>
-			{/if}
+			<Title mini href={`chia-se/${post.authorUsername}/${post.slug}`}>{post.title}</Title>
 			<div class="flex gap-x-2">
+				<div>
+					<AuthorNavLink authorUsername={post.authorUsername} />
+					<span>đăng {toRelativeTime(post.dateCreated)}</span>
+				</div>
+				{#if post.dateLastUpdated}
+					<span class="italic">(cập nhật {toRelativeTime(post.dateLastUpdated)})</span>
+				{/if}
 				<div class="flex items-center gap-x-0.5">
 					<span>{post.commentCount}</span><CommentIcon />
 				</div>
@@ -81,8 +77,6 @@
 					<span>{post.viewCount}</span><ViewIcon />
 				</div>
 			</div>
-
-			<PostHeaderTopicContainer baseHref="chia-se" topics={post.topics} />
 		</div>
 	</div>
 </div>

@@ -1,10 +1,12 @@
 <script lang="ts">
 	import { toRelativeTime } from 'src/lib/i18n/toRelativeTime';
 	import CommentIcon from 'src/routes/(app)/_components/icons/CommentIcon.svelte';
-	import type { PageData } from '../../tim-nhom/$types';
-	import MemberIcon from '../icons/MemberIcon.svelte';
-	import ViewIcon from '../icons/ViewIcon.svelte';
-	import PostHeaderTopicContainer from './PostHeaderTopicContainer.svelte';
+	import type { PageData } from '../../../tim-nhom/$types';
+	import MemberIcon from '../../icons/MemberIcon.svelte';
+	import ViewIcon from '../../icons/ViewIcon.svelte';
+	import AuthorNavLink from '../AuthorNavLink.svelte';
+	import PostHeaderTopicContainer from '../PostHeaderTopicContainer.svelte';
+	import Title from './Title.svelte';
 
 	export let post: PageData['posts'][number];
 
@@ -14,13 +16,9 @@
 <div class="py-4 px-6 border-b border-pri-base">
 	<div class="flex justify-between gap-x-4">
 		<div>
-			<h3 class="text-2xl text-tert-base line-clamp-2">
-				<a href={`tim-nhom/${post.authorUsername}/${post.slug}`}>{post.title}</a>
-			</h3>
-			<a class="hover:text-pri-hover" href={`nguoi-dung/${post.authorUsername}`}>
-				{post.authorUsername}
-			</a>
-			<span>{toRelativeTime(post.dateCreated)}</span>
+			<Title mini href={`tim-nhom/${post.authorUsername}/${post.slug}`}>{post.title}</Title>
+			<AuthorNavLink authorUsername={post.authorUsername} />
+			<span>đăng {toRelativeTime(post.dateCreated)}</span>
 			{#if post.dateLastUpdated}
 				<span class="italic">(cập nhật {toRelativeTime(post.dateLastUpdated)})</span>
 			{/if}

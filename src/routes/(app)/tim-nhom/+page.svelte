@@ -5,8 +5,8 @@
 	import { onMount } from 'svelte';
 	import TeamIcon from '../_components/icons/TeamIcon.svelte';
 	import LoadingIndicator from '../_components/LoadingIndicator.svelte';
-	import TopicContainer from '../_components/postDetail/TopicContainer.svelte';
-	import FindTeamPost from '../_components/posts/FindTeamPost.svelte';
+	import TopicContainer from '../_components/posts/detail/TopicContainer.svelte';
+	import FindTeamPost from '../_components/posts/headlines/FindTeamPost.svelte';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
