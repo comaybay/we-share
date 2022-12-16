@@ -11,6 +11,9 @@ module.exports = {
       transitionDuration: {
         '25': '25ms',
         '50': '50ms'
+      },
+      height: {
+        '26': '6.5rem'
       }
     },
     colors: {
@@ -26,13 +29,14 @@ module.exports = {
       'sec-hover': '#942323',
       'sec-loading': '#b56662',
       'tert-base': '#1512AD',
+      'tert-hover': '#7100e3',
       'tert-light': '#D7D6FC',
       'qua-base': '#1AA75B',
       'qua-hover': '#942323',
       'qua-loading': '#63d498',
       'quin-base': '#D4D838',
       'quin-hover': '#afb327',
-      'quin-loading': '#e1e38a',
+      'quin-loading': '#e1e38a'
     },
 
   },
