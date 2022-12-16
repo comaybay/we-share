@@ -1,8 +1,10 @@
 <script lang="ts">
 	export let loading = false;
+	export let rounded = false;
+	export let block = false;
 </script>
 
-<div class="inline-block">
+<div class={block ? 'block' : 'inline-block'}>
 	{#if loading}
 		<svg
 			aria-hidden="true"
@@ -20,7 +22,8 @@
 	{/if}
 	<button
 		on:click
-		class="rounded-sm px-4 py-1 font-medium border-2 transition-colors duration-50
+		class="{block ? 'w-full' : ''} {rounded ? 'rounded-full' : 'rounded-sm'} 
+		px-4 py-1 font-medium border-2 transition-colors duration-50
 	{loading
 			? 'bg-sec-loading hover:text-sec-loading'
 			: 'text-sec-base hover:text-paper border-sec-base hover:bg-sec-base '}"

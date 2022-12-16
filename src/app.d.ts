@@ -1,8 +1,6 @@
 // See https://kit.svelte.dev/docs/types#app
 // for information about these interfaces
 
-import type { UserProfile } from './lib/types/UserProfile';
-
 // and what to do when importing types
 declare namespace App {
 	// interface PageError {}
@@ -14,6 +12,8 @@ declare namespace App {
 	// interface Locals {}
 	interface PageData {
 		session: import('@supabase/supabase-js').Session | null;
-		userProfile: UserProfile | null;
+		userProfile:
+			| import('../../database.types').Database['public']['Tables']['profiles']['Row']
+			| null;
 	}
 }

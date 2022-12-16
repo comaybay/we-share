@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { POST_QUESTION_MAX_LENGTH } from 'src/lib/constants';
-	import PostForm from 'src/routes/(app)/_components/newPost/PostForm.svelte';
+	import PostForm from 'src/routes/(app)/_components/posts/new/PostForm.svelte';
 	import type { ActionData } from './$types';
 
 	export let form: ActionData;
