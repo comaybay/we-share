@@ -2,7 +2,7 @@ import { invalid, redirect, type Actions } from '@sveltejs/kit';
 import { MAX_NUMBER_OF_TOPICS } from 'src/lib/constants';
 import { ErrorType, getUserFriendlyMessage } from 'src/lib/server/errorExtraction';
 import slugify from 'src/lib/server/slugify';
-import type { PostSubmitionError } from 'src/lib/types/PostSubmitionError';
+import type { PostFormError } from 'src/lib/types/PostFormError';
 import { useProtectedRoute } from 'src/lib/useProtectedRoute';
 
 export const actions: Actions = {
@@ -26,7 +26,7 @@ export const actions: Actions = {
 			return invalid(400, { message: 'invalid topics' });
 		}
 
-		const result: PostSubmitionError = {};
+		const result: PostFormError = {};
 
 		if (!title) {
 			result.titleEmpty = true;

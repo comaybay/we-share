@@ -1,4 +1,4 @@
-export type PostSubmitionError = {
+export type PostFormError = {
 	titleEmpty?: true;
 	contentEmpty?: true;
 	serverError?: true;

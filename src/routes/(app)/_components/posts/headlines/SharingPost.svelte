@@ -64,7 +64,7 @@
 				<YellowStarcon solid={post.starred} />
 			</button>
 		</div>
-		<div>
+		<div class="min-w-0">
 			<Title mini href={`chia-se/${post.authorUsername}/${post.slug}`}>{post.title}</Title>
 			<AuthorNavLink authorUsername={post.authorUsername} />
 			<span>đăng {toRelativeTime(post.dateCreated)}</span>

@@ -45,7 +45,7 @@
 				<span>hỏi {toRelativeTime(post.dateCreated)}</span>
 			</div>
 			<PostAuthorView authorId={post.author.id}>
-				<PostSettingsSection on:choosedelete={deletePost} />
+				<PostSettingsSection editPostHref="/hoi-dap/chinh-sua/{post.id}" on:choosedelete={deletePost} />
 			</PostAuthorView>
 		</div>
 		<PostTitle>{post.title}</PostTitle>

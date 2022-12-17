@@ -11,23 +11,25 @@
 	import { userFriendlyMessage } from 'src/lib/userFriendlyMessage';
 	import PostEditor from 'src/routes/(app)/_components/posts/forms/PostEditor.svelte';
 	import { flip } from 'svelte/animate';
-	import Button from '../../../_components/buttons/Button.svelte';
-	import InputTitle from '../../_components/posts/forms/InputTitle.svelte';
-	import NewPostHeader from '../../_components/posts/forms/NewPostHeader.svelte';
-	import type { ActionData } from './$types';
+	import Button from '../../../../_components/buttons/Button.svelte';
+	import InputTitle from '../../../_components/posts/forms/InputTitle.svelte';
+	import NewPostHeader from '../../../_components/posts/forms/NewPostHeader.svelte';
+	import type { ActionData, PageData } from './$types';
 
 	export let form: ActionData;
+	export let data: PageData;
 
+	const post = data.post;
 	$: postError = form;
 
-	let courseCode = '';
-	let title = '';
-	let content = '';
+	let courseCode = post.courseCode;
+	let title = post.title;
+	let content = post.content;
 	let textContent = '';
-	let teamSize: number | null = null;
+	let teamSize: number | null = post.teamSize;
 
 	let inputTopic = '';
-	let neededSkills: string[] = [];
+	let neededSkills: string[] = post.neededSkills;
 
 	let submitting = false;
 
@@ -54,7 +56,7 @@
 	}
 </script>
 
-<NewPostHeader>Tạo bài viết tìm nhóm</NewPostHeader>
+<NewPostHeader>Chỉnh sửa bài viết tìm nhóm</NewPostHeader>
 
 <div class="mx-auto px-8 max-w-6xl">
 	<form
@@ -62,6 +64,7 @@
 		use:enhance={({ data }) => {
 			submitting = true;
 			//add aditional values to the form data
+			data.append('post-id', post.id.toString());
 			data.append('needed-skills', JSON.stringify(neededSkills));
 			data.append('content', content);
 			data.append('text-content', textContent);
@@ -135,6 +138,12 @@
 				/>
 			</div>
 		</div>
+
+		{#if postError?.teamSizeSmallerThanMemberCount}
+			<p class="text-sec-base">
+				*Số lượng thành viên mới không được nhỏ hơn số lượng thành viên hiện tại
+			</p>
+		{/if}
 
 		{#if postError?.courseCodeEmpty}
 			<p class="text-sec-base">*Mã lớp không được để trống</p>

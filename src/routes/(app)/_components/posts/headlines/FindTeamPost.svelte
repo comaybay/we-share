@@ -15,7 +15,7 @@
 
 <div class="py-4 px-6 border-b border-pri-base">
 	<div class="flex justify-between gap-x-4">
-		<div>
+		<div class="min-w-0">
 			<Title mini href={`tim-nhom/${post.authorUsername}/${post.slug}`}>{post.title}</Title>
 			<AuthorNavLink authorUsername={post.authorUsername} />
 			<span>đăng {toRelativeTime(post.dateCreated)}</span>
