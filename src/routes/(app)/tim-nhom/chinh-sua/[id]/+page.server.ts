@@ -1,9 +1,15 @@
 import { invalid, redirect, type Actions } from '@sveltejs/kit';
 import { MAX_NUMBER_OF_TOPICS } from 'src/lib/constants';
-import { ErrorType, getUserFriendlyMessage } from 'src/lib/server/errorExtraction';
+import { error500 } from 'src/lib/errors';
+import {
+	MSG_API_PERMISSION_DENIED,
+	MSG_SERVER_ERROR,
+	MSG_SERVER_ERROR_TRY_AGAIN
+} from 'src/lib/messages';
 import slugify from 'src/lib/server/slugify';
 import { validateCommonPostProps } from 'src/lib/server/validations';
 import type { FindTeamPostFormError } from 'src/lib/types/FindTeamPostFormError';
+import type { ForeignTableCount } from 'src/lib/types/supabase/ForeignTableCount';
 import { useProtectedRoute } from 'src/lib/useProtectedRoute';
 
 export const actions: Actions = {
@@ -16,6 +22,7 @@ export const actions: Actions = {
 		const textContent = formData.get('text-content')?.toString()?.trim() as string;
 		const courseCode = formData.get('course-code')?.toString()?.trim() as string;
 		const teamSize = parseInt(formData.get('team-size')?.toString()?.trim() as string);
+		const postId = formData.get('post-id')?.toString()?.trim() as string;
 
 		if (isNaN(teamSize)) {
 			return invalid(400, { message: 'invalid team size' });
@@ -34,7 +41,11 @@ export const actions: Actions = {
 			return invalid(400, { message: 'invalid skills' });
 		}
 
-		const result: FindTeamPostFormError = validateCommonPostProps({ content, textContent, title });
+		const result: EditFindTeamPostFormError = validateCommonPostProps({
+			content,
+			textContent,
+			title
+		});
 
 		if (!courseCode) {
 			result.courseCodeEmpty = true;
@@ -44,54 +55,71 @@ export const actions: Actions = {
 			return invalid(400, result);
 		}
 
-		let slug = slugify(title);
+		const { data, error } = await supabaseClient
+			.from('post_teams')
+			.select('slug, author_id, member_count:profiles!post_team_members(count)')
+			.match({ id: postId });
 
-		if (slug.length === 0) {
-			slug = Date.now().toString();
-		} else {
+		if (error) {
+			throw error500({ message: MSG_SERVER_ERROR });
+		}
+
+		if (data.length === 0) {
+			return invalid(400, { message: 'id not found' });
+		}
+
+		if (data[0].author_id !== session.user.id) {
+			throw error500({ message: MSG_API_PERMISSION_DENIED });
+		}
+
+		if ((data[0].member_count as ForeignTableCount)[0].count > teamSize) {
+			result.teamSizeSmallerThanMemberCount = true;
+			return invalid(400, result);
+		}
+
+		const oldSlug = data[0].slug;
+		let newSlug = slugify(title);
+
+		if (newSlug.length === 0) {
+			newSlug = Date.now().toString();
+		} else if (oldSlug !== newSlug) {
 			const { error: countError, data: duplicatedTitleCount } = await supabaseClient
 				.rpc('post_teams_count_duplicated_slug', {
 					_author_id: session.user.id,
-					_slug: slug
+					_slug: newSlug
 				})
 				.single();
 
-			if (countError || duplicatedTitleCount === null) {
+			if (countError) {
 				result.serverError = true;
-				result.userFriendlyMessage = getUserFriendlyMessage(ErrorType.ServerError);
+				result.userFriendlyMessage = MSG_SERVER_ERROR_TRY_AGAIN;
 				return invalid(500, result);
 			}
 
-			if (duplicatedTitleCount && duplicatedTitleCount > 0) {
-				slug = `${slug}--${duplicatedTitleCount + 1}`;
+			if (duplicatedTitleCount > 0) {
+				newSlug = `${newSlug}--${duplicatedTitleCount + 1}`;
 			}
 		}
 
-		const { error: insertError, data: postData } = await supabaseClient
+		const { error: insertError } = await supabaseClient
 			.from('post_teams')
-			.insert({
-				slug,
+			.update({
+				slug: newSlug,
 				text_content: textContent,
-				author_id: session.user.id,
-				title,
-				content,
+				date_last_updated: new Date().toISOString(),
 				needed_skills: neededSkills,
 				course_code: courseCode,
-				team_size: teamSize
+				team_size: teamSize,
+				title,
+				content
 			})
-			.select()
-			.single();
+			.match({ id: postId });
 
 		if (insertError) {
 			result.serverError = true;
-			result.userFriendlyMessage = getUserFriendlyMessage(ErrorType.ServerError);
+			result.userFriendlyMessage = MSG_SERVER_ERROR_TRY_AGAIN;
 			return invalid(500, result);
 		}
-
-		await supabaseClient.from('post_team_members').insert({
-			member_id: session.user.id,
-			post_team_id: postData.id
-		});
 
 		const { error: getUsernameError, data: userProfile } = await supabaseClient
 			.from('profiles')
@@ -101,10 +129,14 @@ export const actions: Actions = {
 
 		if (getUsernameError || !userProfile) {
 			result.serverError = true;
-			result.userFriendlyMessage = getUserFriendlyMessage(ErrorType.ServerError);
+			result.userFriendlyMessage = MSG_SERVER_ERROR_TRY_AGAIN;
 			return invalid(500, result);
 		}
 
-		throw redirect(303, `/tim-nhom/${userProfile.username}/${slug}`);
+		throw redirect(303, `/tim-nhom/${userProfile.username}/${newSlug}`);
 	}
+};
+
+type EditFindTeamPostFormError = FindTeamPostFormError & {
+	teamSizeSmallerThanMemberCount?: true;
 };

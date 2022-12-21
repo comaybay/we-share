@@ -45,7 +45,7 @@
 	}
 </script>
 
-<div class="pt-4 pb-2 px-4 border-b border-pri-base h-26">
+<div class="pt-4 pb-2 px-4 border-b border-pri-base md:h-26">
 	<div class="flex gap-x-4">
 		<div class="flex flex-col items-center text-sec-base">
 			<span class="text-4xl">{question.starCount}</span>
@@ -62,14 +62,14 @@
 			<Title mini href={`hoi-dap/${question.authorUsername}/${question.slug}`}>
 				{question.title}
 			</Title>
-			<div class="flex gap-x-2">
+			<div class="flex gap-x-2 flex-wrap">
 				<div>
 					<AuthorNavLink authorUsername={question.authorUsername} />
 					<span>hỏi {toRelativeTime(question.dateCreated)}</span>
 				</div>
 
 				{#if question.dateLastUpdated}
-					<span class="italic">(cập nhật {toRelativeTime(question.dateLastUpdated)})</span>
+					<span class="italic">(đã qua chỉnh sửa)</span>
 				{/if}
 				<div class="flex items-center gap-x-0.5">
 					<span>{question.commentCount}</span><CommentIcon />

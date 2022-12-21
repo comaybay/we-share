@@ -8,7 +8,7 @@
 <div class="flex items-stretch">
 	<div class="shrink-0 hidden sm:block w-14 border-r-2 border-sec-base bg-stripes" />
 	<!-- pt-16: Header Height -->
-	<div class="pt-16 grow flex flex-col min-h-screen">
+	<div class="pt-16 grow flex flex-col min-h-screen min-w-0">
 		<div class="grow my-8">
 			<slot />
 		</div>

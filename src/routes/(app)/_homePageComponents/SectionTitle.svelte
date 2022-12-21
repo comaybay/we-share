@@ -3,7 +3,7 @@
 </script>
 
 <a {href}>
-	<h3 class="group text-2xl hover:text-pri-hover">
+	<h3 class="group text-2xl hover:text-pri-hover text-center md:text-left">
 		<slot name="first" />
 		<span class="text-sec-base group-hover:text-current">-</span>
 		<slot name="second" />

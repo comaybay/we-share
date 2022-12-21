@@ -1,11 +1,12 @@
 <script lang="ts">
-	import { page } from '$app/stores';
 	import ButtonText from 'src/routes/_components/buttons/ButtonText.svelte';
 	import { createEventDispatcher } from 'svelte';
 	import { dialog } from '../../dialogControl/dialogControl';
 	import DeleteDialog from '../../dialogs/DeleteDialog.svelte';
 	import EditIcon from '../../icons/EditIcon.svelte';
 	import TrashIcon from '../../icons/TrashIcon.svelte';
+
+	export let editPostHref: string;
 
 	const dispatch = createEventDispatcher();
 
@@ -25,8 +26,8 @@
 	}
 </script>
 
-<div>
-	<a href="{$page.url.pathname}/chinh-sua">
+<div class="shrink-0">
+	<a href={editPostHref}>
 		<ButtonText>
 			<div class="flex items-center gap-1">
 				<EditIcon />

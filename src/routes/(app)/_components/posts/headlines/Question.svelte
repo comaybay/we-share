@@ -63,7 +63,7 @@
 				<HeartIcon solid={question.hasFavoritedAnswer} />
 			</div>
 		</div>
-		<div>
+		<div class="min-w-0">
 			<Title mini href={`hoi-dap/${question.authorUsername}/${question.slug}`}>
 				{question.title}
 			</Title>

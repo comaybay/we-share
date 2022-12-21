@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { supabaseClient } from 'src/lib/db';
-	import { toRelativeTime } from 'src/lib/i18n/toRelativeTime';
 	import PostAuthorView from 'src/routes/(app)/PostAuthorView.svelte';
 	import { dialog } from 'src/routes/(app)/_components/dialogControl/dialogControl';
 	import ErrorDialog from 'src/routes/(app)/_components/dialogs/ErrorDialog.svelte';
+	import AuthorSection from 'src/routes/(app)/_components/posts/detail/AuthorSection.svelte';
 	import PostContent from 'src/routes/(app)/_components/posts/detail/PostContent.svelte';
 	import PostSettingsSection from 'src/routes/(app)/_components/posts/detail/PostSettingsSection.svelte';
 	import PostTitle from 'src/routes/(app)/_components/posts/detail/PostTitle.svelte';
@@ -37,19 +37,16 @@
 		<div class="grow max-w-3xl min-w-0">
 			<div class="md:px-8 md:py-4 mx-0 md:mx-6 md:border md:border-pri-light ">
 				<div class="flex justify-between">
-					<div>
-						<a href="/nguoi-dung/{post.author.username}">
-							<div class="inline-block w-12 h-12 mb-1">
-								<UserProfilePicture />
-							</div>
-							<span class="font-bold">
-								{post.author.username}
-							</span>
-						</a>
-						<span>hỏi {toRelativeTime(post.dateCreated)}</span>
-					</div>
+					<AuthorSection
+						username={post.author.username}
+						postDateCreated={post.dateCreated}
+						postDateLastUpdated={post.dateLastUpdated}
+					/>
 					<PostAuthorView authorId={post.author.id}>
-						<PostSettingsSection on:choosedelete={deletePost} />
+						<PostSettingsSection
+							editPostHref="/tim-nhom/chinh-sua/{post.id}"
+							on:choosedelete={deletePost}
+						/>
 					</PostAuthorView>
 				</div>
 

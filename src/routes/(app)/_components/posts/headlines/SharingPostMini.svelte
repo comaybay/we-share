@@ -45,7 +45,7 @@
 	}
 </script>
 
-<div class="pt-4 pb-2 px-4 border-b border-pri-base h-26">
+<div class="pt-4 pb-2 px-4 border-b border-pri-base md:h-26">
 	<div class="flex gap-x-4">
 		<div class="flex flex-col items-center text-quin-base">
 			<span class="text-4xl">{post.starCount}</span>
@@ -60,13 +60,13 @@
 		</div>
 		<div>
 			<Title mini href={`chia-se/${post.authorUsername}/${post.slug}`}>{post.title}</Title>
-			<div class="flex gap-x-2">
+			<div class="flex gap-x-2 flex-wrap">
 				<div>
 					<AuthorNavLink authorUsername={post.authorUsername} />
 					<span>đăng {toRelativeTime(post.dateCreated)}</span>
 				</div>
 				{#if post.dateLastUpdated}
-					<span class="italic">(cập nhật {toRelativeTime(post.dateLastUpdated)})</span>
+					<span class="italic">(đẫ qua chỉnh sửa)</span>
 				{/if}
 				<div class="flex items-center gap-x-0.5">
 					<span>{post.commentCount}</span><CommentIcon />

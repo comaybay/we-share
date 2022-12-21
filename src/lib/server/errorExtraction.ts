@@ -3,6 +3,7 @@ import {
 	AuthInvalidCredentialsError,
 	AuthRetryableFetchError
 } from '@supabase/supabase-js';
+import { MSG_SERVER_ERROR_TRY_AGAIN } from '../messages';
 
 export function getUserFriendlyMessage(errorType: ErrorType) {
 	return (errorPatterns.find(ep => errorType === ep.errorType) ?? serverErrorPattern)
@@ -34,7 +35,7 @@ const serverErrorPattern: ErrorPattern = {
 	errorType: ErrorType.ServerError,
 	errorClass: AuthRetryableFetchError,
 	errorMessage: null,
-	userFriendlyMessage: 'Đã xảy ra sự cố, vui lòng thử lại'
+	userFriendlyMessage: MSG_SERVER_ERROR_TRY_AGAIN
 };
 
 const errorPatterns: Array<ErrorPattern> = [

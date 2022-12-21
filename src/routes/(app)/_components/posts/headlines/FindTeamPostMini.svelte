@@ -12,14 +12,16 @@
 	$: isTeamFull = post.teamMemberCount === post.teamSize;
 </script>
 
-<div class="pt-4 pb-2 px-4 border-b border-pri-base h-26">
+<div class="pt-4 pb-2 px-4 border-b border-pri-base md:h-26">
 	<div class="flex justify-between gap-x-4">
 		<div>
-			<Title mini href={`tim-nhom/${post.authorUsername}/${post.slug}`}>{post.title}</Title>
+			<Title mini href={`tim-nhom/${post.authorUsername}/${post.slug}`}
+				><span class="line-clamp-1">{post.title}</span></Title
+			>
 			<AuthorNavLink authorUsername={post.authorUsername} />
 			<span>đăng {toRelativeTime(post.dateCreated)}</span>
 			{#if post.dateLastUpdated}
-				<span class="italic">(cập nhật {toRelativeTime(post.dateLastUpdated)})</span>
+				<span class="italic">(đẫ qua chỉnh sửa)</span>
 			{/if}
 			<div class="flex gap-x-2">
 				<div class="flex items-center gap-x-0.5">
