@@ -20,7 +20,7 @@
 	WeShare <span class="text-sec-base">-</span> Cộng đồng chia sẻ kiến thức
 </h1>
 
-<div class="mt-8 grid place-content-center grid-cols-2 gap-x-4 gap-y-12 max-w-5xl mx-auto">
+<div class="mx-auto px-4 mt-8 grid w-full grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-12 max-w-5xl">
 	<div>
 		<SectionTitle href="/hoi-dap">
 			<span slot="first">Họ cần bạn!</span>
