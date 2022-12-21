@@ -67,7 +67,7 @@
 </script>
 
 <div class="flex flex-col lg:flex-row-reverse gap-x-16 px-4 md:px-28 justify-between">
-	<div class="flex flex-col shrink-0 min-w-[330px] mb-4 lg:mb-0">
+	<div class="flex flex-col shrink-0 lg:w-[380px] mb-4 lg:mb-0">
 		<a href="/hoi-dap/dat-cau-hoi">
 			<Button block>
 				<div class="w-full flex gap-x-2 justify-center items-center px-14 py-1">
@@ -83,7 +83,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="grow">
+	<div>
 		<NewestPostsButton active={newestQuestionsActive} on:click={onClickNewestQuestions} />
 		<TopPostsButton active={topQuestionsActive} on:click={onClickTopQuestions} />
 		{#if !loading}
