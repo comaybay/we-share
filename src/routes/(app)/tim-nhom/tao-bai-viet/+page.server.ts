@@ -2,7 +2,8 @@ import { invalid, redirect, type Actions } from '@sveltejs/kit';
 import { MAX_NUMBER_OF_TOPICS } from 'src/lib/constants';
 import { ErrorType, getUserFriendlyMessage } from 'src/lib/server/errorExtraction';
 import slugify from 'src/lib/server/slugify';
-import type { PostSubmitionError } from 'src/lib/types/PostSubmitionError';
+import { validateCommonPostProps } from 'src/lib/server/validations';
+import type { FindTeamPostFormError } from 'src/lib/types/FindTeamPostFormError';
 import { useProtectedRoute } from 'src/lib/useProtectedRoute';
 
 export const actions: Actions = {
@@ -12,7 +13,7 @@ export const actions: Actions = {
 		const formData = await event.request.formData();
 		const title = formData.get('title')?.toString()?.trim() as string;
 		const content = formData.get('content')?.toString()?.trim() as string;
-		const contentText = formData.get('text-content')?.toString()?.trim() as string;
+		const textContent = formData.get('text-content')?.toString()?.trim() as string;
 		const courseCode = formData.get('course-code')?.toString()?.trim() as string;
 		const teamSize = parseInt(formData.get('team-size')?.toString()?.trim() as string);
 
@@ -33,21 +34,13 @@ export const actions: Actions = {
 			return invalid(400, { message: 'invalid skills' });
 		}
 
-		const result: FindTeamPostSubmitionError = {};
-
-		if (!title) {
-			result.titleEmpty = true;
-		}
+		const result: FindTeamPostFormError = validateCommonPostProps({ content, textContent, title });
 
 		if (!courseCode) {
 			result.courseCodeEmpty = true;
 		}
 
-		if (!contentText || !content) {
-			result.contentEmpty = true;
-		}
-
-		if (result.contentEmpty || result.titleEmpty) {
+		if (result.contentEmpty || result.titleEmpty || result.courseCodeEmpty) {
 			return invalid(400, result);
 		}
 
@@ -78,7 +71,7 @@ export const actions: Actions = {
 			.from('post_teams')
 			.insert({
 				slug,
-				text_content: contentText,
+				text_content: textContent,
 				author_id: session.user.id,
 				title,
 				content,
@@ -114,8 +107,4 @@ export const actions: Actions = {
 
 		throw redirect(303, `/tim-nhom/${userProfile.username}/${slug}`);
 	}
-};
-
-type FindTeamPostSubmitionError = PostSubmitionError & {
-	courseCodeEmpty?: boolean;
 };
