@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { PUBLIC_TINY_API_KEY } from '$env/static/public';
 	import Editor from '@tinymce/tinymce-svelte';
+	import { tick } from 'svelte';
 
 	//copied from TinyMCE Editor internal uuid function
 	const uuid = (prefix: string): string => {
@@ -58,5 +59,12 @@
 		bind:value
 		bind:text
 		modelEvents="input change keyup undo redo"
+		on:init={async () => {
+			//fix text content not changing on initial value content
+			const v = value;
+			value = '';
+			await tick();
+			value = v;
+		}}
 	/>
 </div>

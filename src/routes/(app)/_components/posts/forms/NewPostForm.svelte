@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { applyAction, enhance } from '$app/forms';
 	import { MAX_NUMBER_OF_TOPICS, TOPIC_MAX_LENGTH } from 'src/lib/constants';
-	import type { PostSubmitionError } from 'src/lib/types/PostSubmitionError';
+	import type { PostFormError } from 'src/lib/types/PostFormError';
 	import { userFriendlyMessage } from 'src/lib/userFriendlyMessage';
-	import PostEditor from 'src/routes/(app)/_components/posts/new/PostEditor.svelte';
+	import PostEditor from 'src/routes/(app)/_components/posts/forms/PostEditor.svelte';
 	import { flip } from 'svelte/animate';
 	import Button from '../../../../_components/buttons/Button.svelte';
 	import InputTitle from './InputTitle.svelte';
 
-	export let postError: PostSubmitionError | null;
+	export let formError: PostFormError | null;
 	export let postContentMaxLength: number;
 
 	let title = '';
@@ -59,7 +59,7 @@
 	}}
 >
 	<InputTitle {title} disabled={submitting} />
-	{#if postError?.titleEmpty}
+	{#if formError?.titleEmpty}
 		<p class="text-sec-base">
 			*{userFriendlyMessage.titleEmpty}
 		</p>
@@ -83,7 +83,7 @@
 				Số lượng ký tự đã vượt quá giới hạn cho phép
 			</span>
 		{/if}
-		{#if postError?.contentEmpty}
+		{#if formError?.contentEmpty}
 			<p class="text-sec-base">
 				*{userFriendlyMessage.contentEmpty}
 			</p>
@@ -154,8 +154,8 @@
 
 	<div class="flex justify-between mt-4">
 		<p class="text-sec-base font-semibold">
-			{#if postError?.userFriendlyMessage}
-				*{postError.userFriendlyMessage}
+			{#if formError?.userFriendlyMessage}
+				*{formError.userFriendlyMessage}
 			{/if}
 		</p>
 		<Button loading={submitting} disabled={contentTooLong}><span class="px-12">Đăng</span></Button>

@@ -42,10 +42,13 @@
 						{post.author.username}
 					</span>
 				</a>
-				<span>đăng{toRelativeTime(post.dateCreated)}</span>
+				<span>đăng {toRelativeTime(post.dateCreated)}</span>
 			</div>
 			<PostAuthorView authorId={post.author.id}>
-				<PostSettingsSection on:choosedelete={deletePost} />
+				<PostSettingsSection
+					editPostHref="/chia-se/chinh-sua/{post.id}"
+					on:choosedelete={deletePost}
+				/>
 			</PostAuthorView>
 		</div>
 
