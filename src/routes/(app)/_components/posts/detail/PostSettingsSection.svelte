@@ -26,7 +26,7 @@
 	}
 </script>
 
-<div>
+<div class="shrink-0">
 	<a href={editPostHref}>
 		<ButtonText>
 			<div class="flex items-center gap-1">
