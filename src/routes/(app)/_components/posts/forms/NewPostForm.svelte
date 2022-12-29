@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { applyAction, enhance } from '$app/forms';
-	import { MAX_NUMBER_OF_TOPICS, TOPIC_MAX_LENGTH } from 'src/lib/constants';
+	import { MAX_NUMBER_OF_TOPICS, MAX_TOPIC_LENGTH } from 'src/lib/constants';
 	import type { PostFormError } from 'src/lib/types/PostFormError';
 	import { userFriendlyMessage } from 'src/lib/userFriendlyMessage';
 	import PostEditor from 'src/routes/(app)/_components/posts/forms/PostEditor.svelte';
@@ -98,7 +98,7 @@
 			>
 				<input
 					minlength={3}
-					maxlength={TOPIC_MAX_LENGTH}
+					maxlength={MAX_TOPIC_LENGTH}
 					type="text"
 					class="pl-4 pr-2 rounded-full w-32 border-none focus:outline-none resize-x"
 					placeholder="Chủ đề"

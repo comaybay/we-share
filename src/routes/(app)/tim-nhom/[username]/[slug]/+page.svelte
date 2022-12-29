@@ -1,16 +1,20 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { supabaseClient } from 'src/lib/db';
-	import PostAuthorView from 'src/routes/(app)/PostAuthorView.svelte';
+	import CommentSection from 'src/routes/(app)/_components/comments/CommentSection.svelte';
 	import { dialog } from 'src/routes/(app)/_components/dialogControl/dialogControl';
 	import ErrorDialog from 'src/routes/(app)/_components/dialogs/ErrorDialog.svelte';
 	import AuthorSection from 'src/routes/(app)/_components/posts/detail/AuthorSection.svelte';
-	import PostContent from 'src/routes/(app)/_components/posts/detail/PostContent.svelte';
+	import LeftStickySection from 'src/routes/(app)/_components/posts/detail/LeftStickySection.svelte';
 	import PostSettingsSection from 'src/routes/(app)/_components/posts/detail/PostSettingsSection.svelte';
 	import PostTitle from 'src/routes/(app)/_components/posts/detail/PostTitle.svelte';
+	import PostContent from 'src/routes/(app)/_components/posts/detail/RenderContent.svelte';
+	import RightStickySection from 'src/routes/(app)/_components/posts/detail/RightStickySection.svelte';
 	import TopicContainer from 'src/routes/(app)/_components/posts/detail/TopicContainer.svelte';
+	import PostAuthorView from 'src/routes/(app)/_components/views/PostAuthorView.svelte';
 	import UserProfilePicture from 'src/routes/_components/UserProfilePicture.svelte';
 	import type { PageData } from './$types';
+	import FindTeamPostStats from './_components/FindTeamPostStats.svelte';
 
 	export let data: PageData;
 
@@ -30,12 +34,28 @@
 	}
 </script>
 
-<div class="flex flex-col md:flex-row justify-center mx-8 md:mx-6">
+<div class="flex flex-col md:flex-row justify-center mx-4">
 	{#if post}
-		<div class="mt-2 md:mt-0 order-2 md:order-none">Placeholder</div>
+		<div class="relative grow max-w-3xl min-w-0">
+			<LeftStickySection>
+				<FindTeamPostStats {post} />
+			</LeftStickySection>
 
-		<div class="grow max-w-3xl min-w-0">
-			<div class="md:px-8 md:py-4 mx-0 md:mx-6 md:border md:border-pri-light ">
+			<RightStickySection>
+				<div class="order-3 md:order-none">
+					<span class="text-lg text-sec-base">Thành viên:</span>
+					{#each post.members as member}
+						<a href="nguoi-dung/{member.username}" class="flex gap-0.5 items-center text-lg">
+							<div class="h-10 w-10">
+								<UserProfilePicture />
+							</div>
+							{member.username}
+						</a>
+					{/each}
+				</div>
+			</RightStickySection>
+
+			<div class="md:px-8 md:py-4 mb-4 md:border md:border-pri-light">
 				<div class="flex justify-between">
 					<AuthorSection
 						username={post.author.username}
@@ -57,17 +77,13 @@
 
 				<TopicContainer topics={post.neededSkills} baseHref="/tim-nhom" />
 			</div>
-		</div>
-		<div class="order-3 md:order-none">
-			<span class="text-lg text-sec-base">Thành viên:</span>
-			{#each post.members as member}
-				<a href="nguoi-dung/{member.username}" class="flex gap-0.5 items-center text-lg">
-					<div class="h-10 w-10">
-						<UserProfilePicture />
-					</div>
-					{member.username}
-				</a>
-			{/each}
+
+			<CommentSection
+				postType="team"
+				commentCount={post.commentCount}
+				comments={data.comments}
+				postId={post.id}
+			/>
 		</div>
 	{/if}
 </div>

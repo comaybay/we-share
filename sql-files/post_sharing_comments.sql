@@ -3,10 +3,11 @@ create table if not exists post_sharing_comments (
   date_created timestamp with time zone not null default current_timestamp, 
   date_last_updated timestamp with time zone, 
   text_content varchar(10000) not null,
-  content varchar(100000) not null,
+  content varchar not null,
   
   author_id uuid references profiles(id) not null,
   parent_comment_id bigint references post_sharing_comments(id),
+  top_level_comment_id bigint references post_sharing_comments(id),
   post_id bigint references post_sharings(id) not null
 );
 alter table public.post_sharing_comments enable row level security;

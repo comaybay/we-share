@@ -8,7 +8,7 @@
 	import UserProfilePicture from 'src/routes/_components/UserProfilePicture.svelte';
 	import type { PageData } from '../../../chia-se/$types';
 	import ViewIcon from '../../icons/ViewIcon.svelte';
-	import YellowStarcon from '../../icons/YellowStarcon.svelte';
+	import YellowStarcon from '../../icons/YellowStarIcon.svelte';
 	import AuthorNavLink from '../AuthorNavLink.svelte';
 	import PostHeaderTopicContainer from '../PostHeaderTopicContainer.svelte';
 	import Title from './Title.svelte';

@@ -1,12 +1,15 @@
 <script lang="ts">
 	import { applyAction, enhance } from '$app/forms';
 	import {
+		MAX_COURSE_CODE_LENGTH,
 		MAX_NUMBER_OF_TOPICS,
 		MAX_TEAM_SIZE,
+		MAX_TOPIC_LENGTH,
+		MIN_COURSE_CODE_LENGTH,
 		MIN_TEAM_SIZE,
+		MIN_TOPIC_LENGTH,
 		POST_QUESTION_MAX_LENGTH,
-		POST_TEAM_MAX_LENGTH,
-		TOPIC_MAX_LENGTH
+		POST_TEAM_MAX_LENGTH
 	} from 'src/lib/constants';
 	import { userFriendlyMessage } from 'src/lib/userFriendlyMessage';
 	import PostEditor from 'src/routes/(app)/_components/posts/forms/PostEditor.svelte';
@@ -95,8 +98,8 @@
 					disabled={submitting}
 					required
 					name="course-code"
-					minlength={3}
-					maxlength={255}
+					minlength={MIN_COURSE_CODE_LENGTH}
+					maxlength={MAX_COURSE_CODE_LENGTH}
 					bind:value={courseCode}
 					type="text"
 					class="mt-1 rounded-sm"
@@ -181,8 +184,8 @@
     hover:enabled:border-pri-base focus-within:border-tert-base hover:enabled:focus-within:border-tert-base"
 				>
 					<input
-						minlength={3}
-						maxlength={TOPIC_MAX_LENGTH}
+						minlength={MIN_TOPIC_LENGTH}
+						maxlength={MAX_TOPIC_LENGTH}
 						type="text"
 						class="pl-4 pr-2 rounded-full w-36 border-none focus:outline-none resize-x"
 						placeholder="Kỹ năng cần tìm"

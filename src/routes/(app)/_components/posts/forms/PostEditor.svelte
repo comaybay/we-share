@@ -1,12 +1,6 @@
 <script lang="ts">
-	import { PUBLIC_TINY_API_KEY } from '$env/static/public';
-	import Editor from '@tinymce/tinymce-svelte';
-	import { tick } from 'svelte';
-
-	//copied from TinyMCE Editor internal uuid function
-	const uuid = (prefix: string): string => {
-		return prefix + '_' + Math.floor(Math.random() * 1000000000) + String(Date.now());
-	};
+	import { uuid } from 'src/lib/uuid';
+	import CustomEditor from '../CustomEditor.svelte';
 
 	export let value = '';
 	export let text = '';
@@ -47,24 +41,4 @@
 	};
 </script>
 
-<div
-	class="outline outline-1 outline-transparent transition-all duration-100 
-	{disabled ? '' : 'hover:outline-pri-base'}"
->
-	<Editor
-		apiKey={PUBLIC_TINY_API_KEY}
-		{id}
-		{disabled}
-		{conf}
-		bind:value
-		bind:text
-		modelEvents="input change keyup undo redo"
-		on:init={async () => {
-			//fix text content not changing on initial value content
-			const v = value;
-			value = '';
-			await tick();
-			value = v;
-		}}
-	/>
-</div>
+<CustomEditor {id} {disabled} {conf} bind:value bind:text />

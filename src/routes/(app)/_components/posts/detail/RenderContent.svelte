@@ -2,12 +2,12 @@
 	export let content: string;
 </script>
 
-<div class="post-format no-tailwind-base">
+<div class="format no-tailwind-base">
 	{@html content}
 </div>
 
 <style global lang="scss">
-	.post-format {
+	.format {
 		figure.image {
 			display: inline-block;
 			border: 1px solid gray;

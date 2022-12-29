@@ -5,15 +5,15 @@ create table if not exists post_questions (
   title varchar(255) not null,
   slug varchar(255) not null,
   text_content varchar(30000) not null,
-  content varchar(300000) not null,
+  content varchar not null,
   topics varchar(50)[] not null,
   view_count bigint not null default 0,
 
-  favorite_answer_id bigint references post_question_comments(id),
   author_id uuid references profiles(id) not null
 );
 alter table post_questions enable row level security;
 
+alter table post_questions add column favorite_answer_id bigint references post_question_comments(id);
 
 create policy "Public post_questions are viewable by everyone."
   on post_questions for select

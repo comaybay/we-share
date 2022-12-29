@@ -35,6 +35,8 @@ export interface Database {
           author_id: string
           parent_comment_id: number | null
           post_id: number
+          text_content: string
+          top_level_comment_id: number | null
         }
         Insert: {
           id?: number
@@ -44,6 +46,8 @@ export interface Database {
           author_id: string
           parent_comment_id?: number | null
           post_id: number
+          text_content: string
+          top_level_comment_id?: number | null
         }
         Update: {
           id?: number
@@ -53,6 +57,8 @@ export interface Database {
           author_id?: string
           parent_comment_id?: number | null
           post_id?: number
+          text_content?: string
+          top_level_comment_id?: number | null
         }
       }
       post_question_stars: {
@@ -158,6 +164,7 @@ export interface Database {
           author_id: string
           parent_comment_id: number | null
           post_id: number
+          top_level_comment_id: number | null
         }
         Insert: {
           id?: number
@@ -168,6 +175,7 @@ export interface Database {
           author_id: string
           parent_comment_id?: number | null
           post_id: number
+          top_level_comment_id?: number | null
         }
         Update: {
           id?: number
@@ -178,6 +186,7 @@ export interface Database {
           author_id?: string
           parent_comment_id?: number | null
           post_id?: number
+          top_level_comment_id?: number | null
         }
       }
       post_sharing_stars: {
@@ -204,6 +213,7 @@ export interface Database {
           date_last_updated: string | null
           title: string
           slug: string
+          slug: string
           content: string
           topics: string[]
           author_id: string
@@ -217,6 +227,7 @@ export interface Database {
           date_last_updated?: string | null
           title: string
           slug: string
+          slug: string
           content: string
           topics: string[]
           author_id: string
@@ -228,6 +239,7 @@ export interface Database {
           date_created?: string
           date_last_updated?: string | null
           title?: string
+          slug?: string
           slug?: string
           content?: string
           topics?: string[]
@@ -245,6 +257,8 @@ export interface Database {
           author_id: string
           parent_comment_id: number | null
           post_id: number
+          top_level_comment_id: number | null
+          text_content: string
         }
         Insert: {
           id?: number
@@ -254,6 +268,8 @@ export interface Database {
           author_id: string
           parent_comment_id?: number | null
           post_id: number
+          top_level_comment_id?: number | null
+          text_content: string
         }
         Update: {
           id?: number
@@ -263,6 +279,8 @@ export interface Database {
           author_id?: string
           parent_comment_id?: number | null
           post_id?: number
+          top_level_comment_id?: number | null
+          text_content?: string
         }
       }
       post_team_members: {
@@ -332,29 +350,69 @@ export interface Database {
       profiles: {
         Row: {
           id: string
-          username: string | null
+          username: string
           name: string | null
           quote: string | null
           email: string
+          role: string
         }
         Insert: {
           id: string
-          username?: string | null
+          username: string
           name?: string | null
           quote?: string | null
           email: string
+          role: string
         }
         Update: {
           id?: string
-          username?: string | null
+          username?: string
           name?: string | null
           quote?: string | null
           email?: string
+          role?: string
         }
       }
     }
     Views: {
-      [_ in never]: never
+      view_post_question_top_level_comments: {
+        Row: {
+          id: number | null
+          post_id: number | null
+          date_created: string | null
+          date_last_updated: string | null
+          content: string | null
+          author_id: string | null
+          author_username: string | null
+          reply_count: number | null
+          star_count: number | null
+        }
+      }
+      view_post_sharing_top_level_comments: {
+        Row: {
+          id: number | null
+          post_id: number | null
+          date_created: string | null
+          date_last_updated: string | null
+          content: string | null
+          author_id: string | null
+          author_username: string | null
+          reply_count: number | null
+          star_count: number | null
+        }
+      }
+      view_post_team_top_level_comments: {
+        Row: {
+          id: number | null
+          post_id: number | null
+          date_created: string | null
+          date_last_updated: string | null
+          content: string | null
+          author_id: string | null
+          author_username: string | null
+          reply_count: number | null
+        }
+      }
     }
     Functions: {
       post_question_stars_count: {
