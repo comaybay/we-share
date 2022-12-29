@@ -38,7 +38,6 @@ export const actions: Actions = {
 		}
 
 		if (!postId) {
-			console.log(postId);
 			throw error400({ message: MSG_API_ID_MISSING });
 		}
 

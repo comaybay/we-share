@@ -45,7 +45,7 @@
 	}
 </script>
 
-<div class="pt-4 pb-2 px-4 border-b border-pri-base md:h-26">
+<div class="pt-4 pb-2 px-4 border-b border-pri-base">
 	<div class="flex gap-x-4">
 		<div class="flex flex-col items-center text-sec-base">
 			<span class="text-4xl">{question.starCount}</span>

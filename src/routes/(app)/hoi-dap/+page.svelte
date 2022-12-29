@@ -7,8 +7,8 @@
 	import LoadingIndicator from '../_components/LoadingIndicator.svelte';
 	import TopicContainer from '../_components/posts/detail/TopicContainer.svelte';
 	import Question from '../_components/posts/headlines/Question.svelte';
-	import NewestPostsButton from '../_components/posts/NewestPostsButton.svelte';
-	import TopPostsButton from '../_components/posts/TopPostsButton.svelte';
+	import SortNewestButton from '../_components/posts/SortNewestButton.svelte';
+	import SortTopButton from '../_components/posts/SortTopButton.svelte';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
@@ -84,8 +84,8 @@
 		</div>
 	</div>
 	<div>
-		<NewestPostsButton active={newestQuestionsActive} on:click={onClickNewestQuestions} />
-		<TopPostsButton active={topQuestionsActive} on:click={onClickTopQuestions} />
+		<SortNewestButton active={newestQuestionsActive} on:click={onClickNewestQuestions} />
+		<SortTopButton active={topQuestionsActive} on:click={onClickTopQuestions} />
 		{#if !loading}
 			{#each questions as question}
 				<Question {question} />

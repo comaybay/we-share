@@ -12,11 +12,11 @@
 	$: isTeamFull = post.teamMemberCount === post.teamSize;
 </script>
 
-<div class="pt-4 pb-2 px-4 border-b border-pri-base md:h-26">
+<div class="pt-4 pb-2 px-4 border-b border-pri-base">
 	<div class="flex justify-between gap-x-4">
 		<div>
 			<Title mini href={`tim-nhom/${post.authorUsername}/${post.slug}`}
-				><span class="line-clamp-1">{post.title}</span></Title
+				><span class="line-clamp-2">{post.title}</span></Title
 			>
 			<AuthorNavLink authorUsername={post.authorUsername} />
 			<span>đăng {toRelativeTime(post.dateCreated)}</span>

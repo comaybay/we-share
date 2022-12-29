@@ -90,14 +90,14 @@ export const actions: Actions = {
 			return invalid(500, result);
 		}
 
-		await supabaseClient
-			.from('profiles')
-			.update({
-				username,
-				name: profilename.length > 0 ? profilename : username,
-				quote: quote.length > 0 ? quote : null
-			})
-			.match({ id: user!.id });
+		await supabaseClient.from('profiles').insert({
+			id: user!.id,
+			username,
+			email: email,
+			role: 'user',
+			name: profilename.length > 0 ? profilename : username,
+			quote: quote.length > 0 ? quote : null
+		});
 
 		throw redirectHome();
 	}

@@ -7,7 +7,7 @@
 	import CommentIcon from 'src/routes/(app)/_components/icons/CommentIcon.svelte';
 	import type { PageData } from '../../../$types';
 	import ViewIcon from '../../icons/ViewIcon.svelte';
-	import YellowStarcon from '../../icons/YellowStarcon.svelte';
+	import YellowStarcon from '../../icons/YellowStarIcon.svelte';
 	import AuthorNavLink from '../AuthorNavLink.svelte';
 	import Title from './Title.svelte';
 
@@ -45,7 +45,7 @@
 	}
 </script>
 
-<div class="pt-4 pb-2 px-4 border-b border-pri-base md:h-26">
+<div class="pt-4 pb-2 px-4 border-b border-pri-base">
 	<div class="flex gap-x-4">
 		<div class="flex flex-col items-center text-quin-base">
 			<span class="text-4xl">{post.starCount}</span>
