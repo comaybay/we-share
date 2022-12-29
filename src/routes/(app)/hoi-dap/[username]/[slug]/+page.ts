@@ -22,7 +22,7 @@ export const load: PageLoad = async event => {
 		.from('post_questions')
 		.select(
 			`id, date_created, date_last_updated, title, content, topics, favorite_answer_id, view_count, 
-			post_question_comments(count), post_question_stars!inner(count)`
+			post_question_comments!post_question_comments_post_id_fkey(count), post_question_stars!inner(count)`
 		)
 		.match({ slug: event.params.slug, author_id: authorId })
 		.single();

@@ -11,7 +11,7 @@ export const load: PageLoad = async event => {
 		.from('post_questions')
 		.select(
 			`id, title, date_created, date_last_updated, view_count, slug,
-			profiles!post_questions_author_id_fkey(username), post_question_comments(count), post_question_stars!inner(count)`
+			profiles!post_questions_author_id_fkey(username), post_question_comments!post_question_comments_post_id_fkey(count), post_question_stars!inner(count)`
 		)
 		.order('date_last_updated', { ascending: false })
 		.order('date_created', { ascending: false })
