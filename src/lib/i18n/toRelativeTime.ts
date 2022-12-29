@@ -13,12 +13,12 @@ const divisions: Division[] = [
 ];
 
 export function toRelativeTime(date: Date) {
-	let duration = (date.getTime() - Date.now()) / 1000;
+	let duration = Math.abs(date.getTime() - Date.now()) / 1000;
 
 	for (let i = 0; i <= divisions.length; i++) {
 		const division = divisions[i];
 		if (Math.abs(duration) < division.amount) {
-			return formatter.format(Math.round(duration), division.name);
+			return formatter.format(-Math.round(duration), division.name);
 		}
 		duration /= division.amount;
 	}
