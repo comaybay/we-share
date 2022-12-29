@@ -413,6 +413,44 @@ export interface Database {
           reply_count: number | null
         }
       }
+      view_user_stats: {
+        Row: {
+          id: string | null
+          username: string | null
+          name: string | null
+          quote: string | null
+          question_star_count: number | null
+          question_comment_star_count: number | null
+          favorite_answer_count: number | null
+          sharing_star_count: number | null
+          sharing_comment_star_count: number | null
+          bookmark_count: number | null
+        }
+        Insert: {
+          id?: string | null
+          username?: string | null
+          name?: string | null
+          quote?: string | null
+          question_star_count?: never
+          question_comment_star_count?: never
+          favorite_answer_count?: never
+          sharing_star_count?: never
+          sharing_comment_star_count?: never
+          bookmark_count?: never
+        }
+        Update: {
+          id?: string | null
+          username?: string | null
+          name?: string | null
+          quote?: string | null
+          question_star_count?: never
+          question_comment_star_count?: never
+          favorite_answer_count?: never
+          sharing_star_count?: never
+          sharing_comment_star_count?: never
+          bookmark_count?: never
+        }
+      }
     }
     Functions: {
       post_question_stars_count: {
