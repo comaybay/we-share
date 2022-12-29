@@ -2,7 +2,9 @@
 	import WeShareIcon from 'src/routes/_components/WeShareIcon.svelte';
 </script>
 
-<div class="mx-24 py-6 px-8 border-t border-t-pri-base flex justify-end items-center">
+<div
+	class="mx-4 sm:mx-8 md:mx-24 py-6 px-8 border-t border-t-pri-base flex justify-center md:justify-end items-center"
+>
 	<a
 		href="https://github.com/comaybay/we-share"
 		class="hover:text-pri-light flex items-center gap-1 text-sm"
