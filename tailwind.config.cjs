@@ -33,7 +33,7 @@ module.exports = {
       'tert-hover': '#7100e3',
       'tert-light': '#D7D6FC',
       'qua-base': '#1AA75B',
-      'qua-hover': '#942323',
+      'qua-hover': '#1fb58d',
       'qua-loading': '#63d498',
       'quin-base': '#D4D838',
       'quin-hover': '#afb327',
