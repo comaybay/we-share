@@ -1,7 +1,8 @@
 create table if not exists public.profiles (
-  id uuid references auth.users not null,
+  id uuid references auth.users not null on delete cascade,
+  role varchar(255) not null,
   email varchar(254) not null,
-  username varchar(15),
+  username varchar(15) not null,
   name varchar(70),
   quote varchar(255),
   primary key (id)
@@ -22,20 +23,4 @@ create policy "Users can update own profile."
   on profiles for update
   using ( auth.uid() = id );
 
--- inserts a row into public.users
-create function public.handle_new_user()
-returns trigger
-language plpgsql
-security definer set search_path = public
-as $$
-begin
-  insert into public.profiles (id)
-  values (new.id);
-  return new;
-end;
-$$;
 
--- trigger the function every time a user is created
-create trigger on_auth_user_created
-  after insert on auth.users
-  for each row execute procedure public.handle_new_user();

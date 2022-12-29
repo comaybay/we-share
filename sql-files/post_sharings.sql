@@ -5,7 +5,7 @@ create table if not exists post_sharings (
   title varchar(255) not null,
   slug varchar(255) not null,
   text_content varchar(30000) not null,
-  content varchar(300000) not null,
+  content varchar not null,
   topics varchar(50)[] not null,
   view_count bigint not null default 0,
 

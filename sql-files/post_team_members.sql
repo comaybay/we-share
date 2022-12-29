@@ -1,8 +1,8 @@
 create table if not exists post_team_members (
   date_created timestamp with time zone not null default current_timestamp, 
 
-  post_team_id not null bigint references post_teams(id) on delete cascade,
-  member_id uuid references profiles(id) not null
+  post_team_id bigint not null references post_teams(id) on delete cascade,
+  member_id uuid references profiles(id) not null,
   primary key (post_team_id, member_id)
 );
 alter table public.post_team_members enable row level security;
