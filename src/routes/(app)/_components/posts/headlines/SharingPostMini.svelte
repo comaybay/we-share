@@ -66,7 +66,7 @@
 					<span>đăng {toRelativeTime(post.dateCreated)}</span>
 				</div>
 				{#if post.dateLastUpdated}
-					<span class="italic">(đẫ qua chỉnh sửa)</span>
+					<span class="italic">(đã qua chỉnh sửa)</span>
 				{/if}
 				<div class="flex items-center gap-x-0.5">
 					<span>{post.commentCount}</span><CommentIcon />
