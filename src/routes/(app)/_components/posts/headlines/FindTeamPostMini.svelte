@@ -21,7 +21,7 @@
 			<AuthorNavLink authorUsername={post.authorUsername} />
 			<span>đăng {toRelativeTime(post.dateCreated)}</span>
 			{#if post.dateLastUpdated}
-				<span class="italic">(đẫ qua chỉnh sửa)</span>
+				<span class="italic">(đã qua chỉnh sửa)</span>
 			{/if}
 			<div class="flex gap-x-2">
 				<div class="flex items-center gap-x-0.5">
