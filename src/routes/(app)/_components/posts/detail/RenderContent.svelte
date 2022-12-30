@@ -2,12 +2,16 @@
 	export let content: string;
 </script>
 
-<div class="format no-tailwind-base">
+<div class="format">
 	{@html content}
 </div>
 
 <style global lang="scss">
 	.format {
+		*:not(img) {
+			all: revert;
+		}
+
 		figure.image {
 			display: inline-block;
 			border: 1px solid gray;
@@ -36,7 +40,6 @@
  Alignment using classes rather than inline styles
  check out the "formats" option
 */
-
 		img.align-left {
 			float: left;
 		}

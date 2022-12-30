@@ -12,13 +12,15 @@
 
 <NewPostHeader>Chỉnh sửa câu hỏi</NewPostHeader>
 
-<div class="mx-auto px-8 max-w-6xl">
-	<EditPostForm
-		postId={id}
-		{title}
-		{content}
-		{topics}
-		formError={form}
-		postContentMaxLength={POST_SHARING_MAX_LENGTH}
-	/>
+<div class="px-8">
+	<div class="mx-auto max-w-3xl">
+		<EditPostForm
+			postId={id}
+			{title}
+			{content}
+			{topics}
+			formError={form}
+			postContentMaxLength={POST_SHARING_MAX_LENGTH}
+		/>
+	</div>
 </div>

@@ -9,6 +9,8 @@
 
 <NewPostHeader>Đặt câu hỏi</NewPostHeader>
 
-<div class="mx-auto px-8 max-w-6xl">
-	<PostForm formError={form} postContentMaxLength={POST_QUESTION_MAX_LENGTH} />
+<div class="px-8">
+	<div class="mx-auto max-w-3xl">
+		<PostForm formError={form} postContentMaxLength={POST_QUESTION_MAX_LENGTH} />
+	</div>
 </div>

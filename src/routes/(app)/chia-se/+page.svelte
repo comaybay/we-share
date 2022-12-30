@@ -37,8 +37,8 @@
 	let topQuestionsActive = false;
 	$: {
 		const sortSrder = url.searchParams.get('order');
-		newestQuestionsActive = sortSrder !== null && sortSrder === 'newest';
 		topQuestionsActive = sortSrder !== null && sortSrder === 'top';
+		newestQuestionsActive = sortSrder === null || sortSrder === 'newest';
 	}
 
 	async function onClickNewestQuestions() {

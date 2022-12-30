@@ -40,7 +40,7 @@
 	let topQuestionsActive = false;
 	$: {
 		const sortSrder = url.searchParams.get('order');
-		newestQuestionsActive = sortSrder !== null && sortSrder === 'newest';
+		newestQuestionsActive = sortSrder === null || sortSrder === 'newest';
 		topQuestionsActive = sortSrder !== null && sortSrder === 'top';
 	}
 
