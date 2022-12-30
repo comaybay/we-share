@@ -42,8 +42,8 @@
 			</LeftStickySection>
 
 			<RightStickySection>
-				<div class="order-3 md:order-none">
-					<span class="text-lg text-sec-base">Thành viên:</span>
+				<div>
+					<div class="text-lg text-sec-base">Thành viên:</div>
 					{#each post.members as member}
 						<a href="nguoi-dung/{member.username}" class="flex gap-0.5 items-center text-lg">
 							<div class="h-10 w-10">
