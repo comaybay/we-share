@@ -11,6 +11,7 @@
 	import PostContent from 'src/routes/(app)/_components/posts/detail/RenderContent.svelte';
 	import TopicContainer from 'src/routes/(app)/_components/posts/detail/TopicContainer.svelte';
 	import PostAuthorView from 'src/routes/(app)/_components/views/PostAuthorView.svelte';
+	import Head from 'src/routes/_components/Head.svelte';
 	import SharingPostStarButton from '../../_components/SharingPostStarButton.svelte';
 	import type { PageData } from './$types';
 	import SharingPostStats from './_components/SharingPostStats.svelte';
@@ -32,6 +33,8 @@
 		dialog.open();
 	}
 </script>
+
+<Head title={post.title} description={data.metaDescription} />
 
 <div class="flex justify-center gap-4 mx-4">
 	<div class="relative grow max-w-3xl min-w-0">

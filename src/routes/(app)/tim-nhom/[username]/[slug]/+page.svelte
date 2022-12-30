@@ -12,6 +12,7 @@
 	import RightStickySection from 'src/routes/(app)/_components/posts/detail/RightStickySection.svelte';
 	import TopicContainer from 'src/routes/(app)/_components/posts/detail/TopicContainer.svelte';
 	import PostAuthorView from 'src/routes/(app)/_components/views/PostAuthorView.svelte';
+	import Head from 'src/routes/_components/Head.svelte';
 	import UserProfilePicture from 'src/routes/_components/UserProfilePicture.svelte';
 	import type { PageData } from './$types';
 	import FindTeamPostStats from './_components/FindTeamPostStats.svelte';
@@ -34,56 +35,56 @@
 	}
 </script>
 
+<Head title={post.title} description={data.metaDescription} />
+
 <div class="flex flex-col md:flex-row justify-center mx-4">
-	{#if post}
-		<div class="relative grow max-w-3xl min-w-0">
-			<LeftStickySection>
-				<FindTeamPostStats {post} />
-			</LeftStickySection>
+	<div class="relative grow max-w-3xl min-w-0">
+		<LeftStickySection>
+			<FindTeamPostStats {post} />
+		</LeftStickySection>
 
-			<RightStickySection>
-				<div>
-					<div class="text-lg text-sec-base">Thành viên:</div>
-					{#each post.members as member}
-						<a href="nguoi-dung/{member.username}" class="flex gap-0.5 items-center text-lg">
-							<div class="h-10 w-10">
-								<UserProfilePicture />
-							</div>
-							{member.username}
-						</a>
-					{/each}
-				</div>
-			</RightStickySection>
+		<RightStickySection>
+			<div class="p-4 rounded-full">
+				<div class="text-lg text-sec-base">Thành viên:</div>
+				{#each post.members as member}
+					<a href="nguoi-dung/{member.username}" class="flex gap-0.5 items-center text-lg">
+						<div class="h-10 w-10">
+							<UserProfilePicture />
+						</div>
+						{member.username}
+					</a>
+				{/each}
+			</div>
+		</RightStickySection>
 
-			<div class="md:px-8 md:py-4 mb-4 md:border md:border-pri-light">
-				<div class="flex justify-between">
-					<AuthorSection
-						username={post.author.username}
-						postDateCreated={post.dateCreated}
-						postDateLastUpdated={post.dateLastUpdated}
+		<div class="md:px-8 md:py-4 mb-4 md:border md:border-pri-light">
+			<div class="flex justify-between">
+				<AuthorSection
+					username={post.author.username}
+					postDateCreated={post.dateCreated}
+					postDateLastUpdated={post.dateLastUpdated}
+				/>
+				<PostAuthorView authorId={post.author.id}>
+					<PostSettingsSection
+						editPostHref="/tim-nhom/chinh-sua/{post.id}"
+						on:choosedelete={deletePost}
 					/>
-					<PostAuthorView authorId={post.author.id}>
-						<PostSettingsSection
-							editPostHref="/tim-nhom/chinh-sua/{post.id}"
-							on:choosedelete={deletePost}
-						/>
-					</PostAuthorView>
-				</div>
-
-				<PostTitle>{post.title}</PostTitle>
-				<div class="mt-4 mb-6">
-					<PostContent content={post.content} />
-				</div>
-
-				<TopicContainer topics={post.neededSkills} baseHref="/tim-nhom" />
+				</PostAuthorView>
 			</div>
 
-			<CommentSection
-				postType="team"
-				commentCount={post.commentCount}
-				comments={data.comments}
-				postId={post.id}
-			/>
+			<PostTitle>{post.title}</PostTitle>
+			<div class="mt-4 mb-6">
+				<PostContent content={post.content} />
+			</div>
+
+			<TopicContainer topics={post.neededSkills} baseHref="/tim-nhom" />
 		</div>
-	{/if}
+
+		<CommentSection
+			postType="team"
+			commentCount={post.commentCount}
+			comments={data.comments}
+			postId={post.id}
+		/>
+	</div>
 </div>

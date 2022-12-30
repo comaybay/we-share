@@ -1,8 +1,4 @@
-import {
-	AuthApiError,
-	AuthInvalidCredentialsError,
-	AuthRetryableFetchError
-} from '@supabase/supabase-js';
+import { AuthApiError, AuthRetryableFetchError } from '@supabase/supabase-js';
 import { MSG_SERVER_ERROR_TRY_AGAIN } from '../messages';
 
 export function getUserFriendlyMessage(errorType: ErrorType) {
@@ -39,12 +35,11 @@ const serverErrorPattern: ErrorPattern = {
 };
 
 const errorPatterns: Array<ErrorPattern> = [
-	serverErrorPattern,
 	{
 		errorType: ErrorType.InValidLoginCredentials,
-		errorClass: AuthInvalidCredentialsError,
-		errorMessage: null,
-		userFriendlyMessage: 'Tên tài khoản hoặc mật khẩu không chính xác'
+		errorClass: AuthApiError,
+		errorMessage: 'Invalid login credentials',
+		userFriendlyMessage: 'Tên tài khoản / Email hoặc mật khẩu không chính xác'
 	},
 	{
 		errorType: ErrorType.UserAlreadyRegistered,

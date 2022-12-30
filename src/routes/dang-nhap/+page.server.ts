@@ -74,13 +74,13 @@ export const actions: Actions = {
 
 		if (error) {
 			const { errorType, userFriendlyMessage } = extractError(error);
-			signInError.userFriendlyMessage = userFriendlyMessage;
 
 			if (errorType === ErrorType.InValidLoginCredentials) {
 				signInError.invalidCredentials = true;
 				return invalid(400, signInError);
 			}
 
+			signInError.userFriendlyMessage = userFriendlyMessage;
 			signInError.serverError = true;
 			return invalid(500, signInError);
 		}
@@ -105,7 +105,6 @@ export type SignInError = {
 	passwordMissing?: true;
 	passwordInvalid?: true;
 	usernameNotExist?: true;
-	loginFailed?: true;
 	invalidCredentials?: true;
 	serverError?: true;
 

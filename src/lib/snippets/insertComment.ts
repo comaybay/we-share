@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import type { TypedSupabaseClient } from '@supabase/auth-helpers-sveltekit/dist/types';
+import { removeNewlines } from '../removeNewlines';
 import type { PostComment } from '../types/PostComment';
 import type { PostType } from '../types/PostType';
 import type { ForeignProfileName } from '../types/supabase/ForeignProfileName';
@@ -16,7 +17,7 @@ export async function insertComment(
 		.insert({
 			author_id: comment.authorId,
 			content: comment.content,
-			text_content: comment.textContent,
+			text_content: removeNewlines(comment.textContent),
 			post_id: comment.postId,
 			parent_comment_id: comment.parentCommentId,
 			top_level_comment_id: comment.topLevelCommentId
@@ -56,7 +57,6 @@ export async function insertComment(
 			Exclude<typeof data.parent_comment, object[]>
 		>;
 
-		console.log(dataParentComment);
 		model.parentCommentAuthor = dataParentComment.author as { username: string; id: string };
 	}
 

@@ -1,5 +1,6 @@
 import { invalid, redirect, type Actions } from '@sveltejs/kit';
 import { MAX_NUMBER_OF_TOPICS } from 'src/lib/constants';
+import { removeNewlines } from 'src/lib/removeNewlines';
 import { ErrorType, getUserFriendlyMessage } from 'src/lib/server/errorExtraction';
 import slugify from 'src/lib/server/slugify';
 import { validateCommonPostProps } from 'src/lib/server/validations';
@@ -71,7 +72,7 @@ export const actions: Actions = {
 			.from('post_teams')
 			.insert({
 				slug,
-				text_content: textContent,
+				text_content: removeNewlines(textContent),
 				author_id: session.user.id,
 				title,
 				content,

@@ -1,5 +1,6 @@
 import { invalid, redirect, type Actions } from '@sveltejs/kit';
 import { MAX_NUMBER_OF_TOPICS } from 'src/lib/constants';
+import { removeNewlines } from 'src/lib/removeNewlines';
 import { ErrorType, getUserFriendlyMessage } from 'src/lib/server/errorExtraction';
 import slugify from 'src/lib/server/slugify';
 import type { PostFormError } from 'src/lib/types/PostFormError';
@@ -12,7 +13,7 @@ export const actions: Actions = {
 		const formData = await event.request.formData();
 		const title = formData.get('title')?.toString()?.trim() as string;
 		const content = formData.get('content')?.toString()?.trim() as string;
-		const contentText = formData.get('text-content')?.toString()?.trim() as string;
+		const textContent = formData.get('text-content')?.toString()?.trim() as string;
 		let topics: string[];
 		try {
 			topics = JSON.parse(formData.get('topics') as string);
@@ -32,7 +33,7 @@ export const actions: Actions = {
 			result.titleEmpty = true;
 		}
 
-		if (!contentText || !content) {
+		if (!textContent || !content) {
 			result.contentEmpty = true;
 		}
 
@@ -65,7 +66,7 @@ export const actions: Actions = {
 
 		const { error: insertError } = await supabaseClient.from('post_sharings').insert({
 			slug,
-			text_content: contentText,
+			text_content: removeNewlines(textContent),
 			author_id: session.user.id,
 			title,
 			content,

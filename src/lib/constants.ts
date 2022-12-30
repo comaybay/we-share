@@ -17,3 +17,6 @@ export const MAX_TEAM_SIZE = 100;
 
 export const MIN_COURSE_CODE_LENGTH = 3;
 export const MAX_COURSE_CODE_LENGTH = 15;
+
+export const DEFAULT_META_DESCRIPTION =
+	'WeShare là một nền tảng chia sẻ kiến thức, với cộng đồng giúp đỡ lẫn nhau thông qua hỏi đáp, tìm nhóm hay tạo bài viết chia sẽ kiến thức';

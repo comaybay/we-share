@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { DEFAULT_META_DESCRIPTION } from 'src/lib/constants';
+	import Head from 'src/routes/_components/Head.svelte';
 	import UserProfilePicture from 'src/routes/_components/UserProfilePicture.svelte';
 	import Bookmark from '../../_components/icons/Bookmark.svelte';
 	import HeartIcon from '../../_components/icons/HeartIcon.svelte';
@@ -12,6 +14,12 @@
 	$: user = data.user;
 	$: stats = data.stats;
 </script>
+
+<Head
+	title="{user.name} ({user.username})"
+	description={user.quote ??
+		`Xem thông tin về ${user.name} (@${user.username}) trên WeShare. ${DEFAULT_META_DESCRIPTION}`}
+/>
 
 <div class="flex flex-col md:flex-row items-center md:items-start mx-4 justify-center">
 	<UserProfilePicture classname="shrink-0 w-60 h-60" />

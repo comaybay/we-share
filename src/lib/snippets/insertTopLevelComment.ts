@@ -1,4 +1,5 @@
 import type { TypedSupabaseClient } from '@supabase/auth-helpers-sveltekit/dist/types';
+import { removeNewlines } from '../removeNewlines';
 import type { PostTopLevelComment } from '../types/PostTopLevelComment';
 import type { PostType } from '../types/PostType';
 import type { ForeignProfileName } from '../types/supabase/ForeignProfileName';
@@ -15,7 +16,7 @@ export async function insertTopLevelComment(
 		.insert({
 			author_id: comment.authorId,
 			content: comment.content,
-			text_content: comment.textContent,
+			text_content: removeNewlines(comment.textContent),
 			post_id: comment.postId,
 			parent_comment_id: comment.parentCommentId,
 			top_level_comment_id: comment.topLevelCommentId

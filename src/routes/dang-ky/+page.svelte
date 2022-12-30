@@ -2,7 +2,9 @@
 	import { applyAction, enhance, type SubmitFunction } from '$app/forms';
 	import { goto, invalidateAll } from '$app/navigation';
 	import { page } from '$app/stores';
+	import { DEFAULT_META_DESCRIPTION } from 'src/lib/constants';
 	import Button from '../_components/buttons/Button.svelte';
+	import Head from '../_components/Head.svelte';
 	import InputTextWithLabel from '../_components/InputTextWithLabel.svelte';
 	import Link from '../_components/Link.svelte';
 	import WeShareLogoBig from '../_components/WeShareLogoBig.svelte';
@@ -46,6 +48,8 @@
 
 	let pressedOnce = false;
 </script>
+
+<Head title="Đăng ký" description={`Đăng ký tài khoản WeShare. ${DEFAULT_META_DESCRIPTION}`} />
 
 <div class="relative">
 	<div

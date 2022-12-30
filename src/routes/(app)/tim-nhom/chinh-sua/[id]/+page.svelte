@@ -13,6 +13,7 @@
 	} from 'src/lib/constants';
 	import { userFriendlyMessage } from 'src/lib/userFriendlyMessage';
 	import PostEditor from 'src/routes/(app)/_components/posts/forms/PostEditor.svelte';
+	import Head from 'src/routes/_components/Head.svelte';
 	import { flip } from 'svelte/animate';
 	import Button from '../../../../_components/buttons/Button.svelte';
 	import InputTitle from '../../../_components/posts/forms/InputTitle.svelte';
@@ -58,6 +59,8 @@
 		neededSkills = neededSkills;
 	}
 </script>
+
+<Head title="Chỉnh sửa bài viết tìm nhóm" noindex />
 
 <NewPostHeader>Chỉnh sửa bài viết tìm nhóm</NewPostHeader>
 <div class="px-8">

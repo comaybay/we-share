@@ -6,6 +6,7 @@ import { MSG_SERVER_ERROR_TRY_AGAIN } from 'src/lib/messages';
 import { getIdFromUsername } from 'src/lib/snippets/getIdFromUsername';
 import { getStarredCommentIds } from 'src/lib/snippets/getStarredCommentIds';
 import { isPostStarred } from 'src/lib/snippets/isPostStarred';
+import { truncateForMetaDescription } from 'src/lib/truncateForMetaDescription';
 import type { ForeignTableCount } from 'src/lib/types/supabase/ForeignTableCount';
 import type { PageLoad } from './$types';
 
@@ -21,7 +22,7 @@ export const load: PageLoad = async event => {
 	const { data: dataQuestion } = await supabaseClient
 		.from('post_questions')
 		.select(
-			`id, date_created, date_last_updated, title, content, topics, favorite_answer_id, view_count, 
+			`id, date_created, date_last_updated, title, content, text_content, topics, favorite_answer_id, view_count, 
 			post_question_comments!post_question_comments_post_id_fkey(count), post_question_stars!inner(count)`
 		)
 		.match({ slug: event.params.slug, author_id: authorId })
@@ -106,6 +107,7 @@ export const load: PageLoad = async event => {
 				starred: starredCommentIds.has(c.id!),
 				replyCount: c.reply_count!
 			};
-		})
+		}),
+		metaDescription: truncateForMetaDescription(dataQuestion.text_content)
 	};
 };

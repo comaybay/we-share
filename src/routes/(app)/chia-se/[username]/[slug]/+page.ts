@@ -9,6 +9,7 @@ import {
 import { getIdFromUsername } from 'src/lib/snippets/getIdFromUsername';
 import { getStarredCommentIds } from 'src/lib/snippets/getStarredCommentIds';
 import { isPostStarred } from 'src/lib/snippets/isPostStarred';
+import { truncateForMetaDescription } from 'src/lib/truncateForMetaDescription';
 import type { PostTopLevelComment } from 'src/lib/types/PostTopLevelComment';
 import type { ForeignTableCount } from 'src/lib/types/supabase/ForeignTableCount';
 import type { PageLoad } from './$types';
@@ -25,7 +26,7 @@ export const load: PageLoad = async event => {
 	const { data: dataPost } = await supabaseClient
 		.from('post_sharings')
 		.select(
-			`id, date_created, date_last_updated, title, content, topics, view_count, 
+			`id, date_created, date_last_updated, title, content, text_content, topics, view_count, 
 			post_sharing_comments(count), post_sharing_stars!inner(count)`
 		)
 		.match({ slug: event.params.slug, author_id: authorId })
@@ -109,6 +110,7 @@ export const load: PageLoad = async event => {
 			commentCount: (dataPost.post_sharing_comments as ForeignTableCount)[0].count,
 			starred: postStarred
 		},
-		comments
+		comments,
+		metaDescription: truncateForMetaDescription(dataPost.text_content)
 	};
 };

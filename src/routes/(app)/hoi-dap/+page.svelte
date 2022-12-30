@@ -2,6 +2,7 @@
 	import { goto, invalidate } from '$app/navigation';
 	import { page } from '$app/stores';
 	import Button from 'src/routes/_components/buttons/Button.svelte';
+	import Head from 'src/routes/_components/Head.svelte';
 	import { onMount } from 'svelte';
 	import AskQuestionIcon from '../_components/icons/AskQuestionIcon.svelte';
 	import LoadingIndicator from '../_components/LoadingIndicator.svelte';
@@ -65,6 +66,11 @@
 		loading = false;
 	}
 </script>
+
+<Head
+	title="Hỏi đáp"
+	description="Xem những câu hỏi và những câu trả lời từ cộng đồng WeShare. Bạn có câu hỏi cần được giải đáp? hãy đặt câu hỏi trên WeShare!"
+/>
 
 <div class="flex flex-col lg:flex-row-reverse gap-x-16 px-4 md:px-28 justify-between">
 	<div class="flex flex-col shrink-0 lg:w-[380px] mb-4 lg:mb-0">

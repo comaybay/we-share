@@ -1,5 +1,7 @@
 <script lang="ts">
+	import { DEFAULT_META_DESCRIPTION } from 'src/lib/constants';
 	import ButtonOutline from '../_components/buttons/ButtonOutline.svelte';
+	import Head from '../_components/Head.svelte';
 	import WeShareIcon from '../_components/WeShareIcon.svelte';
 	import type { PageData } from './$types';
 	import AskQuestionIcon from './_components/icons/AskQuestionIcon.svelte';
@@ -12,6 +14,12 @@
 
 	export let data: PageData;
 </script>
+
+<Head
+	title="WeShare - Cộng đồng chia sẻ kiến thức"
+	titleIncludesAppName={false}
+	description={DEFAULT_META_DESCRIPTION}
+/>
 
 <div class="mt-4 w-fit mx-auto text-sec-base">
 	<WeShareIcon size={64} strokeWidth={1} />

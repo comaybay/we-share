@@ -6,6 +6,7 @@ import {
 	MSG_SERVER_ERROR,
 	MSG_SERVER_ERROR_TRY_AGAIN
 } from 'src/lib/messages';
+import { removeNewlines } from 'src/lib/removeNewlines';
 import slugify from 'src/lib/server/slugify';
 import { validateCommonPostProps } from 'src/lib/server/validations';
 import type { FindTeamPostFormError } from 'src/lib/types/FindTeamPostFormError';
@@ -105,7 +106,7 @@ export const actions: Actions = {
 			.from('post_teams')
 			.update({
 				slug: newSlug,
-				text_content: textContent,
+				text_content: removeNewlines(textContent),
 				date_last_updated: new Date().toISOString(),
 				needed_skills: neededSkills,
 				course_code: courseCode,

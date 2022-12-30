@@ -4,12 +4,13 @@ import { error } from '@sveltejs/kit';
 import { error404, error500 } from 'src/lib/errors';
 import { MSG_POST_NOT_FOUND, MSG_SERVER_ERROR_TRY_AGAIN } from 'src/lib/messages';
 import { getIdFromUsername } from 'src/lib/snippets/getIdFromUsername';
+import { truncateForMetaDescription } from 'src/lib/truncateForMetaDescription';
 import type { PostTopLevelComment } from 'src/lib/types/PostTopLevelComment';
 import type { ForeignTableCount } from 'src/lib/types/supabase/ForeignTableCount';
 import type { PageLoad } from './$types';
 
 export const load: PageLoad = async event => {
-	const { session, supabaseClient } = await getSupabase(event);
+	const { supabaseClient } = await getSupabase(event);
 
 	const authorId = await getIdFromUsername(event.params.username, supabaseClient);
 
@@ -20,7 +21,7 @@ export const load: PageLoad = async event => {
 	const { data: dataPost } = await supabaseClient
 		.from('post_teams')
 		.select(
-			`id, date_created, date_last_updated, title, content, team_size, course_code, needed_skills, view_count, 
+			`id, date_created, date_last_updated, title, content, text_content, team_size, course_code, needed_skills, view_count, 
 			members:profiles!post_team_members(username), post_team_comments(count)`
 		)
 		.match({ slug: event.params.slug, author_id: authorId })
@@ -80,6 +81,7 @@ export const load: PageLoad = async event => {
 			commentCount: (dataPost.post_team_comments as ForeignTableCount)[0].count,
 			teamSize: dataPost.team_size
 		},
-		comments
+		comments,
+		metaDescription: truncateForMetaDescription(dataPost.text_content)
 	};
 };

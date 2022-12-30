@@ -2,7 +2,9 @@
 	import { applyAction, enhance, type SubmitFunction } from '$app/forms';
 	import { goto, invalidateAll } from '$app/navigation';
 	import { page } from '$app/stores';
+	import { DEFAULT_META_DESCRIPTION } from 'src/lib/constants';
 	import Button from '../_components/buttons/Button.svelte';
+	import Head from '../_components/Head.svelte';
 	import InputTextWithLabel from '../_components/InputTextWithLabel.svelte';
 	import Link from '../_components/Link.svelte';
 	import WeShareLogoBig from '../_components/WeShareLogoBig.svelte';
@@ -44,6 +46,8 @@
 		};
 	};
 </script>
+
+<Head title="Đăng ký" description={`Đăng nhập vào WeShare. ${DEFAULT_META_DESCRIPTION}`} />
 
 <div class="relative">
 	<div class="absolute -z-10 pt-32 h-full w-full flex flex-col space-y-12 justify-center">
@@ -96,6 +100,8 @@
 							<p class="text-sec-base">*Mục này là bắt buộc</p>
 						{:else if form?.passwordInvalid}
 							<p class="text-sec-base">*Mật khẩu không hợp lệ</p>
+						{:else if form?.invalidCredentials}
+							<p class="text-sec-base">*Sai mật khẩu</p>
 						{/if}
 					</div>
 				</div>
