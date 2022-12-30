@@ -8,7 +8,7 @@ create table if not exists post_team_comments (
   author_id uuid references profiles(id) not null,
   parent_comment_id bigint references post_team_comments(id),
   top_level_comment_id bigint references post_team_comments(id),
-  post_id bigint references post_teams(id) not null
+  post_id bigint not null references post_teams(id) on delete cascade
 );
 alter table public.post_team_comments enable row level security;
 
