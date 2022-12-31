@@ -31,9 +31,7 @@ export const load: PageLoad = async event => {
 		}
 	}
 
-	query
-		.order('date_last_updated', { ascending: false })
-		.order('date_created', { ascending: false });
+	query.order('date_created', { ascending: false });
 
 	const { data: postsData, error: getPostsError } = await query;
 

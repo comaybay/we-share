@@ -13,7 +13,6 @@ export const load: PageLoad = async event => {
 			`id, title, date_created, date_last_updated, view_count, slug,
 			profiles!post_questions_author_id_fkey(username), post_question_comments!post_question_comments_post_id_fkey(count), post_question_stars!inner(count)`
 		)
-		.order('date_last_updated', { ascending: false })
 		.order('date_created', { ascending: false })
 		.limit(3);
 
@@ -23,7 +22,6 @@ export const load: PageLoad = async event => {
 			`id, title, date_created, date_last_updated, view_count, slug,
 			profiles!post_sharings_author_id_fkey(username), post_sharing_comments(count), post_sharing_stars(count)`
 		)
-		.order('date_last_updated', { ascending: false })
 		.order('date_created', { ascending: false })
 		.limit(3);
 
@@ -33,7 +31,6 @@ export const load: PageLoad = async event => {
 			`title, date_created, date_last_updated, team_size, view_count, slug,
 			profiles!post_teams_author_id_fkey(username), post_team_comments(count), post_team_members!inner(count)`
 		)
-		.order('date_last_updated', { ascending: false })
 		.order('date_created', { ascending: false })
 		.limit(3);
 
