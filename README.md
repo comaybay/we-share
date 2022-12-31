@@ -1,38 +1,25 @@
-# create-svelte
+# Đồ án 1 (SE121.N11.PMCL)
+Tên đề tài: Xây dựng hệ thống chia sẽ kiến thức cho sinh viên
+STT: 46
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+#### Giảng viên:
+ThS. Nguyễn Tấn Toàn
 
-## Creating a project
+#### Sinh viên thực hiện:
+Thái Chí Bảo - 19521256
 
-If you're seeing this, you've probably already done this step. Congrats!
+# Setup
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+1. Clone project: `git clone https://github.com/comaybay/we-share.git`
+2. Đi đến thư mục project: `cd we-share`
+3. Tải các dependencies cần thiết: `npm install`
+4. Chạy ứng dụng ở environment dev: `npm run dev`
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
 
-## Developing
+# Build Production
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Tạo phiên bản production của ứng dụng: `npm run build`
 
-```bash
-npm run dev
+Preview bản production: `npm run preview`
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+Deploy app: sử dụng adapter tương ứng và cách sử dụng [tại đây](https://kit.svelte.dev/docs/adapters)
