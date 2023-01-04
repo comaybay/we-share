@@ -1,3 +1,5 @@
+export const POST_PER_PAGE = 10;
+
 export const POST_TEAM_MAX_LENGTH = 10000;
 export const POST_QUESTION_MAX_LENGTH = 30000;
 export const POST_SHARING_MAX_LENGTH = 30000;
